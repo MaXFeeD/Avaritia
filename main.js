@@ -2,15 +2,12 @@
 BUILD INFO:
   dir: dev
   target: main.js
-  files: 9
+  files: 19
 */
 
 
 
-// file: ItemsAV.js
-
-IMPORT("ToolType");
-IMPORT("SoundAPI");
+// file: header.js
 
 /*
  ▄▄▄          ██▒   █▓    ▄▄▄          ██▀███      ██▓   ▄▄▄█████▓    ██▓    ▄▄▄      
@@ -25,44 +22,223 @@ IMPORT("SoundAPI");
                   ░                                                                   
 */
 
+IMPORT("RecipeTileEntityLib");
+IMPORT("ToolType");
+IMPORT("SoundAPI");
+IMPORT("Bow");
 
-var BHMesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
-scale:[0.1,0.1,0.1],
-translate:[0,-1.2,0]
-});
-var BHRender = new Render();
-var BHPart = BHRender.getPart("head"); 
-BHPart.setMesh(BHMesh);
-var BHtexture= new Texture("mob/BHtexture.png").setResolution(256, 256);
+Item.setRequiresIconOverride = ModAPI.requireGlobal("Item.setRequiresIconOverride");
 
-var ModelBH = new EntityModel();
-ModelBH.setRender(BHRender);
-ModelBH.setTexture(BHtexture);
 
-var BlackHole = MobRegistry.registerEntity("BlackHole");
-BlackHole.customizeVisual({
-    getModels: function() {
-        return {
-            "main": ModelBH
-        };
+
+
+// file: translation.js
+
+Translation.addTranslation("Infinity chunck", {ru: "Кусочек бескоечности"});
+Translation.addTranslation("Infinity ingot", {ru: "Слиток бесконечности"});
+Translation.addTranslation("Infinity catalyst", {ru: "Катализатор бескоечности"});
+Translation.addTranslation("Neutronium ingot", {ru: "Нейтронный слиток"});
+
+Translation.addTranslation("Fractured ore", {ru: "Растрескавшаяся руда"});
+Translation.addTranslation("Matrix ingot", {ru: "Слиток кристаллической матрицы"});
+Translation.addTranslation("Diamond lattice", {ru: "Алмазная решетка"});
+Translation.addTranslation("Ghyper Matter", {ru: "Большой хранитель"});
+Translation.addTranslation("Endest pearl", {ru: "Эндест-жемчуг"});
+Translation.addTranslation("Gaia block", {ru: "Блок гаи"});
+Translation.addTranslation("Infinity block", {ru: "Блок бесконечности"});
+Translation.addTranslation("Neutronium block", {ru: "Нейтронный блок"});
+Translation.addTranslation("Compresed workbench", {ru: "Сжатый верстак"});
+Translation.addTranslation("Double compressed workbench", {ru: "Сильно сжатый верстак"});
+Translation.addTranslation("Extrime workbench", {ru: "Экстримальноно сжатый верстак"});
+Translation.addTranslation("Compressor neutronium", {ru: "Нейтронный компресор"});
+Translation.addTranslation("Neutroinium collector", {ru: "Нейтронный собиратель"});
+Translation.addTranslation("Asgardandelion", {ru: "Асгарданделион"});
+Translation.addTranslation("Soarleander", {ru: "Соарлеандр"});
+Translation.addTranslation("Sword of the Cosmos", {ru: "Меч космоса"});
+Translation.addTranslation("World Braker", {ru: "Кирка 'Уничтожитель Миров'"});
+Translation.addTranslation("Planet Eater", {ru: "Лопата 'Пожиратель Миров'"});
+Translation.addTranslation("Nature's Ruin", {ru: "Торпор 'Руины Природы'"});
+Translation.addTranslation("Hoe of the Green Earth", {ru: "Мотыга 'Зеленая Земля'"});
+Translation.addTranslation("Cosmos soup", {ru: "Космическая тушенка"});
+Translation.addTranslation("Cosmos meatballs", {ru: "Космческие фрикадельки'"});
+
+Translation.addTranslation("Matter Cluster", { de: "Materienansammlung", ru: "Кусок материи", zh: "物质团" });
+Translation.addTranslation("Critical Matter Cluster", { de: "Kritische Materienansammlung", ru: "Предельный кусок материи", zh: "临界物质团" });
+
+
+
+
+// file: blocks/resource.js
+
+/*IDRegistry.genBlockID("gaiaBlock"); 
+Block.createBlock("gaiaBlock", [
+    {name: "Gaia block", texture: [["block_gaia", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.gaiaBlock,3);
+ToolAPI.registerBlockMaterial(BlockID.gaiaBlock, "stone", 4, true);
+*/
+
+IDRegistry.genBlockID("infBlock"); 
+Block.createBlock("infBlock", [
+    {name: "Infinity block", texture: [["infinity", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.infBlock,3);
+ToolAPI.registerBlockMaterial(BlockID.infBlock, "stone", 4, true);
+
+IDRegistry.genBlockID("neutroniumBlock"); 
+Block.createBlock("neutroniumBlock", [
+    {name: "Neutronium block", texture: [["neutronium", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.neutroniumBlock,3);
+ToolAPI.registerBlockMaterial(BlockID.neutroniumBlock, "stone", 4, true);
+
+IDRegistry.genBlockID("crystal_matrixAV");
+Block.createBlockWithRotation("crystal_matrixAV", [
+	{name: "Crystal matrix", texture: 
+	[["crystal_matrix", 0],
+	 ["crystal_matrix", 0],
+	 ["crystal_matrix", 0],
+	 ["crystal_matrix", 0],
+	 ["crystal_matrix", 0],
+	 ["crystal_matrix", 0]],
+	      inCreative: true}
+], "opaque");
+Block.setDestroyTime(BlockID.crystal_matrixAV,4);
+ToolAPI.registerBlockMaterial(BlockID.crystal_matrix, "stone", 4, true);
+
+
+
+
+// file: blocks/sapling.js
+
+var Renderer={
+        setSaplingRender:function(id,x){
+        var shape = new ICRender.CollisionShape();     
+        BlockRenderer.setCustomCollisionShape(Block.getNumericId(id), -1, shape);    
+        BlockRenderer.addRenderCallback(id, function(api, coords,block) {
+            if(x!=0){
+                for(var i = 0;i < 1/x;i+=x){
+                api.renderBoxId(coords.x, coords.y, coords.z,0+i, 0.01, 0+i, x+i, 0.99, x+i,id, block.data);
+                api.renderBoxId(coords.x, coords.y, coords.z,(1-x)-i, 0.01, 0+i,1-i, 0.99, x+i,id, block.data);
+                }
+            }
+            else{
+                api.renderBoxId(coords.x, coords.y, coords.z, 0.4999, 0.01, 0, 0.5, 0.99, 1,id, block.data);
+                api.renderBoxId(coords.x, coords.y, coords.z, 0, 0.01, 0.4999, 1, 0.99, 0.5, id, block.data);
+            }
+        });
+        BlockRenderer.enableCustomRender(id);
+    }
+};
+
+IDRegistry.genBlockID("asgWhite");
+Block.createBlock("asgWhite", [
+    {name: "Asgardandelion", texture: [["empty", 0], ["empty", 0], ["asgardandelion", 1]], inCreative: false}
+]);
+
+IDRegistry.genItemID("asgWhite");
+Item.createItem("asgWhite", "Asgardandelion", {name: "asgardandelion"});
+
+Item.registerUseFunction("asgWhite", function(coords, item, block){
+    var place = coords.relative;
+    if(GenerationUtils.isTransparentBlock(World.getBlockID(place.x, place.y, place.z))){
+        World.setBlock(place.x, place.y, place.z, BlockID.roseWhite);
+        Player.setCarriedItem(item.id, item.count - 1, item.data);  
     }
 });
 
-BlackHole.customizeDescription({
-    getHitbox: function() {
-        return {
-            w: 0,
-            h: 0
-        };
+Renderer.setSaplingRender(BlockID.asgWhite,0);
+
+Callback.addCallback("GenerateChunk", function(x,z){ 
+for(var i = 0; i < 1; i++){ 
+coords=GenerationUtils.randomCoords(x,z,20,96); 
+for(var k=20;k<96;k++){ 
+if(World.getBlockID(coords.x,k,coords.z)==3){ 
+if(World.getBlockID(coords.x,k+1,coords.z)!=0)return;
+World.setBlock(coords.x,k+1,coords.z,BlockID.Asgardandelion,0); 
+} 
+} 
+} 
+});
+
+IDRegistry.genBlockID("solWhite");
+Block.createBlock("solWhite", [
+    {name: "Soarleander", texture: [["empty", 0], ["empty", 0], ["soarleander", 1]], inCreative: false}
+]);
+
+IDRegistry.genItemID("solWhite");
+Item.createItem("solWhite", "Soarleander", {name: "soarleander"});
+
+Item.registerUseFunction("solWhite", function(coords, item, block){
+    var place = coords.relative;
+    if(GenerationUtils.isTransparentBlock(World.getBlockID(place.x, place.y, place.z))){
+        World.setBlock(place.x, place.y, place.z, BlockID.roseWhite);
+        Player.setCarriedItem(item.id, item.count - 1, item.data);  
     }
 });
 
-IDRegistry.genItemID("customEntitySpawn"); 
-Item.createItem("customEntitySpawn", "Spawn custom entity", {name: "stick"});
-Item.registerUseFunction("customEntitySpawn", function(coords, item, block){
-    Entity.spawnCustom("BlackHole", coords.relative.x + .5, coords.relative.y + .5, coords.relative.z + .5); 
+Renderer.setSaplingRender(BlockID.solWhite,0);
+
+Callback.addCallback("GenerateChunk", function(x,z){ 
+for(var i = 0; i < 1; i++){ 
+coords=GenerationUtils.randomCoords(x,z,20,96); 
+for(var k=20;k<96;k++){ 
+if(World.getBlockID(coords.x,k,coords.z)==3){ 
+if(World.getBlockID(coords.x,k+1,coords.z)!=0)return 
+World.setBlock(coords.x,k+1,coords.z,BlockID.solWhite,0); 
+} 
+} 
+} 
 });
 
+
+
+
+// file: blocks/machine.js
+
+IDRegistry.genBlockID("compressorAv"); 
+Block.createBlockWithRotation("compressorAv", [
+    {name: "Compressor neutronium", texture: [["side", 0],["top_comp", 0],["side", 0],["compfront", 0],["side", 0],["side", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.compressorAv,4);
+ToolAPI.registerBlockMaterial(BlockID.compressorAv, "stone", 4, true);
+
+IDRegistry.genBlockID("neutCo"); 
+Block.createBlockWithRotation("neutCo", [
+    {name: "Neutroinium collector", texture: [["side", 0],["top", 0],["side", 0],["active", 0],["side", 0],["side", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.neutCo,4);
+ToolAPI.registerBlockMaterial(BlockID.neutCo, "stone", 4, true);
+
+
+
+
+// file: blocks/workbench.js
+
+IDRegistry.genBlockID("compreBlock"); 
+Block.createBlock("compreBlock", [
+    {name: "Compresed workbench", texture: [["compressed", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.compreBlock,4);
+ToolAPI.registerBlockMaterial(BlockID.compreBlock, "wood", 0, true);
+
+IDRegistry.genBlockID("dcompreBlock"); 
+Block.createBlock("dcompreBlock", [
+    {name: "Double compressed workbench", texture: [["double_compressed", 0]],inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.dcompreBlock,6);
+ToolAPI.registerBlockMaterial(BlockID.dcompreBlock, "wood", 2, true);
+
+IDRegistry.genBlockID("extWorckbench");
+Block.createBlockWithRotation("extWorckbench", [
+ {name: "Extrеme workbench", texture:
+ [["crafting", 2],
+ ["craftingtop", 0],
+ ["craftingside", 0],
+  ["craftingside", 0],
+   ["craftingside", 0],
+    ["craftingside", 0]],
+ inCreative: true}], "opaque");
+Block.setDestroyTime(BlockID.extWorckbench,4);
+ToolAPI.registerBlockMaterial(BlockID.extWorckbench, "stone", 3, true);
+
+
+
+
+// file: items/define.js
 
 IDRegistry.genItemID("crystal_matrix_ingot");
 Item.createItem("crystal_matrix_ingot", "Crystal matrix ingot", {name: "crystal_matrix_ingot"});
@@ -103,12 +279,10 @@ Item.createItem("redstonesing", "Redstone Singularity", {name: "singularity_reds
 IDRegistry.genItemID("quartzsing");
 Item.createItem("quartzsing", "Quartz Singularity", {name: "singularity_quartz"});
 
-/*IDRegistry.genItemID("oreFractured");
+IDRegistry.genItemID("oreFractured");
 Item.createItem("oreFractured", "Fractured ore", {name: "fractured_ore"});
 IDRegistry.genItemID("infChunck");
 Item.createItem("infChunck", "Infinity chunck", {name: "resource_infinity_drop"});
-
-*/
 
 IDRegistry.genItemID("gypMatter");
 Item.createItem("gypMatter", "Ghyper Matter", {name: "gypmatter"});
@@ -117,56 +291,37 @@ IDRegistry.genItemID("endestPearl");
 Item.createThrowableItem("endestPearl", "Endest pearl", {name: "endest"}, {stack: 16});
 
 
-var endparticle = Particles.registerParticleType({
-  texture: "ep",
-  size: [1, 1],
-  lifetime: [40, 40],
-  render: 2,
-  velocity: [0, -0.1, 0]
-});
-
-	
-function handleExplode(coords, time) {
- Threading.initThread("explode", function() {
-  java.lang.Thread.sleep(time * 50);
-  Entity.remove("BlackHole");
-  World.explode(coords.x, coords.y, coords.z, 7, false);
- }, 0);
-}
 
 
-Callback.addCallback('ProjectileHit', function (projectile, item, target, coords) {
-	Player.setCarriedItem(item.id, item.count - 1, 0);
-    coords = Entity.getPosition(projectile);
-    let fmobs = Entity.getAllInRange(coords, 8);
-Entity.spawnCustom("BlackHole", coords.x, coords.y, coords.z); 
-for(var i in fmobs){
-    Entity.moveToTarget(fmobs[i], coords.x, coords.y, coords.z, {speed: 1, denyY: false, jumpVel: 0});
-}
-    for (var dx = -5; dx < 5; dx++) {
-    for (var dy = -3; dy < 5; dy++) {
-    for (var dz = -5; dz < 5; dz++) {	
-         if(dx * dx + dy * dy + dz * dz <= 20){
-	     Particles.addParticle(endparticle, coords.x+0.5 + dx, coords.y+1 + dy, coords.z+0.5 + dz, 0, -0.1, 0, 1);	
-	}}}
-};
-     handleExplode(coords, 20 * 9);
-});
+// file: items/food.js
 
+IDRegistry.genItemID("ultimstew");
+Item.createFoodItem("ultimstew", "Cosmos soup", {name: "ultimstew", meta: 0},{isTech:false,stack: 64,food: 10});
+Callback.addCallback("FoodEaten",function(heal, satRatio){
+if(Player.getCarriedItem().id==ItemID.ultimstew){
+Entity.addEffect(Player.get(), 12, 1, 12000, false,false);
+Entity.addEffect(Player.get(), 5, 1, 12000, false,false);
+Entity.addEffect(Player.get(), 6, 1, 30, false,false);
+Entity.addEffect(Player.get(), 21, 2, 12000, false,false);
+Entity.addEffect(Player.get(), 22, 2, 12000, false,false);
+}});
 
-var claster = new ItemExtraData();
-
-var DroppedItems = [];
-Callback.addCallback("EntityAdded", function(entity){
-if(Entity.getType(entity) == Native.EntityType.ITEM) DroppedItems.push(entity);
-});
+IDRegistry.genItemID("cosmMeatballs");
+Item.createFoodItem("cosmMeatballs", "Cosmos meatballs", {name: "cosm_meatballs", meta: 0},{isTech:false,stack: 64,food: 10});
+Callback.addCallback("FoodEaten",function(heal, satRatio){
+if(Player.getCarriedItem().id==ItemID.cosmMeatballs){
+Entity.addEffect(Player.get(), 12, 1, 12000, false,false);
+Entity.addEffect(Player.get(), 1, 2, 12000, false,false);
+Entity.addEffect(Player.get(), 5, 1, 12000, false,false);
+Entity.addEffect(Player.get(), 6, 1, 30, false,false);
+Entity.addEffect(Player.get(), 21, 2, 12000, false,false);
+Entity.addEffect(Player.get(), 22, 2, 12000, false,false);
+}});
 
 
 
 
-// file: ToolsAV.js
-
-IMPORT("Bow");
+// file: items/tool.js
 
 IDRegistry.genItemID("cosmSword");
 Item.createItem("cosmSword", "Sword of the Cosmos", {name: "cosm_sword", meta: 0}, {stack: 1});
@@ -213,7 +368,6 @@ Item.createItem("cosmAxe", "Nature's Ruin", {name: "infaxe", meta: 0}, {stack: 1
 IDRegistry.genItemID("cosmHoe");
 Item.createItem("cosmHoe", "Hoe of the Green Earth", {name: "infhoe", meta: 0}, {stack: 1});
 
-
 ToolAPI.addToolMaterial("cosmsw", {durability: 999999999, level: 7, efficiency: 6, damage: 99999999999999, enchantability: 14});
 ToolAPI.addToolMaterial("skull_sword", {durability: 999999999, level: 7, efficiency: 6, damage: 999, enchantability: 14});
 ToolAPI.addToolMaterial("cosmsh", {durability: 999999999, level: 8, efficiency: 8, damage: 10, enchantability: 14});
@@ -250,7 +404,6 @@ ToolAPI.setTool(ItemID.cosmdes, "cosmsh", ToolType.shovel);
 Item.setToolRender(ItemID.cosmdes, true);
 
               //functional
-
 /*
 Callback.addCallback("EntityHurt", function (a,v) {
     if(Player.getCarriedItem().id == ItemID.cosmSword){ 
@@ -266,7 +419,6 @@ if(et==48||et==34){
 World.drop(coord.x,coord.y,coord.z,397,1,1);
 }}
 });
-
 	
 Callback.addCallback('ItemUse', function (coords, item, block) {
 	var player = Player.get();
@@ -283,7 +435,6 @@ Callback.addCallback('ItemUse', function (coords, item, block) {
 	   Player.setCarriedItem(ItemID.cosmdes, 1, 0);
 	}
 });
-	
 
 Callback.addCallback('ItemUse', function (coords, item, block) {
 var player = Player.get();
@@ -296,7 +447,6 @@ World.setBlock(xc, coords.y, zc, 60);
 }
 });
 
-
 Callback.addCallback('ItemUse', function (coords, item, block) {
 	var player = Player.get();
 	if(item.id == ItemID.cosmhammer && Entity.getSneaking(player)){
@@ -304,6 +454,7 @@ Callback.addCallback('ItemUse', function (coords, item, block) {
 		Player.setCarriedItem(ItemID.cosmPickaxe, 1, 0);
 		}
 });
+
 Callback.addCallback("DestroyBlock", function(coords, block, player){
 var side = coords.side;
 var X = 8;
@@ -328,7 +479,6 @@ if(World.getBlockID(xx, yy, zz) !== 7 && item.id == ItemID.cosmhammer){
   }};
 });
 
-
 Callback.addCallback('ItemUse', function (coords, item, block) {
 var player = Player.get();
 if(item.id == ItemID.cosmdes && Entity.getSneaking(player)){
@@ -336,6 +486,7 @@ if(item.id == ItemID.cosmdes && Entity.getSneaking(player)){
 	Player.setCarriedItem(ItemID.cosmShovel, 1, 0);
 	}
 });
+
 Callback.addCallback("DestroyBlock", function(coords, block, player){
 	var side = coords.side;
 var X = 8;
@@ -361,7 +512,6 @@ if(World.getBlockID(xx, yy, zz) !== 14 && World.getBlockID(xx, yy, zz) !== 15 &&
 }};
 });
 
-
 Callback.addCallback('ProjectileHit', function (projectile, item, target, coords) {
 	if(projectile.id == ItemID.infbow /*&& target !== Entity.getAll()*/ && item.id == ItemID.infbow){
 		Entity.spawn(coords.x+0.5, coords.y+3, coords.z+1.5, 80, [heavenarrow]);
@@ -381,7 +531,6 @@ Callback.addCallback('ProjectileHit', function (projectile, item, target, coords
 }
 });
 
-
 Callback.addCallback('ItemUse', function (coords, item, block) {
 	var player = Player.get();
 	if(item.id==ItemID.cosmAxe && Entity.getSneaking(player)){
@@ -396,7 +545,6 @@ Callback.addCallback('ItemUse', function (coords, item, block) {
 		   }
 	}}}}
 	});
-	
 
 var rr = 3;
 
@@ -418,208 +566,282 @@ if(World.getBlockID(startx + xx, starty + yy, startz + zz) == block.id){World.de
 }});
 }};
 
-
 ModAPI.registerAPI("TreeCapitator", TreeCapitator);
 TreeCapitator.registerAxe(ItemID.cosmAxe);
 
 
 
 
-// file: BlocksAV.js
+// file: items/armor.js
 
-var Renderer={
-        setSaplingRender:function(id,x){
-        var shape = new ICRender.CollisionShape();     
-        BlockRenderer.setCustomCollisionShape(Block.getNumericId(id), -1, shape);    
-        BlockRenderer.addRenderCallback(id, function(api, coords,block) {
-            if(x!=0){
-                for(var i = 0;i < 1/x;i+=x){
-                api.renderBoxId(coords.x, coords.y, coords.z,0+i, 0.01, 0+i, x+i, 0.99, x+i,id, block.data);
-                api.renderBoxId(coords.x, coords.y, coords.z,(1-x)-i, 0.01, 0+i,1-i, 0.99, x+i,id, block.data);
-                }
-            }
-            else{
-                api.renderBoxId(coords.x, coords.y, coords.z, 0.4999, 0.01, 0, 0.5, 0.99, 1,id, block.data);
-                api.renderBoxId(coords.x, coords.y, coords.z, 0, 0.01, 0.4999, 1, 0.99, 0.5, id, block.data);
-            }
-        })
-        BlockRenderer.enableCustomRender(id);
-    }
+var arm = {
+	setMode: function(arg){
+       Callback.addCallback("tick",function() {
+           if(Player.getArmorSlot(arg.type[0]).id == arg.id){
+	          arg.tick();
+    }})}
+    
 };
 
-/*IDRegistry.genBlockID("gaiaBlock"); 
-Block.createBlock("gaiaBlock", [
-    {name: "Gaia block", texture: [["block_gaia", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.gaiaBlock,3);
-ToolAPI.registerBlockMaterial(BlockID.gaiaBlock, "stone", 4, true);
-*/
-IDRegistry.genBlockID("infBlock"); 
-Block.createBlock("infBlock", [
-    {name: "Infinity block", texture: [["infinity", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.infBlock,3);
-ToolAPI.registerBlockMaterial(BlockID.infBlock, "stone", 4, true);
+Game.getGameMode = ModAPI.requireGlobal("Level.getGameMode");
 
-IDRegistry.genBlockID("neutroniumBlock"); 
-Block.createBlock("neutroniumBlock", [
-    {name: "Neutronium block", texture: [["neutronium", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.neutroniumBlock,3);
-ToolAPI.registerBlockMaterial(BlockID.neutroniumBlock, "stone", 4, true);
-
-IDRegistry.genBlockID("compreBlock"); 
-Block.createBlock("compreBlock", [
-    {name: "Compresed workbench", texture: [["compressed", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.compreBlock,4);
-ToolAPI.registerBlockMaterial(BlockID.compreBlock, "wood", 0, true);
-
-IDRegistry.genBlockID("dcompreBlock"); 
-Block.createBlock("dcompreBlock", [
-    {name: "Double compressed workbench", texture: [["double_compressed", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.dcompreBlock,6);
-ToolAPI.registerBlockMaterial(BlockID.dcompreBlock, "wood", 2, true);
-
-IDRegistry.genBlockID("extWorckbench");
-Block.createBlockWithRotation("extWorckbench", [
- {name: "Extrеme workbench", texture:
- [["crafting", 2],
- ["craftingtop", 0],
- ["craftingside", 0],
-  ["craftingside", 0],
-   ["craftingside", 0],
-    ["craftingside", 0]],
- inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.extWorckbench,4);
-ToolAPI.registerBlockMaterial(BlockID.extWorckbench, "stone", 3, true);
-
-IDRegistry.genBlockID("crystal_matrixAV");
-Block.createBlockWithRotation("crystal_matrixAV", [
-	{name: "Crystal matrix", texture: 
-	[["crystal_matrix", 0],
-	 ["crystal_matrix", 0],
-	 ["crystal_matrix", 0],
-	 ["crystal_matrix", 0],
-	 ["crystal_matrix", 0],
-	 ["crystal_matrix", 0]],
-	      inCreative: true}
-], "opaque");
-Block.setDestroyTime(BlockID.crystal_matrixAV,4);
-ToolAPI.registerBlockMaterial(BlockID.crystal_matrix, "stone", 4, true);
-
-IDRegistry.genBlockID("compressorAv"); 
-Block.createBlockWithRotation("compressorAv", [
-    {name: "Compressor neutronium", texture: [["side", 0],["top_comp", 0],["side", 0],["compfront", 0],["side", 0],["side", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.compressorAv,4);
-ToolAPI.registerBlockMaterial(BlockID.compressorAv, "stone", 4, true);
-
-IDRegistry.genBlockID("neutCo"); 
-Block.createBlockWithRotation("neutCo", [
-    {name: "Neutroinium collector", texture: [["side", 0],["top", 0],["side", 0],["active", 0],["side", 0],["side", 0]],inCreative: true}], "opaque");
-Block.setDestroyTime(BlockID.neutCo,4);
-ToolAPI.registerBlockMaterial(BlockID.neutCo, "stone", 4, true);
-
-/*
-IDRegistry.genBlockID("asgWhite");
-Block.createBlock("asgWhite", [
-    {name: "Asgardandelion", texture: [["empty", 0], ["empty", 0], ["asgardandelion", 1]], inCreative: false}
-]);
-
-IDRegistry.genItemID("asgWhite");
-Item.createItem("asgWhite", "Asgardandelion", {name: "asgardandelion"});
-
-Item.registerUseFunction("asgWhite", function(coords, item, block){
-    var place = coords.relative;
-    if(GenerationUtils.isTransparentBlock(World.getBlockID(place.x, place.y, place.z))){
-        World.setBlock(place.x, place.y, place.z, BlockID.roseWhite);
-        Player.setCarriedItem(item.id, item.count - 1, item.data);  
+IDRegistry.genItemID("inf_helmet");
+Item.createArmorItem("inf_helmet", "Infinity Helmet", {name: "helmetAV", meta: 0}, {	isTech: false,
+	armor: 3,
+	type: "helmet",
+	texture: "armor/infinity_armor_full0.png",
+	durability: 999999999
+});
+arm.setMode({
+	id: ItemID.inf_helmet,
+	type: [0],
+	tick: function(){
+	   Entity.addEffect(Player.get(), 16, 1, 19, false,false);
+       Entity.addEffect(Player.get(), 23, 190, 19, false,false);
+       Entity.addEffect(Player.get(), 13, 190, 19, false,false);
+	}
+});
+IDRegistry.genItemID("inf_chestplate");
+Item.createArmorItem("inf_chestplate", "Infinity Chestplate", {name: "chestaplateAV", meta: 0}, {	isTech: false,
+	armor: 8,
+	type: "chestplate",
+	texture: "armor/infinity_armor_full0.png",
+	durability: 999999999
+});
+arm.setMode({
+	id: ItemID.inf_chestplate,
+	type: [1],
+	tick: function(){
+	   Entity.addEffect(Player.get(), 11, 190, 19, false,false);
+       Entity.addEffect(Player.get(), 10, 190, 19, false,false);
+       Player.setFlyingEnabled(true);
+	}
+});
+Callback.addCallback("tick",function() {
+    if(Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && !Game.getGameMode()){
+	    Player.setFlyingEnabled(false);
     }
 });
 
-Renderer.setSaplingRender(BlockID.asgWhite,0);
-
-Callback.addCallback("GenerateChunk", function(x,z){ 
-for(var i = 0; i < 1; i++){ 
-coords=GenerationUtils.randomCoords(x,z,20,96); 
-for(var k=20;k<96;k++){ 
-if(World.getBlockID(coords.x,k,coords.z)==3){ 
-if(World.getBlockID(coords.x,k+1,coords.z)!=0)return 
-World.setBlock(coords.x,k+1,coords.z,BlockID.Asgardandelion,0); 
-} 
-} 
-} 
+Callback.addCallback("tick",function() {
+    if(Player.getArmorSlot(1).id == ItemID.inf_chestplate && Player.getFlying(true)){
+	//    wing.load();
+    }else {
+		if(Player.getArmorSlot(1).id == ItemID.inf_chestplate || Player.getFlying(false)){
+			wing.destroy();
+		}
+	}
 });
 
-Recipes.addShaped({id: ItemID.gypMatter, count: 1, data: 0}, [
-    "oao"  
-], ['a', ItemID.asgWhite, 0]);
-
-
-IDRegistry.genBlockID("solWhite");
-Block.createBlock("solWhite", [
-    {name: "Soarleander", texture: [["empty", 0], ["empty", 0], ["soarleander", 1]], inCreative: false}
-]);
-
-IDRegistry.genItemID("solWhite");
-Item.createItem("solWhite", "Soarleander", {name: "soarleander"});
-
-Item.registerUseFunction("solWhite", function(coords, item, block){
-    var place = coords.relative;
-    if(GenerationUtils.isTransparentBlock(World.getBlockID(place.x, place.y, place.z))){
-        World.setBlock(place.x, place.y, place.z, BlockID.roseWhite);
-        Player.setCarriedItem(item.id, item.count - 1, item.data);  
-    }
+IDRegistry.genItemID("inf_leggings");
+Item.createArmorItem("inf_leggings", "Infinity Leggings", {name: "legginsAV", meta: 0}, {	isTech: false,
+	armor: 6,
+	type: "leggings",
+	texture: "armor/infinity_armor_full1.png",
+	durability: 999999999
+});
+arm.setMode({
+	id: ItemID.inf_leggings,
+	type: [2],
+	tick: function(){
+	   Entity.addEffect(Player.get(), 1, 9, 19, false,false);
+	}
 });
 
-Renderer.setSaplingRender(BlockID.solWhite,0);
-
-Callback.addCallback("GenerateChunk", function(x,z){ 
-for(var i = 0; i < 1; i++){ 
-coords=GenerationUtils.randomCoords(x,z,20,96); 
-for(var k=20;k<96;k++){ 
-if(World.getBlockID(coords.x,k,coords.z)==3){ 
-if(World.getBlockID(coords.x,k+1,coords.z)!=0)return 
-World.setBlock(coords.x,k+1,coords.z,BlockID.solWhite,0); 
-} 
-} 
-} 
-});*/
-
-
-
-
-// file: FoodAV.js
-
-IDRegistry.genItemID("ultimstew");
-Item.createFoodItem("ultimstew", "Cosmos soup", {name: "ultimstew", meta: 0},{isTech:false,stack: 64,food: 10});
-Callback.addCallback("FoodEaten",function(heal, satRatio){
-if(Player.getCarriedItem().id==ItemID.ultimstew){
-Entity.addEffect(Player.get(), 12, 1, 12000, false,false);
-Entity.addEffect(Player.get(), 5, 1, 12000, false,false);
-Entity.addEffect(Player.get(), 6, 1, 30, false,false);
-Entity.addEffect(Player.get(), 21, 2, 12000, false,false);
-Entity.addEffect(Player.get(), 22, 2, 12000, false,false);
-}});
-
-IDRegistry.genItemID("cosmMeatballs");
-Item.createFoodItem("cosmMeatballs", "Cosmos meatballs", {name: "cosm_meatballs", meta: 0},{isTech:false,stack: 64,food: 10});
-Callback.addCallback("FoodEaten",function(heal, satRatio){
-if(Player.getCarriedItem().id==ItemID.cosmMeatballs){
-Entity.addEffect(Player.get(), 12, 1, 12000, false,false);
-Entity.addEffect(Player.get(), 1, 2, 12000, false,false);
-Entity.addEffect(Player.get(), 5, 1, 12000, false,false);
-Entity.addEffect(Player.get(), 6, 1, 30, false,false);
-Entity.addEffect(Player.get(), 21, 2, 12000, false,false);
-Entity.addEffect(Player.get(), 22, 2, 12000, false,false);
-}});
+IDRegistry.genItemID("inf_boots");
+Item.createArmorItem("inf_boots", "Infinity Boots", {name: "bootAV", meta: 0}, {	isTech: false,
+	armor: 3,
+	type: "boots",
+	texture: "armor/infinity_armor_full0.png",
+	durability: 999999999
+});
+arm.setMode({
+	id: ItemID.inf_boots,
+	type: [3],
+	tick: function(){
+	   Entity.addEffect(Player.get(), 8, 3, 19, false,false);
+	}
+});
 
 
 
 
+// file: items/animation.js
+
+var fiv = 0;
+Item.registerIconOverrideFunction(ItemID.ironsing, function(item, texture){
+return {name: "singularity_iron", meta: fiv};
+});
+Item.setRequiresIconOverride(ItemID.ironsing, true);
+
+Item.registerIconOverrideFunction(ItemID.goldsing, function(item, texture){
+return {name: "singularity_gold", meta: fiv};
+});
+Item.setRequiresIconOverride(ItemID.goldsing, true);
+
+Item.registerIconOverrideFunction(ItemID.lapissing, function(item, texture){
+return {name: "singularity_lapis", meta: fiv};
+});
+Item.setRequiresIconOverride(ItemID.lapissing, true);
+
+Item.registerIconOverrideFunction(ItemID.quartzsing, function(item, texture){
+return {name: "singularity_quartz", meta: fiv};
+});
+Item.setRequiresIconOverride(ItemID.quartzsing, true);
+
+Item.registerIconOverrideFunction(ItemID.redstonesing, function(item, texture){
+return {name: "singularity_redstone", meta: fiv};
+});
+Item.setRequiresIconOverride(ItemID.redstonesing, true);
+
+var fou = 0;
+Item.registerIconOverrideFunction(ItemID.endestPearl, function(item, texture){
+return {name: "endest", meta: fou};
+});
+Item.setRequiresIconOverride(ItemID.endestPearl, true);
+
+var sev = 0;
+Item.registerIconOverrideFunction(ItemID.cosmMeatballs, function(item, texture){
+return {name: "cosm_meatballs", meta: sev};
+});
+Item.setRequiresIconOverride(ItemID.cosmMeatballs, true);
+/* var Animate = function(IDD,M,f){ 
+var FtP = World.getTime / f; 
+var ind = 0;
+if(FtP > 0){ 
+Item.registerIconOverrideFunction(IDD, function(item, name){ 
+return {name: name, meta: M+1}
+ }); 
+ } 
+};
+Animate(ItemID.cosmMeatballs, 0, 7); */
+
+var eit = 0;
+Item.registerIconOverrideFunction(ItemID.inf_chestplate, function(item, texture){
+return {name: "chestaplateAV", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.inf_chestplate, true);
+
+Item.registerIconOverrideFunction(ItemID.cosmhammer, function(item, texture){
+return {name: "infhammer", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.cosmhammer, true);
+
+Item.registerIconOverrideFunction(ItemID.cosmHoe, function(item, texture){
+return {name: "infhoe", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.cosmHoe, true);
+
+Item.registerIconOverrideFunction(ItemID.catalystInfinity, function(item, texture){
+return {name: "infinity_catalyst", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.catalystInfinity, true);
+
+Item.registerIconOverrideFunction(ItemID.ingotInfinity, function(item, texture){
+return {name: "infinity_ingot", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.ingotInfinity, true);
+
+Item.registerIconOverrideFunction(ItemID.cosmPickaxe, function(item, texture){
+return {name: "infpickaxe", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.cosmPickaxe, true);
+
+Item.registerIconOverrideFunction(ItemID.cosmShovel, function(item, texture){
+return {name: "infshovel", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.cosmShovel, true);
+
+Item.registerIconOverrideFunction(ItemID.cosmSword, function(item, texture){
+return {name: "cosm_sword", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.cosmSword, true);
+
+Item.registerIconOverrideFunction(ItemID.inf_leggings, function(item, texture){
+return {name: "legginsAV", meta: eit};
+});
+Item.setRequiresIconOverride(ItemID.inf_leggings, true);
+
+var tre = 0;
+Item.registerIconOverrideFunction(ItemID.skull_sword, function(item, texture){
+return {name: "skull_sword", meta: tre};
+});
+Item.setRequiresIconOverride(ItemID.skull_sword, true);
+
+/* Item.registerIconOverrideFunction(ItemID.orb_armok, function(item, texture){
+return {name: "orb_armok", meta: tre};
+});
+Item.setRequiresIconOverride(ItemID.orb_armok, true); */
+
+var two = 0;
+Item.registerIconOverrideFunction(ItemID.ingotNeutronium, function(item, texture){
+return {name: "neutronium_ingot", meta: two};
+});
+Item.setRequiresIconOverride(ItemID.ingotNeutronium, true);
+
+var ts = 0;
+Item.registerIconOverrideFunction(ItemID.ultimstew, function(item, texture){
+return {name: "ultimstew", meta: ts};
+});
+Item.setRequiresIconOverride(ItemID.ultimstew, true);
+
+Callback.addCallback("tick", function(){
+	var time = World.getThreadTime() % 4;
+	if(time == 0 || time == 4) {
+		if(two < 2) two++;
+		else two = 0;
+		if(tre < 3) tre++;
+		else tre = 0;
+		if(fou < 4) fou++;
+		else fou = 0;
+		if(fiv < 5) fiv++;
+		else fiv = 0;
+		if(sev < 7) sev++;		
+		else sev = 0;
+		if(eit < 8) eit++;
+		else eit = 0;
+		if(ts < 27) ts++;
+		else ts = 0;
+	}
+});
+
+    var inf_render = new Render(); 
+    var partObj = [ 
+        {
+            type: "box",
+            coords: {
+                x: 0,
+                y: 31,
+                z: 0
+            },
+            size: {
+                x: 64,
+                y: 64,
+                z: 0
+            },
+            uv: {
+                x: 0,
+                y: 0
+            }
+        }];
+inf_render.setPart("head", partObj, {});
+		
+var coords = Player.getPosition();
+var wing = new Animation.Base(coords.x, coords.y + 1, coords.z);
+// wing.setInterpolationEnabled(true);
+wing.describe({ render: inf_render.getId(),
+skin: "armor/infinity_armor_wing_full.png" });
+
+wing.loadCustom(function() {
+	var coords = Player.getPosition();
+	this.setPos(coords.x, coords.y + 1, coords.z); 
+    this.refresh();
+});
 
 
-// file: gui.js
 
-IMPORT("RecipeTileEntityLib");
 
-		           //table1
+// file: gui/table.js
 
 var container = new UI.Container();  
 var GuiComp = new UI.StandartWindow({
@@ -639,7 +861,10 @@ TileEntity.registerPrototype(BlockID.compreBlock, {
   tick: function(){}
 });
 
-               //table2
+
+
+
+// file: gui/double_table.js
 
 var GuiDouble = new UI.StandartWindow({
 	standart: {header: {text: {text: Translation.translate("Double compressed crafting table")}},
@@ -658,7 +883,10 @@ TileEntity.registerPrototype(BlockID.dcompreBlock, {
   tick: function(){}
 });
 
-         //general table
+
+
+
+// file: gui/extreme_table.js
 
 /*let slot = this.container.getSlot("slot");
 if(slot.id == 266) return true*/
@@ -708,7 +936,10 @@ RecipeTE.registerWorkbench("extWorckbench",
     GuiScreen:extWorckbench,
 });
 
-              //guid
+
+
+
+// file: gui/extreme_nei.js
 
 var guid1 = new UI.StandartWindow({
 	standart: {
@@ -728,82 +959,37 @@ var guid1 = new UI.StandartWindow({
 		"name": {type: "text", x: 310, y: 30, width: 120, height: 16, text: "This is a Text element"},
 	}
 });
-let g1 = guid1.getContent();
-let r1 = 0;
-let xg1 = 173;
-let yg1 = 73;
-for (let i = 0; i < 81; i++) 
-{
-    g1.elements["slot" + i] = 
-	{
-        type: "slot",
-        x: xg1,
-        y: yg1,
+
+var g1 = guid1.getContent();
+var r1 = 0;
+var xg1 = 173;
+var yg1 = 73;
+for (var i = 0; i < 81; i++) {
+	g1.elements["slot" + i] = {
+		type: "slot",
+		x: xg1,
+		y: yg1,
 		size: 52,
-		visual: true,
-    };
-    xg1 += 52;
-    r1++;
-    if (r1 == 9) 
-	{
-        xg1 = 173;
-        yg1 += 52;
-        r1 = 0;
+		visual: true
+	};
+	xg1 += 52;
+	r1++;
+	if (r1 == 9) {
+		xg1 = 173;
+		yg1 += 52;
+		r1 = 0;
     }
 }
 
 
-             //collector
 
-var guiCollector = new UI.StandartWindow({
-	standart: {header: {text: {text: "Collector"}},
-	background: {color: android.graphics.Color.parseColor("#c6c6c6")},
-	inventory: {standart: true}},
-	drawing: [],
-	elements: {
-		"slot_0": {type: "slot", x: 570, y: 160, size: 102}, 
-		"progress": {type: "text", x: 545, y: 290, width: 120, height: 16, text: "Progress: 0%"},
-	}
-});
 
-const COLLECTOR_MAX = 6000;
+// file: gui/compressor.js
 
-TileEntity.registerPrototype(BlockID.neutCo, {
-defaultValues: {
- jin:0,
-},
-getGuiScreen: function(){
- return guiCollector;
-},
-tick: function() {
- slot = this.container.getSlot("slot_0");
- this.container.setText("progress", "Progress: " + parseInt(this.data.jin / COLLECTOR_MAX * 100) + "%");
- if (++this.data.jin >= COLLECTOR_MAX && slot.count < 64){
-  if (slot.id == ItemID.neutron_pile) {
-   slot.count ++;
-   this.data.jin = 0;
-  } else if (slot.id == 0 && !slot.count) {
-   slot.id = ItemID.neutron_pile;
-  } else this.data.jin = COLLECTOR_MAX;
- }
-},
-   getTransportSlots: function(){
-		let inputC = [];
-	   let outputC = [];
-	 	  for(i=0;i<1;i++){
-	     inputC.push("slot"+i); 
-	     outputC.push("slot"+i);
-		 }
-  return {input: inputC, output: outputC}
-	 	},
-});
-
-            //compressor
-			
 var compressorGUI = new UI.StandartWindow({
 	standart: {header: {text: {text: "Compressor"}},
 	background: {color: android.graphics.Color.parseColor("#c6c6c6")}, inventory: {standart: true}},
-	drawing: [{type:"bitmap",x:574,y:238,scale:3.6,bitmap:"progress_background"},],
+	drawing: [{type:"bitmap",x:574,y:238,scale:3.6,bitmap:"arrow"},],
 	elements: {
 		"slot_0": {type: "slot", x: 500, y: 230, size: 68, visual: false, needClean: false, isTransparentBackground: false},
 		"progress": {type: "scale", x: 574, y: 238, direction: 0, bitmap: "progress", scale: 3.6, value: 1},
@@ -900,313 +1086,59 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 		return compressorGUI;
 		}
 	});
-  
- 
 
 
 
 
-// file: anim.js
+// file: gui/collector.js
 
-/*var Animate = function(IDD,M,f){ 
-var FtP = World.getTime / f; 
-var ind = 0;
-if(FtP > 0){ 
-Item.registerIconOverrideFunction(IDD, function(item, name){ 
-return {name: name, meta: M+1}
- }); 
- } 
-};
-Animate(ItemID.cosmMeatballs, 0, 7);
-*/
-
-var two = 0;
-var sev = 0;
-var fou = 0;
-var eit = 0;
-var ts = 0;
-var tre = 0;
-var fiv = 0;
-var setRequiresIconOverride = ModAPI.requireGlobal("Item.setRequiresIconOverride");
-
-Item.registerIconOverrideFunction(ItemID.ironsing, function(item, texture){
-return {name: "singularity_iron", meta: fiv};
-});
-Item.registerIconOverrideFunction(ItemID.goldsing, function(item, texture){
-return {name: "singularity_gold", meta: fiv};
-});
-Item.registerIconOverrideFunction(ItemID.lapissing, function(item, texture){
-return {name: "singularity_lapis", meta: fiv};
-});
-Item.registerIconOverrideFunction(ItemID.quartzsing, function(item, texture){
-return {name: "singularity_quartz", meta: fiv};
-});
-Item.registerIconOverrideFunction(ItemID.redstonesing, function(item, texture){
-return {name: "singularity_redstone", meta: fiv};
-});
-Item.registerIconOverrideFunction(ItemID.endestPearl, function(item, texture){
-return {name: "endest", meta: fou};
-});
-Item.registerIconOverrideFunction(ItemID.cosmMeatballs, function(item, texture){
-return {name: "cosm_meatballs", meta: sev};
-});
-Item.registerIconOverrideFunction(ItemID.inf_chestplate, function(item, texture){
-return {name: "chestaplateAV", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.cosmhammer, function(item, texture){
-return {name: "infhammer", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.cosmHoe, function(item, texture){
-return {name: "infhoe", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.catalystInfinity, function(item, texture){
-return {name: "infinity_catalyst", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.ingotInfinity, function(item, texture){
-return {name: "infinity_ingot", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.cosmPickaxe, function(item, texture){
-return {name: "infpickaxe", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.cosmShovel, function(item, texture){
-return {name: "infshovel", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.cosmSword, function(item, texture){
-return {name: "cosm_sword", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.inf_leggings, function(item, texture){
-return {name: "legginsAV", meta: eit};
-});
-Item.registerIconOverrideFunction(ItemID.skull_sword, function(item, texture){
-return {name: "skull_sword", meta: tre};
-});
-/*
-Item.registerIconOverrideFunction(ItemID.orb_armok, function(item, texture){
-return {name: "orb_armok", meta: tre};
-});*/
-Item.registerIconOverrideFunction(ItemID.ingotNeutronium, function(item, texture){
-return {name: "neutronium_ingot", meta: two};
-});
-Item.registerIconOverrideFunction(ItemID.ultimstew, function(item, texture){
-return {name: "ultimstew", meta: ts};
-});
-
-setRequiresIconOverride(ItemID.ironsing, true);
-setRequiresIconOverride(ItemID.goldsing, true);
-setRequiresIconOverride(ItemID.lapissing, true);
-setRequiresIconOverride(ItemID.quartzsing, true);
-setRequiresIconOverride(ItemID.redstonesing, true);
-setRequiresIconOverride(ItemID.endestPearl, true);
-setRequiresIconOverride(ItemID.cosmMeatballs, true);
-setRequiresIconOverride(ItemID.inf_chestplate, true);
-setRequiresIconOverride(ItemID.cosmhammer, true);
-setRequiresIconOverride(ItemID.cosmHoe, true);
-setRequiresIconOverride(ItemID.catalystInfinity, true);
-setRequiresIconOverride(ItemID.ingotInfinity, true);
-setRequiresIconOverride(ItemID.cosmPickaxe, true);
-setRequiresIconOverride(ItemID.cosmShovel, true);
-setRequiresIconOverride(ItemID.cosmSword, true);
-setRequiresIconOverride(ItemID.inf_leggings, true);
-setRequiresIconOverride(ItemID.skull_sword, true);
-//setRequiresIconOverride(ItemID.orb_armok, true);
-setRequiresIconOverride(ItemID.ingotNeutronium, true);
-//setRequiresIconOverride(ItemID., true);
-setRequiresIconOverride(ItemID.ultimstew, true);
-
-
-Callback.addCallback("tick", function(){
-	let time = World.getThreadTime()%4;
-	if(time == 0 || time == 4){
-		if(two < 2){
-			two++;
-		}else{
-			two = 0;
-		}
-		if(tre < 3){
-			tre++;
-		}else{
-			tre = 0;
-		}
-		if(fou < 4){
-			fou++;
-		}else{
-			fou = 0;
-		}
-		if(fiv < 5){
-			fiv++;
-		}else{
-			fiv = 0;
-		}
-		if(sev < 7){
-			sev++;		
-		}else{
-			sev = 0;
-		}
-		if(eit < 8){
-			eit++;
-		}else{
-			eit = 0;
-		}
-		if(ts < 27){
-			ts++;
-		}else{
-			ts = 0;
-		}
+var guiCollector = new UI.StandartWindow({
+	standart: {header: {text: {text: "Collector"}},
+	background: {color: android.graphics.Color.parseColor("#c6c6c6")},
+	inventory: {standart: true}},
+	drawing: [],
+	elements: {
+		"slot_0": {type: "slot", x: 570, y: 160, size: 102}, 
+		"progress": {type: "text", x: 545, y: 290, width: 120, height: 16, text: "Progress: 0%"},
 	}
 });
 
+var COLLECTOR_MAX = 6000;
 
-    var inf_render = new Render(); 
-    var partObj = [ 
-        {
-            type: "box",
-            coords: {
-                x: 0,
-                y: 31,
-                z: 0
-            },
-            size: {
-                x: 64,
-                y: 64,
-                z: 0
-            },
-            uv: {
-                x: 0,
-                y: 0
-            }
-        }];
-inf_render.setPart("head", partObj, {});
-		
-var coords = Player.getPosition();
-var wing = new Animation.Base(coords.x, coords.y, coords.z);
-wing.describe({ render: inf_render.getId(),
-skin: "armor/infinity_armor_wing_full.png"});
-
-var coords = wing.coords;
-wing.setPos(coords.x, coords.y + 1, coords.z);
-wing.refresh();
-
-Callback.addCallback("tick", function() {
- var coords = Player.getPosition();
- wing.setPos(coords.x, coords.y + 1, coords.z);
- wing.refresh();
-});
-
-Callback.addCallback("LevelLeft", function() {
- wing.isLoaded = false;
- wing.leftTicks = 1;
-});
-
-/*
-wing.leftTicks = 1;
-wing.loadCustom(function() {
-    this.setPos(this.coords.x + 0.05, this.coords.y, this.coords.z - 0.05); 
-    this.refresh();
-    if(this.leftTicks > 0) this.leftTicks--;
-    else this.destroy();
-});
-*/
-//wing.setInterpolationEnabled(true);
-
-
-
-
-
-// file: arm.js
-
-var arm = {
-	setMode: function(arg){
-       Callback.addCallback("tick",function() {
-           if(Player.getArmorSlot(arg.type[0]).id == arg.id){
-	          arg.tick();
-    }})}
-    
-};
-
-Game.getGameMode = ModAPI.requireGlobal("Level.getGameMode");
-
-IDRegistry.genItemID("inf_helmet");
-Item.createArmorItem("inf_helmet", "Infinity Helmet", {name: "helmetAV", meta: 0}, {	isTech: false,
-	armor: 3,
-	type: "helmet",
-	texture: "armor/infinity_armor_full0.png",
-	durability: 999999999
-});
-arm.setMode({
-	id: ItemID.inf_helmet,
-	type: [0],
-	tick: function(){
-	   Entity.addEffect(Player.get(), 16, 1, 19, false,false);
-       Entity.addEffect(Player.get(), 23, 190, 19, false,false);
-       Entity.addEffect(Player.get(), 13, 190, 19, false,false);
-	}
-});
-IDRegistry.genItemID("inf_chestplate");
-Item.createArmorItem("inf_chestplate", "Infinity Chestplate", {name: "chestaplateAV", meta: 0}, {	isTech: false,
-	armor: 8,
-	type: "chestplate",
-	texture: "armor/infinity_armor_full0.png",
-	durability: 999999999
-});
-arm.setMode({
-	id: ItemID.inf_chestplate,
-	type: [1],
-	tick: function(){
-	   Entity.addEffect(Player.get(), 11, 190, 19, false,false);
-       Entity.addEffect(Player.get(), 10, 190, 19, false,false);
-       Player.setFlyingEnabled(true);
-	}
-});
-Callback.addCallback("tick",function() {
-    if(Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && !Game.getGameMode()){
-	    Player.setFlyingEnabled(false);
-    }
-});
-
-Callback.addCallback("tick",function() {
-    if(Player.getArmorSlot(1).id == ItemID.inf_chestplate && Player.getFlying(true)){
-	//    wing.load();
-    }else {
-		if(Player.getArmorSlot(1).id == ItemID.inf_chestplate || Player.getFlying(false)){
-			wing.destroy();
-		}
-	}
-});
-
-IDRegistry.genItemID("inf_leggings");
-Item.createArmorItem("inf_leggings", "Infinity Leggings", {name: "legginsAV", meta: 0}, {	isTech: false,
-	armor: 6,
-	type: "leggings",
-	texture: "armor/infinity_armor_full1.png",
-	durability: 999999999
-});
-arm.setMode({
-	id: ItemID.inf_leggings,
-	type: [2],
-	tick: function(){
-	   Entity.addEffect(Player.get(), 1, 9, 19, false,false);
-	}
-});
-
-IDRegistry.genItemID("inf_boots");
-Item.createArmorItem("inf_boots", "Infinity Boots", {name: "bootAV", meta: 0}, {	isTech: false,
-	armor: 3,
-	type: "boots",
-	texture: "armor/infinity_armor_full0.png",
-	durability: 999999999
-});
-arm.setMode({
-	id: ItemID.inf_boots,
-	type: [3],
-	tick: function(){
-	   Entity.addEffect(Player.get(), 8, 3, 19, false,false);
-	}
+TileEntity.registerPrototype(BlockID.neutCo, {
+defaultValues: {
+ jin:0,
+},
+getGuiScreen: function(){
+ return guiCollector;
+},
+tick: function() {
+ slot = this.container.getSlot("slot_0");
+ this.container.setText("progress", "Progress: " + parseInt(this.data.jin / COLLECTOR_MAX * 100) + "%");
+ if (++this.data.jin >= COLLECTOR_MAX && slot.count < 64){
+  if (slot.id == ItemID.neutron_pile) {
+   slot.count ++;
+   this.data.jin = 0;
+  } else if (slot.id == 0 && !slot.count) {
+   slot.id = ItemID.neutron_pile;
+  } else this.data.jin = COLLECTOR_MAX;
+ }
+},
+   getTransportSlots: function(){
+		var inputC = [];
+	   var outputC = [];
+	 	  for(i=0;i<1;i++){
+	     inputC.push("slot"+i); 
+	     outputC.push("slot"+i);
+		 }
+  return {input: inputC, output: outputC};
+	 	},
 });
 
 
 
 
-// file: crafts.js
+// file: items/crafts.js
 
 
 Callback.addCallback('LevelLoaded', function () {
@@ -1247,7 +1179,6 @@ Recipes.addShaped({id: BlockID.extWorckbench, count: 1, data: 0}, [
 "aba",
 "aaa"], ['a', ItemID.crystal_matrix_ingot, 0, 'b', BlockID.dcompreBlock, 0]);
 });
-
 
 RecipeTE.addShapeRecipe("extWorckbench", {
     id:ItemID.skull_sword,
@@ -1543,35 +1474,80 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 
 
 
-// file: TranslationAV.js
+// file: entity/sphere.js
 
-Translation.addTranslation("Infinity chunck", {ru: "Кусочек бескоечности"});
-Translation.addTranslation("Infinity ingot", {ru: "Слиток бесконечности"});
-Translation.addTranslation("Infinity catalyst", {ru: "Катализатор бескоечности"});
-Translation.addTranslation("Neutronium ingot", {ru: "Нейтронный слиток"});
+var BHMesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
+scale:[0.1,0.1,0.1],
+translate:[0,-1.2,0]
+});
+var BHRender = new Render();
+var BHPart = BHRender.getPart("head"); 
+BHPart.setMesh(BHMesh);
+var BHtexture= new Texture("mob/BHtexture.png").setResolution(256, 256);
 
-Translation.addTranslation("Fractured ore", {ru: "Растрескавшаяся руда"});
-Translation.addTranslation("Matrix ingot", {ru: "Слиток кристаллической матрицы"});
-Translation.addTranslation("Diamond lattice", {ru: "Алмазная решетка"});
-Translation.addTranslation("Ghyper Matter", {ru: "Большой хранитель"});
-Translation.addTranslation("Endest pearl", {ru: "Эндест-жемчуг"});
-Translation.addTranslation("Gaia block", {ru: "Блок гаи"});
-Translation.addTranslation("Infinity block", {ru: "Блок бесконечности"});
-Translation.addTranslation("Neutronium block", {ru: "Нейтронный блок"});
-Translation.addTranslation("Compresed workbench", {ru: "Сжатый верстак"});
-Translation.addTranslation("Double compressed workbench", {ru: "Сильно сжатый верстак"});
-Translation.addTranslation("Extrime workbench", {ru: "Экстримальноно сжатый верстак"});
-Translation.addTranslation("Compressor neutronium", {ru: "Нейтронный компресор"});
-Translation.addTranslation("Neutroinium collector", {ru: "Нейтронный собиратель"});
-Translation.addTranslation("Asgardandelion", {ru: "Асгарданделион"});
-Translation.addTranslation("Soarleander", {ru: "Соарлеандр"});
-Translation.addTranslation("Sword of the Cosmos", {ru: "Меч космоса"});
-Translation.addTranslation("World Braker", {ru: "Кирка 'Уничтожитель Миров'"});
-Translation.addTranslation("Planet Eater", {ru: "Лопата 'Пожиратель Миров'"});
-Translation.addTranslation("Nature's Ruin", {ru: "Торпор 'Руины Природы'"});
-Translation.addTranslation("Hoe of the Green Earth", {ru: "Мотыга 'Зеленая Земля'"});
-Translation.addTranslation("Cosmos soup", {ru: "Космическая тушенка"});
-Translation.addTranslation("Cosmos meatballs", {ru: "Космческие фрикадельки'"});
+var ModelBH = new EntityModel();
+ModelBH.setRender(BHRender);
+ModelBH.setTexture(BHtexture);
+
+var BlackHole = MobRegistry.registerEntity("BlackHole");
+BlackHole.customizeVisual({
+    getModels: function() {
+        return {
+            "main": ModelBH
+        };
+    }
+});
+
+BlackHole.customizeDescription({
+    getHitbox: function() {
+        return {
+            w: 0,
+            h: 0
+        };
+    }
+});
+
+IDRegistry.genItemID("customEntitySpawn"); 
+Item.createItem("customEntitySpawn", "Spawn custom entity", {name: "stick"});
+Item.registerUseFunction("customEntitySpawn", function(coords, item, block){
+    Entity.spawnCustom("BlackHole", coords.relative.x + .5, coords.relative.y + .5, coords.relative.z + .5); 
+});
+
+var endparticle = Particles.registerParticleType({
+  texture: "ep",
+  size: [1, 1],
+  lifetime: [40, 40],
+  render: 2,
+  velocity: [0, -0.1, 0]
+});
+
+	
+function handleExplode(coords, time) {
+ Threading.initThread("explode", function() {
+  java.lang.Thread.sleep(time * 50);
+  Entity.remove("BlackHole");
+  World.explode(coords.x, coords.y, coords.z, 7, false);
+ }, 0);
+}
+
+
+Callback.addCallback('ProjectileHit', function (projectile, item, target, coords) {
+	Player.setCarriedItem(item.id, item.count - 1, 0);
+    coords = Entity.getPosition(projectile);
+    let fmobs = Entity.getAllInRange(coords, 8);
+Entity.spawnCustom("BlackHole", coords.x, coords.y, coords.z); 
+for(var i in fmobs){
+    Entity.moveToTarget(fmobs[i], coords.x, coords.y, coords.z, {speed: 1, denyY: false, jumpVel: 0});
+}
+    for (var dx = -5; dx < 5; dx++) {
+    for (var dy = -3; dy < 5; dy++) {
+    for (var dz = -5; dz < 5; dz++) {	
+         if(dx * dx + dy * dy + dz * dz <= 20){
+	     Particles.addParticle(endparticle, coords.x+0.5 + dx, coords.y+1 + dy, coords.z+0.5 + dz, 0, -0.1, 0, 1);	
+	}}}
+};
+     handleExplode(coords, 20 * 9);
+});
 
 
 
