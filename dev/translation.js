@@ -1,0 +1,30 @@
+Translation.addTranslation("Infinity chunck", {ru: "Кусочек бескоечности"});
+Translation.addTranslation("Infinity ingot", {ru: "Слиток бесконечности"});
+Translation.addTranslation("Infinity catalyst", {ru: "Катализатор бескоечности"});
+Translation.addTranslation("Neutronium ingot", {ru: "Нейтронный слиток"});
+
+Translation.addTranslation("Fractured ore", {ru: "Растрескавшаяся руда"});
+Translation.addTranslation("Matrix ingot", {ru: "Слиток кристаллической матрицы"});
+Translation.addTranslation("Diamond lattice", {ru: "Алмазная решетка"});
+Translation.addTranslation("Ghyper Matter", {ru: "Большой хранитель"});
+Translation.addTranslation("Endest pearl", {ru: "Эндест-жемчуг"});
+Translation.addTranslation("Gaia block", {ru: "Блок гаи"});
+Translation.addTranslation("Infinity block", {ru: "Блок бесконечности"});
+Translation.addTranslation("Neutronium block", {ru: "Нейтронный блок"});
+Translation.addTranslation("Compresed workbench", {ru: "Сжатый верстак"});
+Translation.addTranslation("Double compressed workbench", {ru: "Сильно сжатый верстак"});
+Translation.addTranslation("Extrime workbench", {ru: "Экстримальноно сжатый верстак"});
+Translation.addTranslation("Compressor neutronium", {ru: "Нейтронный компресор"});
+Translation.addTranslation("Neutroinium collector", {ru: "Нейтронный собиратель"});
+Translation.addTranslation("Asgardandelion", {ru: "Асгарданделион"});
+Translation.addTranslation("Soarleander", {ru: "Соарлеандр"});
+Translation.addTranslation("Sword of the Cosmos", {ru: "Меч космоса"});
+Translation.addTranslation("World Braker", {ru: "Кирка 'Уничтожитель Миров'"});
+Translation.addTranslation("Planet Eater", {ru: "Лопата 'Пожиратель Миров'"});
+Translation.addTranslation("Nature's Ruin", {ru: "Торпор 'Руины Природы'"});
+Translation.addTranslation("Hoe of the Green Earth", {ru: "Мотыга 'Зеленая Земля'"});
+Translation.addTranslation("Cosmos soup", {ru: "Космическая тушенка"});
+Translation.addTranslation("Cosmos meatballs", {ru: "Космческие фрикадельки'"});
+
+Translation.addTranslation("Matter Cluster", { de: "Materienansammlung", ru: "Кусок материи", zh: "物质团" });
+Translation.addTranslation("Critical Matter Cluster", { de: "Kritische Materienansammlung", ru: "Предельный кусок материи", zh: "临界物质团" });
