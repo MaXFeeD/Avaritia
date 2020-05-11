@@ -1,22 +1,21 @@
-var BHMesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
+var render = new Render();
+var mesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
 	scale: [0.1, 0.1, 0.1], translate: [0, -1.2, 0]
 });
-var BHRender = new Render();
-var BHPart = BHRender.getPart("head");
-BHPart.setMesh(BHMesh);
-var BHtexture= new Texture("mob/BHtexture.png").setResolution(256, 256);
+render.getPart("head").setMesh(mesh);
 
-var ModelBH = new EntityModel();
-ModelBH.setRender(BHRender);
-ModelBH.setTexture(BHtexture);
+var model = new EntityModel();
+model.setRender(render);
+var texture = new Texture("mob/BHtexture.png");
+model.setTexture(texture);
 
-var BlackHole = MobRegistry.registerEntity("BlackHole");
-BlackHole.customizeVisual({
+var blackHole = MobRegistry.registerEntity("BlackHole");
+blackHole.customizeVisual({
 	getModels: function() {
-		return { main: ModelBH };
+		return { main: model };
 	}
 });
-BlackHole.customizeDescription({
+blackHole.customizeDescription({
 	getHitbox: function() {
 		return { w: 0, h: 0 };
 	}
@@ -27,7 +26,7 @@ Item.createItem("customEntitySpawn", "Spawn custom entity", {
 	name: "stick"
 });
 Item.registerUseFunction("customEntitySpawn", function(coords, item, block) {
-	Entity.spawnCustom("BlackHole", coords.relative.x + .5, coords.relative.y + .5, coords.relative.z + .5);
+	Entity.spawnCustom("blackHole", coords.relative.x + .5, coords.relative.y + .5, coords.relative.z + .5);
 });
 
 var endparticle = Particles.registerParticleType({
@@ -38,7 +37,7 @@ var endparticle = Particles.registerParticleType({
 function handleExplode(coords, time) {
 	Threading.initThread("explode", function() {
 		java.lang.Thread.sleep(time * 50);
-		Entity.remove("BlackHole");
+		Entity.remove("blackHole");
 		World.explode(coords.x, coords.y, coords.z, 7, false);
 	}, 0);
 }
@@ -47,7 +46,7 @@ Callback.addCallback("ProjectileHit", function(projectile, item, target, coords)
 	Player.setCarriedItem(item.id, item.count - 1, 0);
 	coords = Entity.getPosition(projectile);
 	var fmobs = Entity.getAllInRange(coords, 8);
-	Entity.spawnCustom("BlackHole", coords.x, coords.y, coords.z);
+	Entity.spawnCustom("blackHole", coords.x, coords.y, coords.z);
 	for (var i in fmobs) {
 		Entity.moveToTarget(fmobs[i], coords.x, coords.y, coords.z,
 				{ speed: 1, denyY: false, jumpVel: 0 });

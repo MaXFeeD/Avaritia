@@ -15,7 +15,6 @@ items/animation.js
 gui/table.js
 gui/double_table.js
 gui/extreme_table.js
-gui/extreme_nei.js
 gui/compressor.js
 gui/collector.js
 
