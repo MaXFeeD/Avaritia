@@ -107,15 +107,14 @@ addUsageChangeCallback(ItemID.cosmPickaxe, ItemID.cosmhammer);
 Callback.addCallback("DestroyBlock", function(coords, block, player) {
 	if (Player.getCarriedItem().id == ItemID.cosmhammer) {
 		var side = coords.side, x = 8, y = 9, z = 7;
-		// if (side == 4 || side == 5) x = 0;
+		if (side == 4 || side == 5) x = 0;
 		if (side == 1 || side == 6) y = 0;
-		// if (side == 2 || side == 3) z = 0;
+		if (side == 2 || side == 3) z = 0;
 		for (var xx = coords.x - x; xx <= coords.x + x; xx++) {
-			for (var yy = coords.y - 1 /*y*/; yy <= coords.y + y; yy++) {
+			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (World.getBlockID(xx, yy, zz) !== 7) {
 						World.setBlock(xx, yy, zz, 0);
-						// World.destroyBlock(xx, yy, zz, true);
 					}
 				}
 			}
@@ -147,22 +146,21 @@ Item.setToolRender(ItemID.cosmdes, true);
 addUsageChangeCallback(ItemID.cosmShovel, ItemID.cosmdes);
 
 var DESTROYER_BLOCKS = [14, 15, 16, 21, 56, 73, 129, 49, 7];
-DESTROYER_BLOCKS.hasId = function(arr, id) {
-	return arr.indexOf(id) != -1;
+DESTROYER_BLOCKS.hasId = function(id) {
+	return this.indexOf(id) != -1;
 };
 
 Callback.addCallback("DestroyBlock", function(coords, block, player) {
 	if (Player.getCarriedItem().id == ItemID.cosmdes) {
 		var side = coords.side, x = 8, y = 9, z = 7;
-		// if (side == 4 || side == 5) x = 0;
+		if (side == 4 || side == 5) x = 0;
 		if (side == 1 || side == 6) y = 0;
-		// if (side == 2 || side == 3) z = 0;
+		if (side == 2 || side == 3) z = 0;
 		for (var xx = coords.x - x; xx <= coords.x + x; xx++) {
-			for (var yy = coords.y - 1 /*y*/; yy <= coords.y + y; yy++) {
+			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (!DESTROYER_BLOCKS.hasId(World.getBlockID(xx, yy, zz))) {
-							World.setBlock(xx, yy, zz, 0);
-							// World.destroyBlock(xx, yy, zz, true);
+						World.setBlock(xx, yy, zz, 0);
 					}
 				}
 			}
@@ -184,8 +182,8 @@ ToolAPI.setTool(ItemID.cosmAxe, "cosmaxe", ToolType.axe);
 Item.setToolRender(ItemID.cosmAxe, true);
 
 var AXE_BLOCKS = [17, 18, 31, 38];
-AXE_BLOCKS.hasId = function(arr, id) {
-	return arr.indexOf(id) != -1;
+AXE_BLOCKS.hasId = function(id) {
+	return this.indexOf(id) != -1;
 };
 
 Callback.addCallback("ItemUse", function(coords, item, block) {
