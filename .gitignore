@@ -1,6 +1,6 @@
-main.js
-/.dex
-/bin
-*/*.bak
-api.js
-/dev/avaritia
+/main.js
+/.dex/
+/api.js
+/bin/
+**/*.bak
+/dev/avaritia/
