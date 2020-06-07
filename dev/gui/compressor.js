@@ -71,7 +71,7 @@ var guiCompressor = new UI.StandartWindow({
 var ModRecipe = {
 	recipe: {},
 	addRecipe:function(id, recipe){
-		this.recipe[id] = b;
+		this.recipe[id] = recipe;
 	},
 	getRecipe: function(id) {
 		return this.recipe[id] || null;
