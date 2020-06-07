@@ -21,3 +21,9 @@ gui/collector.js
 items/crafts.js
 
 entity/sphere.js
+
+#integration/Botania.js
+#integration/BloodMagic.js
+#integration/Forestry.js
+#integration/Thaum.js
+

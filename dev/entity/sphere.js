@@ -1,5 +1,5 @@
 var holerender = new Render();
-var holemesh = new RenderMesh(__dir__ + "models/GapingVoid.obj", "obj", {
+var holemesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
 	scale: [0.0675, 0.0675, 0.0675], translate: [0, -2.4, 0]
 });
 holerender.getPart("body").setMesh(holemesh);
@@ -10,7 +10,8 @@ var GapingVoid = function() {
 	this.POOT_RANGE = 0.2;
 	this.PARTICLES = Native.ParticleType.portal;
 	this.PARTICLE_SPEED = 4.5;
-	this.PARTICLE_COUNT = 10;
+//	this.PARTICLE_COUNT = 10;
+	this.PARTICLE_COUNT = 1;
 	
 	this.RADIUS_SCALE = 0.5;
 	this.COLLAPSE = 0.95;
