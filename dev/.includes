@@ -2,7 +2,6 @@ header.js
 translation.js
 
 blocks/resource.js
-blocks/sapling.js
 blocks/machine.js
 blocks/workbench.js
 
