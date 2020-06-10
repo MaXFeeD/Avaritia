@@ -27,7 +27,7 @@ var Renderer={
 
 IDRegistry.genItemID("tinyPotato");
 Item.createItem("tinyPotato", "Tiny Potato", {
-	name: "tinyPotato", meta: 0});
+	name: "stick"/*tinyPotato*/, meta: 0});
 
 IDRegistry.genBlockID("infinitato");
 Block.createBlockWithRotation("infinitato", [

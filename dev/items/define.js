@@ -63,11 +63,6 @@ Item.createItem("quartzsing", "Quartz Singularity", {
 	name: "singularity_quartz", meta: 0
 });
 
-IDRegistry.genItemID("gypMatter");
-Item.createItem("gypMatter", "Ghyper Matter", {
-	name: "gypmatter", meta: 0
-});
-
 IDRegistry.genItemID("endestPearl");
 Item.createThrowableItem("endestPearl", "Endest pearl", {
 	name: "endest", meta: 0
