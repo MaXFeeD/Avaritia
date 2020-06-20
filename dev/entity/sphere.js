@@ -154,6 +154,10 @@ function handleGapingVoid(coords) {
 }
 
 Callback.addCallback("ProjectileHit", function(projectile, item, target, coords) {
-	if (Game.getGameMode() != 1) Player.decreaseCarriedItem(1);
-	handleGapingVoid(Entity.getPosition(projectile));
+	if(Game.getGameMode()!=1){
+		Player.decreaseCarriedItem(1);
+		}
+		if(item.id==ItemID.endestPearl){
+			handleGapingVoid(Entity.getPosition(projectile));
+		} 
 });

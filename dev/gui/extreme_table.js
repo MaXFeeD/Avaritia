@@ -18,21 +18,9 @@ var guiExtremeTable = new UI.StandartWindow({
 			type: "scale",
 			x: 843, y: 252,
 			direction: 0,
-			bitmap: "arrow",
+			bitmap: "progress_background",
 			scale: 3.2,
 			value: 1
-		},
-		guid: {
-			type: "button",
-			x: 920, y: 50,
-			scale: 1.9,
-			bitmap: "guid",
-			bitmap2: "guid_press",
-			clicker: {
-				onClick: function() {
-					Game.tipMessage("Isn't worked");
-				}
-			}
 		},
 		outputSlot: {
 			type: "slot",

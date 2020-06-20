@@ -1,4 +1,4 @@
-var guiCompressor = new UI.StandartWindow({
+var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
@@ -16,7 +16,7 @@ var guiCompressor = new UI.StandartWindow({
 		type:"bitmap",
 		x: 574, y: 238,
 		scale: 3.6,
-		bitmap: "arrow"
+		bitmap: "progress_background"
 	}],
 	elements: {
 		slot_0: {
@@ -68,77 +68,84 @@ var guiCompressor = new UI.StandartWindow({
 	}
 });
 
-var ModRecipe = {
-	recipe: {},
-	addRecipe:function(id, recipe){
-		this.recipe[id] = recipe;
-	},
-	getRecipe: function(id) {
-		return this.recipe[id] || null;
-	}
-};
+var Compressor = {
+	recipe:{},
+	addRecipe:function(a,b){
+		this.recipe[a] = b;
+		},
+		getRecipe: function (a){
+			if(this.recipe[a]){
+				return this.recipe[a];
+				}
+		},
+	};
 
-ModRecipe.addRecipe(42, {
+Compressor.addRecipe(42, {
 	count: 850,
 	out: ItemID.ironsing,
 	name: "Iron"
 });
-ModRecipe.addRecipe(41, {
+Compressor.addRecipe(41, {
 	count: 650,
 	out: ItemID.goldsing,
 	name: "Gold"
 });
-ModRecipe.addRecipe(155, {
+Compressor.addRecipe(155, {
 	count: 750,
 	out: ItemID.quartzsing,
 	name: "Quartz"
 });
-ModRecipe.addRecipe(152, {
+Compressor.addRecipe(152, {
 	count: 950,
 	out: ItemID.redstonesing,
 	name: "Redstone"
 });
-ModRecipe.addRecipe(22, {
+Compressor.addRecipe(22, {
 	count: 850,
 	out: ItemID.lapissing,
 	name: "Lapis"
 });
 
-TileEntity.registerPrototype(BlockID.compressorAv, {
+TileEntity.registerPrototype(BlockID.compressorAv,{
 	defaultValues:{
-		count: 0, end: 0,
-		progress: 0,
-		id: 0, block: ""
-	},
-	getGuiScreen: function() {
-		return guiCompressor;
-	},
-	tick: function() {
-		var input = this.container.getSlot("input");
-		var output = this.container.getSlot("output");
-		var recipe = ModRecipe.getRecipe(input.id);
-		if (recipe) {
-			if (this.data.id == 0 && input.id != 0) {
-				this.data.id = input.id;
-			}
-			if (input.id == this.data.id && input.id != 0) {
+		count:0,
+		progress:0,
+		end:0,
+		id:0,
+		block: "",
+		},
+		tick:function(){
+			var slot0 = this.container.getSlot("slot_0");
+			var slot1 = this.container.getSlot("slot_1");
+			var recipe = Compressor.getRecipe(slot0.id);
+			if(recipe){
+			if(this.data.id==0&&slot0.id!=0){
+				this.data.id = slot0.id;
+				}
+			if(slot0.id==this.data.id&&slot0.id!=0){
 				this.data.block = recipe.name;
 				this.data.count += 1;
 				this.data.end = recipe.count; 
-				this.data.progress += 1 / this.data.end;
-				input.count--;
-			}
-			if(this.data.progress >= 1) {
-				output.id = recipe.out;
-				output.count++;
-				this.data.count -= this.data.end;
-				this.data.id = 0;
-				this.data.progress = 0;
-			}
+				this.data.progress += 1/this.data.end;
+				slot0.count--;
+				}
+				if(this.data.progress >= 1){
+					slot1.id = recipe.out;
+					slot1.count++;
+					this.data.count -= this.data.end;
+					this.data.id = 0;
+					this.data.progress = 0;
+					}
+				}
+				this.container.setText("block", "Block of " + this.data.block);
+				this.container.setText("count",this.data.count +" / "+this.data.end);
+				this.container.setScale("progress",this.data.progress);
+				this.container.validateAll();
+			},
+	getGuiScreen:function(){
+		return compressorGUI;
 		}
-		this.container.setText("block", "Block of " + this.data.block);
-		this.container.setText("count", this.data.count + " / " + this.data.end);
-		this.container.setScale("progress", this.data.progress);
-		this.container.validateAll();
-	}
-});
+	});
+  
+ 
+
