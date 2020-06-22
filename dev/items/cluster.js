@@ -3,6 +3,9 @@ Item.createItem("gypMatter", "Ghyper Matter", {
 	name: "matter_cluster", meta: 1
 });
 
+Item.registerIconOverrideFunction(ItemID.gypMatter, function(item, texture){
+return {name: "matter_cluster", meta: 0};
+});
 
 function getItemInPlayerInventory(id, count, data){
   var total = 0;
@@ -26,6 +29,11 @@ function ClusterStart(xpos,ypos,zpos){
 			World.drop(coords.x, coords.y, coords.z, drop[i]);
 			//drop.pop();
 		}	
+	});
+	Callback.addCallback("tick", function (){
+		if(drop[4095]!=null){
+			setRequiresIconOverride(ItemID.gypMatter, true);
+		}
 	});
 }
 
