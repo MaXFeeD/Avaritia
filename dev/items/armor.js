@@ -37,7 +37,7 @@ ArmorTick.attachTo({
 });
 
 Callback.addCallback("tick", function() {
-	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && !Game.getGameMode()!=1) {
+	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && Game.getGameMode()!=1) {
 		Player.setFlyingEnabled(false);
 	}
 });

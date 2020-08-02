@@ -38,35 +38,68 @@ Callback.addCallback("EntityDeath", function(victim) {
 	}
 });
 
-IDRegistry.genItemID("infbow");
-Item.createItem("infbow", "Inf Bow", {
-	name: "bow_idle", meta: 0
-}, { stack: 1 });
-Item.describeItem(ItemID.infbow, {
-	toolRender: true,
-	maxDamage: 80,
-	useAnimation: 4
+
+let cosmBowAnimator = new ItemAnimator();
+let cosmCrosshair = new Crosshair();
+let cosmArrow = new Arrow();
+let cosmBow = new Bow();
+
+
+cosmBowAnimator.Create({
+	name: 'CosmAnimator',
+	defaultTexture: 'bow_idle',
+	defaultTextureData: 0,
+	animtations: {
+		Bowanim1: {
+			6: {texture: "bow_pull", data: 0},
+			12: {texture: "bow_pull", data: 1},
+			18: {texture: "bow_pull", data: 2},
+			24: {texture: "bow_pull", data: 3}
+		},
+		Bowanim2: {
+			6: {texture: "bow_pull", data: 0},
+			12: {texture: "bow_pull", data: 1},
+			18: {texture: "bow_pull", data: 2},
+			24: {texture: "bow_pull", data: 3}
+		}
+	}
 });
 
-ToolAPI.addToolMaterial("cosmbow", {
-	durability: 999999999,
-	level: 9, efficiency: 9,
-	damage: 1, enchantability: 14
+cosmArrow.Create({
+	namedID: "arrow",
+	name: "Heawen Arrow",
+	texture: "arrow",
+	data: 0,
+	skin: "mob/heavenarrow",
+	particle: "heavenarrow",
+	damage: 80,
+	speed: 40,
+	stack: 1,
+	inCreative: false
 });
-ToolAPI.setTool(ItemID.infbow, "cosmbow", ToolType.sword);
-Item.setToolRender(ItemID.infbow, true);
 
-var infbow = new Bow();
-infbow.set({
-	id: ItemID.infbow,
-	texture: "bow_pull",
-	bullets: [262],
-	skin: "mob/heavenarrow.png",
-	speed: 10, damage: 60, variations: 3
+cosmCrosshair.setUI();
+cosmBow.Create({
+	namedID: "infbow",
+	name: "Cosm Bow",
+	baseTexture: "bow_idle",
+	baseTextureData: 0,
+	maxDamage: 256,
+	crosshair: cosmCrosshair,
+	animation: cosmBowAnimator,
+	sound: "Bow.ogg",
+	arrows: {
+		Bowarrow1: {
+			arrow: cosmArrow,
+			startUseAnimation: 'Bowanim1',
+			endUseAnimation: 'Bowanim2'
+		},
+	}
 });
-var INFINITE_BOW_ARROW_SHOT_COUNT = 14;
 
 
+/*
+var INFINITE_BOW_ARROW_SHOT_COUNT = 16;
 
 Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
 	if (projectile.id == ItemID.infbow && item.id == ItemID.infbow) {
@@ -74,7 +107,7 @@ Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
 			Entity.spawn(coords.x + 0.5 + Math.random() / 0.3, coords.y + 3, coords.z + 1.5 + Math.random()/0.3, 80, [heavenarrow]);
 		}
 	}
-});
+});*/
 
 IDRegistry.genItemID("cosmPickaxe");
 Item.createItem("cosmPickaxe", "World Braker", {
