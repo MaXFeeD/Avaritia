@@ -23,7 +23,7 @@ Item.setEnchantType("skull_sword", 14, 25);
 ToolAPI.addToolMaterial("skull_sword", {
 	durability: 999999999,
 	level: 7, efficiency: 6,
-	damage: 999, enchantability: 14
+	damage: 9, enchantability: 14
 });
 ToolAPI.setTool(ItemID.skull_sword, "skull_sword", ToolType.sword);
 Item.setToolRender(ItemID.skull_sword, true);
@@ -130,7 +130,6 @@ Item.createItem("cosmhammer", "hammer", {
 ToolAPI.setTool(ItemID.cosmhammer, "cosmpi", ToolType.pickaxe);
 Item.setToolRender(ItemID.cosmhammer, true);
 
-
 Callback.addCallback("DestroyBlock", function(coords, block, player) {
 	if (Player.getCarriedItem().id == ItemID.cosmhammer) {
 		var side = coords.side, x = 8, y = 9, z = 7;
@@ -214,7 +213,6 @@ ToolAPI.addToolMaterial("cosmaxe", {
 ToolAPI.setTool(ItemID.cosmAxe, "cosmaxe", ToolType.axe);
 Item.setToolRender(ItemID.cosmAxe, true);
 
-
 function SetCarr(tool, tool2){
 	let item = Player.getCarriedItem();
 	let player = Player.get();
@@ -226,7 +224,6 @@ function SetCarr(tool, tool2){
 		Player.setCarriedItem(tool, 1, 0);
 	}
 }
-
 
 Callback.addCallback("ItemUse", function(coords, item, block) {
 	if (item.id == ItemID.cosmAxe && Entity.getSneaking(Player.get())) {
