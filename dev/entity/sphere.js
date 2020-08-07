@@ -1,16 +1,20 @@
 var holerender = new Render();
 var holemesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
-	scale: [0.0675, 0.0675, 0.0675], translate: [0, -2.4, 0]
+	scale: [0.0675, 0.0675, 0.0675],
+	translate: [0, -2.4, 0]
 });
-holerender.getPart("body").setMesh(holemesh);
+if (!isHorizon) {
+	holerender.getPart("body").setMesh(holemesh);
+}
 
 var GapingVoid = function() {
 	this.RENDER = holerender;
+	this.MESH = holemesh;
 	this.SKIN = "mob/black_hole.png";
 	this.POOT_RANGE = 0.2;
 	this.PARTICLES = Native.ParticleType.portal;
 	this.PARTICLE_SPEED = 4.5;
-//	this.PARTICLE_COUNT = 10;
+	this.PARTICLE_COUNT = 10;
 	this.PARTICLE_COUNT = 1;
 	
 	this.RADIUS_SCALE = 0.5;
@@ -76,7 +80,7 @@ GapingVoid.prototype.spawnParticles = function(range) {
 		var sy = py * this.PARTICLE_SPEED;
 		var sz = pz * this.PARTICLE_SPEED;
 		Particles.addParticle(this.PARTICLES, this.coords.x + px,
-			this.coords.y + py, this.coords.z + pz, sx, sy, sz);
+			this.coords.y + py, this.coords.z + pz, sx, sy, sz, 0);
 	}
 };
 
@@ -85,7 +89,7 @@ GapingVoid.prototype.suckAndDamage = function() {
 	entities[Player.get()] = { type: Native.EntityType.PLAYER };
 	Object.keys(entities).forEach(function(ent, index) {
 		if (typeof ent != "number") ent = parseInt(ent);
-		if (!ent /* null */ || !Entity.isExist(ent)) return;
+		if (ent == null || !Entity.isExist(ent)) return;
 		if (ITEM_TYPES.isItem(entities[ent].type)) return;
 		var position = Entity.getPosition(ent);
 		var dx = hole.coords.x - position.x, dy = hole.coords.y -
@@ -115,7 +119,9 @@ GapingVoid.prototype.eatBlocks = function() {
 					var lx = bx + x, ly = by + y, lz = bz + z;
 					if (ly >= 0 && ly <= 255) {
 						var dist = Math.sqrt(x * x + y * y + z * z);
-						if (dist <= this.nomrange) World.setBlock(lx, ly, lz, 0);
+						if (dist <= this.nomrange) {
+							World.setBlock(lx, ly, lz, 0);
+						}
 					}
 				}
 			}
@@ -125,8 +131,19 @@ GapingVoid.prototype.eatBlocks = function() {
 
 GapingVoid.prototype.initialize = function(ticks) {
 	this.animation = new Animation.Base(this.coords.x, this.coords.y, this.coords.z);
-	this.animation.describe({ render: this.RENDER.getId(),
-		skin: this.SPAWN_SKIN, scale: this.SPAWN_SCALE });
+	if (isHorizon) {
+		this.animation.describe({
+			mesh: this.MESH,
+		    skin: this.SPAWN_SKIN,
+		    scale: this.SPAWN_SCALE
+		});
+	} else {
+		this.animation.describe({
+			render: this.RENDER.getId(),
+			skin: this.SPAWN_SKIN,
+			scale: this.SPAWN_SCALE
+		});
+	}
 	var hole = this, ticks = ticks >= 0 ? ticks : 0;
 	this.animation.loadCustom(function() {
 		if (!this.ticks) this.ticks = ticks;
@@ -139,8 +156,9 @@ GapingVoid.prototype.initialize = function(ticks) {
 
 GapingVoid.prototype.suck = function(coords) {
 	this.coords = coords, this.initialize();
-	for (var i = 0; i < this.SPAWN_PARTICLE_SCALE; i++)
+	for (var i = 0; i < this.SPAWN_PARTICLE_SCALE; i++) {
 		this.spawnParticles(this.SPAWN_PARTICLE_RADIUS);
+	}
 	this.sound = new Sound("gapingVoid.ogg");
 	this.sound.setInBlock(this.coords, 8);
 	this.sound.play();
@@ -154,10 +172,10 @@ function handleGapingVoid(coords) {
 }
 
 Callback.addCallback("ProjectileHit", function(projectile, item, target, coords) {
-	if(Game.getGameMode()!=1){
+	if (Game.getGameMode() != 1) {
 		Player.decreaseCarriedItem(1);
-		}
-		if(item.id==ItemID.endestPearl){
-			handleGapingVoid(Entity.getPosition(projectile));
-		} 
+	}
+	if (item.id == ItemID.endestPearl) {
+		handleGapingVoid(Entity.getPosition(projectile));
+	} 
 });

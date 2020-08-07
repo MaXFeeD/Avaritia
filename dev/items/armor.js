@@ -1,10 +1,13 @@
 IDRegistry.genItemID("inf_helmet");
 Item.createArmorItem("inf_helmet", "Infinity Helmet", {
-	name: "helmetAV", meta: 0
+	name: "helmetAV",
+	meta: 0
 }, {
-	isTech: false, armor: 3, type: "helmet",
+	isTech: false,
+	armor: 3,
+	type: "helmet",
 	texture: "armor/infinity_armor_full_1.png",
-	durability: 999999999
+	durability: Number.MAX_VALUE
 });
 ArmorTick.attachTo({
 	id: ItemID.inf_helmet,
@@ -18,11 +21,14 @@ ArmorTick.attachTo({
 
 IDRegistry.genItemID("inf_chestplate");
 Item.createArmorItem("inf_chestplate", "Infinity Chestplate", {
-	name: "chestaplateAV", meta: 0
+	name: "chestaplateAV",
+	meta: 0
 }, {
-	isTech: false, armor: 8, type: "chestplate",
+	isTech: false,
+	armor: 8,
+	type: "chestplate",
 	texture: "armor/infinity_armor_full_1.png",
-	durability: 999999999
+	durability: Number.MAX_VALUE
 });
 ArmorTick.attachTo({
 	id: ItemID.inf_chestplate,
@@ -30,14 +36,14 @@ ArmorTick.attachTo({
 	tick: function() {
 		Entity.addEffect(Player.get(), 11, 190, 19, false, false);
 		Entity.addEffect(Player.get(), 10, 190, 19, false, false);
-		if(Game.getGameMode()!=1){
+		if(Game.getGameMode() != 1) {
 			Player.setFlyingEnabled(true);
 		}
 	}
 });
 
 Callback.addCallback("tick", function() {
-	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && Game.getGameMode()!=1) {
+	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && Game.getGameMode() != 1) {
 		Player.setFlyingEnabled(false);
 	}
 });
@@ -52,11 +58,14 @@ Callback.addCallback("tick", function() {
 
 IDRegistry.genItemID("inf_leggings");
 Item.createArmorItem("inf_leggings", "Infinity Leggings", {
-	name: "legginsAV", meta: 0
+	name: "legginsAV",
+	meta: 0
 }, {
-	isTech: false, armor: 6, type: "leggings",
+	isTech: false,
+	armor: 6,
+	type: "leggings",
 	texture: "armor/infinity_armor_full_2.png",
-	durability: 999999999
+	durability: Number.MAX_VALUE
 });
 ArmorTick.attachTo({
 	id: ItemID.inf_leggings,
@@ -68,11 +77,14 @@ ArmorTick.attachTo({
 
 IDRegistry.genItemID("inf_boots");
 Item.createArmorItem("inf_boots", "Infinity Boots", {
-	name: "bootAV", meta: 0
+	name: "bootAV",
+	meta: 0
 }, {
-	isTech: false, armor: 3, type: "boots",
+	isTech: false,
+	armor: 3,
+	type: "boots",
 	texture: "armor/infinity_armor_full_1.png",
-	durability: 999999999
+	durability: Number.MAX_VALUE
 });
 ArmorTick.attachTo({
 	id: ItemID.inf_boots,

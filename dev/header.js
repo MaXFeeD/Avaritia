@@ -9,16 +9,18 @@
   ░   ▒           ░░       ░   ▒        ░░   ░     ▒ ░     ░          ▒ ░     ░   ▒   
       ░  ░         ░           ░  ░      ░         ░                  ░           ░  ░
                   ░                                                                   
+   
+   Copyright 2018-2020 StoneBlock Team (vk.com/club178626915)
+   Developed with love by Foldik and MaXFeeD
+   
 */
 
-IMPORT('RecipeTileEntityLib');
-IMPORT('ToolType');
-IMPORT('Bow');
-IMPORT('ItemAnimator:1');
-IMPORT('SoundAPI');
-IMPORT('Timer');
-
-//ModAPI.registerAPI("AvaritiaAPI", какойто объект хз чо);
+IMPORT("RecipeTileEntityLib");
+IMPORT("ToolType");
+IMPORT("Bow");
+IMPORT("ItemAnimator:1");
+IMPORT("SoundAPI");
+IMPORT("Timer");
 
 var isHorizon = getCoreAPILevel() > 8;
 
@@ -30,7 +32,11 @@ var ArmorTick = {
 	attachTo: function(arg) {
 		if (!arg.tick || arg.id == undefined || arg.type == undefined) return;
 		Callback.addCallback("tick", function() {
-			if (Player.getArmorSlot(arg.type).id == arg.id) arg.tick();
+			if (Player.getArmorSlot(arg.type).id == arg.id) {
+				if (arg.tick instanceof Function) {
+					arg.tick();
+				}
+			}
 		});
 	}
 };
@@ -60,9 +66,9 @@ function playerHasItem(id, count, data) {
 	var total = 0;
 	for (var i = 9; i < 45; i++) {
 		var slot = Player.getInventorySlot(i);
-		if (slot.id == id && (slot.data == data || data == -1)) total += slot.count;
+		if (slot.id == id && (slot.data == data || data == -1)) {
+			total += slot.count;
+		}
 	}
 	return total >= count;
-	var icon = (id, count, data);
 }
-

@@ -20,11 +20,11 @@ IDRegistry.genBlockID("extWorckbench");
 Block.createBlockWithRotation("extWorckbench", [{
 	name: "Extrеme workbench",
 	texture: [["crafting", 2],
- ["craftingtop", 0],
- ["craftingside", 0],
-  ["craftingside", 0],
-   ["craftingside", 0],
-    ["craftingside", 0]],
+			  ["craftingtop", 0],
+			  ["craftingside", 0],
+			  ["craftingside", 0],
+			  ["craftingside", 0],
+			  ["craftingside", 0]],
 	inCreative: true
 }], "opaque");
 Block.setDestroyTime(BlockID.extWorckbench, 4);

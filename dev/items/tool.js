@@ -140,7 +140,7 @@ Callback.addCallback("DestroyBlock", function(coords, block, player) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (World.getBlockID(xx, yy, zz) !== 7) {
-						ClusterStart(xx,yy,zz);
+						checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}

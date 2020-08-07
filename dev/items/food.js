@@ -1,7 +1,12 @@
 IDRegistry.genItemID("ultimstew");
 Item.createFoodItem("ultimstew", "Cosmos soup", {
-	name: "ultimstew", meta: 0,
-}, { isTech: false, stack: 64, food: 10 });
+	name: "ultimstew",
+	meta: 0,
+}, {
+	isTech: false,
+	stack: 64,
+	food: 10
+});
 
 Callback.addCallback("FoodEaten", function(heal, satRatio) {
 	if (Player.getCarriedItem().id == ItemID.ultimstew) {
@@ -15,8 +20,13 @@ Callback.addCallback("FoodEaten", function(heal, satRatio) {
 
 IDRegistry.genItemID("cosmMeatballs");
 Item.createFoodItem("cosmMeatballs", "Cosmos meatballs", {
-	name: "cosm_meatballs", meta: 0,
-}, { isTech: false, stack: 64, food: 10 });
+	name: "cosm_meatballs",
+	meta: 0,
+}, {
+	isTech: false,
+	stack: 64,
+	food: 10
+});
 
 Callback.addCallback("FoodEaten", function(heal, satRatio) {
 	if (Player.getCarriedItem().id == ItemID.cosmMeatballs) {

@@ -12,8 +12,8 @@ var guiCompressedTable = new UI.StandartWindow({
 			standart: true
 		}
 	},
-	drawing: [],
-	elements: {}
+	drawing: new Array(),
+	elements: new Object()
 });
 
 TileEntity.registerPrototype(BlockID.compreBlock, {

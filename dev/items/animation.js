@@ -134,9 +134,13 @@ render.setPart("head", [{
 
 var coords = Player.getPosition();
 var wing = new Animation.Base(coords.x, coords.y + 1, coords.z);
-if (isHorizon) wing.setInterpolationEnabled(true);
-wing.describe({ render: render.getId(),
-	skin: "armor/infinity_armor_wing_full.png" });
+if (isHorizon) {
+	wing.setInterpolationEnabled(true);
+}
+wing.describe({
+	render: render.getId(),
+	skin: "armor/infinity_armor_wing_full.png"
+});
 
 wing.loadCustom(function() {
 	var coords = Player.getPosition();

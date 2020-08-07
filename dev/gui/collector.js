@@ -13,7 +13,7 @@ var guiCollector = new UI.StandartWindow({
 			standart: true
 		}
 	},
-	drawing: [],
+	drawing: new Array(),
 	elements: {
 		output: {
 			type: "slot",
@@ -25,8 +25,10 @@ var guiCollector = new UI.StandartWindow({
 			x: 625, y: 290,
 			width: 120,
 			height: 16,
-			text: CollectorProgress + '0%',
-			font:{alignment: 1}
+			text: CollectorProgress + "0%",
+			font: {
+				alignment: 1
+			}
 		}
 	}
 });
@@ -34,7 +36,9 @@ var guiCollector = new UI.StandartWindow({
 var COLLECTOR_MAX = 6000;
 
 TileEntity.registerPrototype(BlockID.neutCo, {
-	defaultValues: { progress: 0 },
+	defaultValues: {
+		progress: 0
+	},
 	getGuiScreen: function() {
 		return guiCollector;
 	},

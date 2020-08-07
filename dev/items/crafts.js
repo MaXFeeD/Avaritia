@@ -68,7 +68,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"a       a",
 	"aaadadaaa"], {
 		a: { id: 42 }, b: { id: 155 }, c: { id: 152 },
-		d:{ id:ItemID.crystal_matrix_ingot }
+		d: { id:ItemID.crystal_matrix_ingot }
 	});
 RecipeTE.addShapeRecipe("extWorckbench", {
 	id: ItemID.endestPearl,

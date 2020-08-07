@@ -12,7 +12,7 @@ var guiExtremeTable = new UI.StandartWindow({
 			standart: true
 		}
 	},
-	drawing: [],
+	drawing: new Array(),
 	elements: {
 		scale_0: {
 			type: "scale",
@@ -52,5 +52,6 @@ for (var i = 0; i < 81; i++) {
 
 RecipeTE.registerWorkbench("extWorckbench", {
 	GuiScreen: guiExtremeTable,
-	rows: 9, cols: 9
+	rows: 9,
+	cols: 9
 });
