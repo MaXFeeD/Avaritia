@@ -2,7 +2,7 @@ var guiExtremeTable = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: "Extreme crafting table"
+				text: Translation.translate("Extreme crafting table")
 			}
 		},
 		background: {
@@ -16,7 +16,7 @@ var guiExtremeTable = new UI.StandartWindow({
 	elements: {
 		scale_0: {
 			type: "scale",
-			x: 843, y: 252,
+			x: 843, y: 237,
 			direction: 0,
 			bitmap: "progress_background",
 			scale: 3.2,
@@ -24,7 +24,7 @@ var guiExtremeTable = new UI.StandartWindow({
 		},
 		outputSlot: {
 			type: "slot",
-			x: 930, y: 250,
+			x: 930, y: 235,
 			size: 50
 		}
 	}
@@ -34,7 +34,7 @@ var guiExtremeTable = new UI.StandartWindow({
 if(slot.id == 266) return true */
 
 var content = guiExtremeTable.getContent();
-var row = 0, x = 380, y = 50;
+var row = 0, x = 380, y = 35;
 for (var i = 0; i < 81; i++) {
 	content.elements["inputSlot" + i] = {
 		type: "slot",

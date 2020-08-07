@@ -1,5 +1,5 @@
 const AVARITIA_TABLE = 'avaritia_table';
-const AVARITIA_TABLE_NAME = Translation.translate('Workbench');
+const AVARITIA_TABLE_NAME = Translation.translate('Workbenches');
 const AVARITIA_RESOURCE_BLOCKS = 'avaritia_resource_blocks';
 const AVARITIA_RESOURCE_BLOCKS_NAME = Translation.translate('Resource Blocks');
 const AVARITIA_MACHINES = 'avaritia_machines';

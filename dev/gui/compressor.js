@@ -2,7 +2,7 @@ var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: "Compressor"
+				text: Translation.translate("Compressor")
 			}
 		},
 		background: {
@@ -14,14 +14,31 @@ var compressorGUI = new UI.StandartWindow({
 	},
 	drawing: [{
 		type:"bitmap",
-		x: 574, y: 238,
+		x: 584, y: 200,
 		scale: 3.6,
 		bitmap: "progress_background"
 	}],
 	elements: {
+		intext: {
+			type: Translation.translate("text"),
+			x: 452, y: 160,
+			width: 68,
+			height: 16,
+			text: "Input",
+			font:{alignment: 1}
+		},
+		input: {
+			type: "slot",
+			x: 422, y: 192,
+			size: 68,
+			visual: true,
+			needClean: true,
+			isTransparentBackground: true,
+			bitmap: 'ЖекаСукаИсправьУжеНастройкуПрозрачностиСлотов'
+		},
 		slot_0: {
 			type: "slot",
-			x: 500, y: 230,
+			x: 510, y: 192,
 			size: 68,
 			visual: false,
 			needClean: false,
@@ -29,7 +46,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		progress: {
 			type: "scale",
-			x: 574, y: 238,
+			x: 584, y: 200,
 			direction: 0,
 			bitmap: "progress",
 			scale: 3.6,
@@ -37,7 +54,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		sing: {
 			type: "scale",
-			x: 657, y: 228,
+			x: 667, y: 190,
 			direction: 0,
 			bitmap: "sing",
 			scale: 2.3,
@@ -45,7 +62,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_1: {
 			type: "slot",
-			x: 740, y: 230,
+			x: 750, y: 192,
 			size: 68,
 			visual: false,
 			needClean: false,
@@ -53,18 +70,29 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		count: {
 			type: "text",
-			x: 580, y: 310,
+			x: 660, y: 272,
 			width: 120,
 			height: 16,
-			text: "0/0"
+			text: "0/0",
+			font:{alignment: 1}
 		},
-		block: {
-			type: "text",
-			x: 580, y: 360,
-			width: 120,
+		outext: {
+			type: Translation.translate("text"),
+			x: 878, y: 160,
+			width: 68,
 			height: 16,
-			text: ""
-		}
+			text: "Output",
+			font:{alignment: 1}
+		},
+		output: {
+			type: "slot",
+			x: 838, y: 192,
+			size: 68,
+			visual: true,
+			needClean: true,
+			isTransparentBackground: true,
+			bitmap: 'ЖекаСукаИсправьУжеНастройкуПрозрачностиСлотов'
+		},
 	}
 });
 
@@ -83,27 +111,22 @@ var Compressor = {
 Compressor.addRecipe(42, {
 	count: 850,
 	out: ItemID.ironsing,
-	name: "Iron"
 });
 Compressor.addRecipe(41, {
 	count: 650,
 	out: ItemID.goldsing,
-	name: "Gold"
 });
 Compressor.addRecipe(155, {
 	count: 750,
 	out: ItemID.quartzsing,
-	name: "Quartz"
 });
 Compressor.addRecipe(152, {
 	count: 950,
 	out: ItemID.redstonesing,
-	name: "Redstone"
 });
 Compressor.addRecipe(22, {
 	count: 850,
 	out: ItemID.lapissing,
-	name: "Lapis"
 });
 
 TileEntity.registerPrototype(BlockID.compressorAv,{
@@ -112,7 +135,7 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 		progress:0,
 		end:0,
 		id:0,
-		block: "",
+		result: null
 		},
 		tick:function(){
 			var slot0 = this.container.getSlot("slot_0");
@@ -123,11 +146,12 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 				this.data.id = slot0.id;
 				}
 			if(slot0.id==this.data.id&&slot0.id!=0){
-				this.data.block = recipe.name;
 				this.data.count += 1;
 				this.data.end = recipe.count; 
 				this.data.progress += 1/this.data.end;
 				slot0.count--;
+				this.data.result = recipe.out;
+				this.container.setSlot('output', this.data.result, 1, 0);
 				}
 				if(this.data.progress >= 1){
 					slot1.id = recipe.out;
@@ -137,7 +161,7 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 					this.data.progress = 0;
 					}
 				}
-				this.container.setText("block", "Block of " + this.data.block);
+				this.container.setSlot('input', this.data.id, 1, 0);
 				this.container.setText("count",this.data.count +" / "+this.data.end);
 				this.container.setScale("progress",this.data.progress);
 				this.container.validateAll();

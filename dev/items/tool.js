@@ -15,15 +15,15 @@ ToolAPI.setTool(ItemID.cosmSword, "cosmsw", ToolType.sword);
 Item.setToolRender(ItemID.cosmSword, true);
 
 IDRegistry.genItemID("skull_sword");
-Item.createItem("skull_sword", "Skull sword", {
+Item.createItem("skull_sword", "Skullfire sword", {
 	name: "skull_sword", meta: 0
 }, { stack: 1 });
 Item.setEnchantType("skull_sword", 14, 25);
 
 ToolAPI.addToolMaterial("skull_sword", {
 	durability: 999999999,
-	level: 7, efficiency: 6,
-	damage: 9, enchantability: 14
+	level: 1, efficiency: 6,
+	damage: 7, enchantability: 14
 });
 ToolAPI.setTool(ItemID.skull_sword, "skull_sword", ToolType.sword);
 Item.setToolRender(ItemID.skull_sword, true);
