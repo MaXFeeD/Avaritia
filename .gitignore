@@ -1,6 +1,21 @@
-/main.js
-/.dex/
-/api.js
-/bin/
+# TypeScript v1 declaration files
+typings/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Sources build
+main.js
+.dex/
+bin/
+
+# Avaritia sources
+dev/.source/
+res/.source/
+
+# Environment ignores
+_config.yml
 **/*.bak
-/dev/avaritia/
+
+# Dropbox sync
+.ttxfolder
