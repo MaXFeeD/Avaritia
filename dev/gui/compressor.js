@@ -19,7 +19,7 @@ var compressorGUI = new UI.StandartWindow({
 			y: 157,
 			width: 68,
 			height: 16,
-			text: "Input",
+			text: "",
 			font: {
 				alignment: 1
 			}
@@ -89,7 +89,6 @@ var compressorGUI = new UI.StandartWindow({
 			y: 157,
 			width: 68,
 			height: 16,
-			text: "Output",
 			font: {
 				alignment: 1
 			}
@@ -172,6 +171,8 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 				this.data.progress += 1 / this.data.target;
 				slot0.count--;
 				this.data.result = recipe.out;
+				this.container.setText("intext", "Input");
+				this.container.setText("outext", "Output");
 				this.container.setSlot("output", this.data.result, 1, 0);
 			}
 		}

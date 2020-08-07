@@ -15,7 +15,6 @@ var GapingVoid = function() {
 	this.PARTICLES = Native.ParticleType.portal;
 	this.PARTICLE_SPEED = 4.5;
 	this.PARTICLE_COUNT = 10;
-	this.PARTICLE_COUNT = 1;
 	
 	this.RADIUS_SCALE = 0.5;
 	this.COLLAPSE = 0.95;

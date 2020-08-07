@@ -106,8 +106,8 @@ Item.registerIconOverrideFunction(ItemID.ultimstew, function(item, texture){
 Item.setRequiresIconOverride(ItemID.ultimstew, true);
 
 Callback.addCallback("tick", function(){
-	var time = World.getThreadTime() % 3;
-	if (time == 0 || time == 3) {
+	var time = World.getThreadTime() % 6;
+	if (time == 0 || time == 6) {
 		if (twoBlinkIndex < 2) twoBlinkIndex++;
 		else twoBlinkIndex = 0;
 		if (threeBlinkIndex < 3) threeBlinkIndex++;

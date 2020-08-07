@@ -133,9 +133,9 @@ Item.setToolRender(ItemID.cosmhammer, true);
 Callback.addCallback("DestroyBlock", function(coords, block, player) {
 	if (Player.getCarriedItem().id == ItemID.cosmhammer) {
 		var side = coords.side, x = 8, y = 9, z = 7;
-		if (side == 4 || side == 5) x = 0;
-		if (side == 1 || side == 6) y = 0;
-		if (side == 2 || side == 3) z = 0;
+		/*if (side == 4 || side == 5) //x = 0;
+		if (side == 1 || side == 6) //y = 0;
+		if (side == 2 || side == 3) //z = 0;*/
 		for (var xx = coords.x - x; xx <= coords.x + x; xx++) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
@@ -184,14 +184,14 @@ AXE_BLOCKS.hasId = function(id) {
 Callback.addCallback("DestroyBlock", function(coords, block, player) {
 	if(Player.getCarriedItem().id == ItemID.cosmdes) {
 		var side = coords.side, x = 8, y = 9, z = 7;
-		if (side == 4 || side == 5) x = 0;
-		if (side == 1 || side == 6) y = 0;
-		if (side == 2 || side == 3) z = 0;
+		/*if (side == 4 || side == 5) //x = 0;
+		if (side == 1 || side == 6) //y = 0;
+		if (side == 2 || side == 3) //z = 0;*/
 		for (var xx = coords.x - x; xx <= coords.x + x; xx++) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (!DESTROYER_BLOCKS.hasId(World.getBlockID(xx, yy, zz))) {
-						
+						checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}
