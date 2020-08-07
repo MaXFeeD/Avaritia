@@ -30,21 +30,23 @@ ArmorTick.attachTo({
 	tick: function() {
 		Entity.addEffect(Player.get(), 11, 190, 19, false, false);
 		Entity.addEffect(Player.get(), 10, 190, 19, false, false);
-		Player.setFlyingEnabled(true);
+		if(Game.getGameMode()!=1){
+			Player.setFlyingEnabled(true);
+		}
 	}
 });
 
 Callback.addCallback("tick", function() {
-	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && !Game.getGameMode()) {
+	if (Player.getArmorSlot(1).id ==! ItemID.inf_chestplate && Game.getGameMode()!=1) {
 		Player.setFlyingEnabled(false);
 	}
 });
 
 Callback.addCallback("tick", function() {
 	if (Player.getArmorSlot(1).id == ItemID.inf_chestplate && Player.getFlying(true)) {
-		wing.load();
+		//wing.load();
     } else if (Player.getArmorSlot(1).id == ItemID.inf_chestplate || Player.getFlying(false)) {
-		wing.destroy();
+		//wing.destroy();
 	}
 });
 

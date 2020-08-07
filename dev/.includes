@@ -8,6 +8,7 @@ blocks/workbench.js
 items/define.js
 items/food.js
 items/tool.js
+items/cluster.js
 items/armor.js
 items/animation.js
 
@@ -26,3 +27,4 @@ entity/sphere.js
 #integration/Forestry.js
 #integration/Thaum.js
 
+groups.js

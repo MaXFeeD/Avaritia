@@ -17,13 +17,21 @@ var Renderer={
                 api.renderBoxId(coords.x, coords.y, coords.z, 0.4999, 0.01, 0, 0.5, 0.99, 1,id, block.data);
                 api.renderBoxId(coords.x, coords.y, coords.z, 0, 0.01, 0.4999, 1, 0.99, 0.5, id, block.data);
             }
-        })
+        }),
         BlockRenderer.enableCustomRender(id);
     }
 };
 
 
   //infinitato
+  
+var BlackLight = Particles.registerParticleType({
+  texture: "bl",
+  size: [20, 20],
+  lifetime: [3, 4],
+  render: 0,
+  velocity: [0, 0.03, 0]
+});
 
 IDRegistry.genItemID("tinyPotato");
 Item.createItem("tinyPotato", "Tiny Potato", {
@@ -44,27 +52,29 @@ Block.setDestroyTime(BlockID.infinitato,2);
 ToolAPI.registerBlockMaterial(BlockID.infinitato, "stone", 2, true);
 
 //Block.setBlockShape(BlockID.infinitato, {x: 0, y: 0, z: 0}, {x: 0, y: 1.5, z: 0});
-var infinitatoModel = new ICRender.CollisionShape();
-var entry = infinitatoModel.addEntry();
-entry.addBox(0/16, 0/16, 0/16, 16/16, 24/16, 16/16);
-BlockRenderer.setCustomCollisionShape(BlockID.infinitato, -1, infinitatoModel); 
 
+Block.setShape(BlockID.infinitato, 4/16, 0/16, 4/16, 12/16, 12/16, 12/16);
 
-var render = new ICRender.Model();
-BlockRenderer.setStaticICRender(BlockID.infinitato, -1, render);
-var model = BlockRenderer.createModel();
-model.addBox(1/16, 1/16, 0/16, 16/16, 23/16, 16/16, "infinitato", 1);
-model.addBox(0/16, 1/16, 0/16, 1/16, 23/16, 16/16, "infinitato", 0);
-model.addBox(0/16, 0/16, 0/16, 16/16, 1/16, 16/16, "infinitato", 2);
-model.addBox(0/16, 23/16, 0/16, 16/16, 24/16, 16/16, "infinitato", 2);
-render.addEntry(model);
+var renderato = new ICRender.Model();
+BlockRenderer.setStaticICRender(BlockID.infinitato, -1, renderato);
+var modelato = BlockRenderer.createModel();
+
+modelato.addBox(4.5/16, 0/16, 4.5/16, 11.5/16, 0.5/16, 11.5/16, "infinitato", 2);
+modelato.addBox(4.5/16, 11.5/16, 4.5/16, 11.5/16, 12/16, 11.5/16, "infinitato", 2);
+modelato.addBox(4/16, 0/16, 4/16, 12/16, 12/16, 4.5/16, "infinitato", 1);
+modelato.addBox(4/16, 0/16, 4.5/16, 4.5/16, 12/16, 11.5/16, "infinitato", 0);
+modelato.addBox(11.5/16, 0/16, 4.5/16, 12/16, 12/16, 11.5/16, "infinitato", 1);
+modelato.addBox(4/16, 0/16, 11.5/16, 12/16, 12/16, 12/16, "infinitato", 1);
+
+renderato.addEntry(modelato);
+
 
 TileEntity.registerPrototype(BlockID.infinitato, {
      defaultValues: {
 		 
      },
      tick: function(){
-		 
+		 Particles.addParticle(BlackLight, this.x, this.y+0.2, this.z, 0, 0, 0);
      },
      click: function(id, count, data, coords){
 		 Entity.addEffect(Player.get(), 21, 3, 3600, false, false);//10 health

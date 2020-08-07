@@ -11,10 +11,12 @@
                   ░                                                                   
 */
 
-IMPORT("RecipeTileEntityLib");
-IMPORT("ToolType");
-IMPORT("SoundAPI");
-IMPORT("Bow");
+IMPORT('RecipeTileEntityLib');
+IMPORT('ToolType');
+IMPORT('Bow');
+IMPORT('ItemAnimator:1');
+IMPORT('SoundAPI');
+IMPORT('Timer');
 
 //ModAPI.registerAPI("AvaritiaAPI", какойто объект хз чо);
 
@@ -53,3 +55,14 @@ function makeSimplifiedCallback(action) {
 	arguments.shift(); // removing action from callback names, it attached into function
 	arguments.forEach(function(current) { addNamedCallback(action, current); });
 }
+
+function playerHasItem(id, count, data) {
+	var total = 0;
+	for (var i = 9; i < 45; i++) {
+		var slot = Player.getInventorySlot(i);
+		if (slot.id == id && (slot.data == data || data == -1)) total += slot.count;
+	}
+	return total >= count;
+	var icon = (id, count, data);
+}
+
