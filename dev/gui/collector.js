@@ -1,4 +1,5 @@
 const CollectorProgress = Translation.translate("Progress: ");
+
 var guiCollector = new UI.StandartWindow({
 	standart: {
 		header: {
@@ -17,15 +18,16 @@ var guiCollector = new UI.StandartWindow({
 	elements: {
 		output: {
 			type: "slot",
-			x: 570, y: 160,
+			x: 570,
+			y: 160,
 			size: 102
 		},
 		progress: {
 			type: "text",
-			x: 625, y: 290,
+			x: 625,
+			y: 290,
 			width: 120,
 			height: 16,
-			text: CollectorProgress + "0%",
 			font: {
 				alignment: 1
 			}
@@ -33,7 +35,7 @@ var guiCollector = new UI.StandartWindow({
 	}
 });
 
-var COLLECTOR_MAX = 6000;
+var COLLECTOR_TICKS = 6000;
 
 TileEntity.registerPrototype(BlockID.neutCo, {
 	defaultValues: {
@@ -44,8 +46,8 @@ TileEntity.registerPrototype(BlockID.neutCo, {
 	},
 	tick: function() {
 		slot = this.container.getSlot("output");
-		this.container.setText("progress", CollectorProgress + parseInt(this.data.progress / COLLECTOR_MAX * 100) + "%");
-		if (++this.data.progress >= COLLECTOR_MAX && slot.count < 64) {
+		this.container.setText("progress", CollectorProgress + parseInt(this.data.progress / COLLECTOR_TICKS * 100) + "%");
+		if (++this.data.progress >= COLLECTOR_TICKS && slot.count < 64) {
 			if (slot.id == ItemID.neutron_pile) {
 				slot.count ++;
 				this.data.progress = 0;

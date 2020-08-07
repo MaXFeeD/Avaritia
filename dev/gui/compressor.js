@@ -12,18 +12,11 @@ var compressorGUI = new UI.StandartWindow({
 			standart: true
 		}
 	},
-	drawing: [{
-		type:"bitmap",
-		x: 584,
-		y: 200,
-		scale: 3.6,
-		bitmap: "progress_background"
-	}],
 	elements: {
 		intext: {
 			type: Translation.translate("text"),
-			x: 452,
-			y: 160,
+			x: 432,
+			y: 157,
 			width: 68,
 			height: 16,
 			text: "Input",
@@ -33,7 +26,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		input: {
 			type: "slot",
-			x: 422,
+			x: 402,
 			y: 192,
 			size: 68,
 			visual: true,
@@ -43,7 +36,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_0: {
 			type: "slot",
-			x: 510,
+			x: 490,
 			y: 192,
 			size: 68,
 			visual: false,
@@ -52,25 +45,28 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		progress: {
 			type: "scale",
-			x: 584,
+			x: 574,
 			y: 200,
-			direction: 0,
-			bitmap: "progress",
+			pixelate: true,
+			bitmap: "progress_singular",
+			background: "progress_background",
 			scale: 3.6,
-			value: 1
+			value: 0
 		},
-		sing: {
+		singular: {
 			type: "scale",
 			x: 667,
 			y: 190,
-			direction: 0,
-			bitmap: "sing",
-			scale: 2.3,
-			value: 1
+			direction: 1,
+			pixelate: true,
+			bitmap: "singular",
+			background: "singular_background",
+			scale: 4.6,
+			value: 0
 		},
 		slot_1: {
 			type: "slot",
-			x: 750,
+			x: 760,
 			y: 192,
 			size: 68,
 			visual: false,
@@ -83,15 +79,14 @@ var compressorGUI = new UI.StandartWindow({
 			y: 272,
 			width: 120,
 			height: 16,
-			text: "0 / 0",
 			font: {
 				alignment: 1
 			}
 		},
 		outext: {
 			type: Translation.translate("text"),
-			x: 878,
-			y: 160,
+			x: 898,
+			y: 157,
 			width: 68,
 			height: 16,
 			text: "Output",
@@ -101,7 +96,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: 838,
+			x: 858,
 			y: 192,
 			size: 68,
 			visual: true,
@@ -129,31 +124,37 @@ var Compressor = {
 };
 
 Compressor.addRecipe(42, {
-	count: 850,
+	count: 400,
 	out: ItemID.ironsing
 });
 Compressor.addRecipe(41, {
-	count: 650,
+	count: 200,
 	out: ItemID.goldsing
 });
 Compressor.addRecipe(155, {
-	count: 750,
+	count: 200,
 	out: ItemID.quartzsing
 });
 Compressor.addRecipe(152, {
-	count: 950,
+	count: 500,
 	out: ItemID.redstonesing
 });
 Compressor.addRecipe(22, {
-	count: 850,
+	count: 200,
 	out: ItemID.lapissing
 });
+
+// TODO: Diamonds (x300)
+// TODO: Emeralds (x200)
+
+var CONSUME_TICKS = 100;
 
 TileEntity.registerPrototype(BlockID.compressorAv,{
 	defaultValues: {
 		count: 0,
 		progress: 0,
-		end: 0,
+		target: 0,
+		consumed: 0,
 		id: 0,
 		result: null
 	},
@@ -167,23 +168,39 @@ TileEntity.registerPrototype(BlockID.compressorAv,{
 			}
 			if (slot0.id == this.data.id && slot0.id != 0) {
 				this.data.count += 1;
-				this.data.end = recipe.count; 
-				this.data.progress += 1 / this.data.end;
+				this.data.target = recipe.count; 
+				this.data.progress += 1 / this.data.target;
 				slot0.count--;
 				this.data.result = recipe.out;
 				this.container.setSlot("output", this.data.result, 1, 0);
 			}
-			if (this.data.progress >= 1) {
-				slot1.id = recipe.out;
-				slot1.count++;
-				this.data.count -= this.data.end;
-				this.data.id = 0;
-				this.data.progress = 0;
+		}
+		if (this.data.progress >= 1) {
+			var result = Compressor.getRecipe(this.data.id);
+			if (result) {
+				if (this.data.consumed >= CONSUME_TICKS) {
+					slot1.id = result.out;
+					slot1.count++;
+					this.data.count -= this.data.target;
+					if (this.data.count == 0) {
+						this.data.id = 0;
+					}
+					this.data.consumed = 0;
+					this.data.progress--;
+				} else {
+					this.data.consumed++;
+				}
 			}
 		}
 		this.container.setSlot("input", this.data.id, 1, 0);
-		this.container.setText("count", this.data.count + " / " + this.data.end);
-		this.container.setScale("progress", this.data.progress);
+		this.container.setText("count", this.data.count + " / " + this.data.target);
+		if (this.data.target > 0) {
+			this.container.setScale("progress", this.data.consumed / CONSUME_TICKS);
+			this.container.setScale("singular", this.data.count / this.data.target);
+		} else {
+			this.container.setScale("progress", 0);
+			this.container.setScale("singular", 0);
+		}
 		this.container.validateAll();
 	},
 	getGuiScreen: function() {
