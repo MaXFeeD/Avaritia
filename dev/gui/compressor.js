@@ -177,7 +177,7 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 					this.data.consumed++;
 				}
 			} else {
-				World.drop(this.coords.x, this.coords.y, this.coords.z, this.data.id, this.data.count);
+				World.drop(this.x, this.y, this.z, this.data.id, this.data.count);
 				this.data.id = this.data.count = this.data.consumed = 0;
 			}
 			isDirty = true;
