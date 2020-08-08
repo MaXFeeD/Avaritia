@@ -84,7 +84,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: 878,
+			x: 898,
 			y: 157,
 			width: 68,
 			height: 16,
@@ -94,7 +94,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: 858,
+			x: 838,
 			y: 192,
 			size: 68,
 			visual: true,
