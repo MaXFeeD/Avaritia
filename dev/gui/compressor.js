@@ -14,12 +14,11 @@ var compressorGUI = new UI.StandartWindow({
 	},
 	elements: {
 		intext: {
-			type: Translation.translate("text"),
+			type: "text",
 			x: 432,
 			y: 157,
 			width: 68,
 			height: 16,
-			text: "",
 			font: {
 				alignment: 1
 			}
@@ -84,8 +83,8 @@ var compressorGUI = new UI.StandartWindow({
 			}
 		},
 		outext: {
-			type: Translation.translate("text"),
-			x: 898,
+			type: "text",
+			x: 878,
 			y: 157,
 			width: 68,
 			height: 16,
@@ -148,59 +147,80 @@ Compressor.addRecipe(22, {
 
 var CONSUME_TICKS = 100;
 
-TileEntity.registerPrototype(BlockID.compressorAv,{
+TileEntity.registerPrototype(BlockID.compressorAv, {
 	defaultValues: {
 		count: 0,
-		progress: 0,
 		target: 0,
 		consumed: 0,
 		id: 0,
 		result: null
 	},
+	init: function() {
+		this.input = this.container.getSlot("slot_0");
+		this.result = this.container.getSlot("slot_1");
+		this.updateScreen();
+	},
 	tick: function() {
-		var slot0 = this.container.getSlot("slot_0");
-		var slot1 = this.container.getSlot("slot_1");
-		var recipe = Compressor.getRecipe(slot0.id);
-		if (recipe) {
-			if (this.data.id == 0 && slot0.id != 0) {
-				this.data.id = slot0.id;
-			}
-			if (slot0.id == this.data.id && slot0.id != 0) {
-				this.data.count += 1;
-				this.data.target = recipe.count; 
-				this.data.progress += 1 / this.data.target;
-				slot0.count--;
-				this.data.result = recipe.out;
-				this.container.setText("intext", "Input");
-				this.container.setText("outext", "Output");
-				this.container.setSlot("output", this.data.result, 1, 0);
-			}
-		}
-		if (this.data.progress >= 1) {
+		var isDirty = false;
+		if (this.data.count >= this.data.target) {
 			var result = Compressor.getRecipe(this.data.id);
 			if (result) {
 				if (this.data.consumed >= CONSUME_TICKS) {
-					slot1.id = result.out;
-					slot1.count++;
+					this.result.id = result.out;
+					this.result.count++;
 					this.data.count -= this.data.target;
 					if (this.data.count == 0) {
 						this.data.id = 0;
 					}
 					this.data.consumed = 0;
-					this.data.progress--;
 				} else {
 					this.data.consumed++;
 				}
+			} else {
+				World.drop(this.coords.x, this.coords.y, this.coords.z, this.data.id, this.data.count);
+				this.data.id = this.data.count = this.data.consumed = 0;
+			}
+			isDirty = true;
+		} else {
+			var recipe = Compressor.getRecipe(this.input.id);
+			if (recipe && (recipe.out == this.result.id || this.result.id == 0)) {
+				if (this.data.id == 0 && this.input.id != 0) {
+					this.data.id = this.input.id;
+					isDirty = true;
+				}
+				if (this.input.id == this.data.id && this.input.id != 0) {
+					this.data.count++;
+					this.data.target = recipe.count;
+					this.input.count--;
+					this.data.result = recipe.out;
+					isDirty = true;
+				}
 			}
 		}
-		this.container.setSlot("input", this.data.id, 1, 0);
-		this.container.setText("count", this.data.count + " / " + this.data.target);
-		if (this.data.target > 0) {
-			this.container.setScale("progress", this.data.consumed / CONSUME_TICKS);
-			this.container.setScale("singular", this.data.count / this.data.target);
+		if (isDirty) {
+			this.updateScreen();
+		}
+	},
+	updateScreen: function() {
+		if (this.data.count > 0) {
+		    this.container.setText("intext", Translation.translate("Input"));
+		    this.container.setText("outext", Translation.translate("Output"));
+		    this.container.setSlot("input", this.data.id, 1, 0);
+		    this.container.setSlot("output", this.data.result, 1, 0);
+		    this.container.setText("count", this.data.count + " / " + this.data.target);
 		} else {
-			this.container.setScale("progress", 0);
-			this.container.setScale("singular", 0);
+		    this.container.setText("intext", "");
+		    this.container.setText("outext", "");
+		    this.container.clearSlot("input");
+		    this.container.clearSlot("output");
+		    this.container.setText("count", "");
+		}
+		if (this.data.target > 0) {
+		    this.container.setScale("progress", this.data.consumed / CONSUME_TICKS);
+		    this.container.setScale("singular", this.data.count / this.data.target);
+		} else {
+		    this.container.setScale("progress", 0);
+		    this.container.setScale("singular", 0);
 		}
 		this.container.validateAll();
 	},
