@@ -84,7 +84,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: 858,
+			x: 888,
 			y: 157,
 			width: 68,
 			height: 16,
