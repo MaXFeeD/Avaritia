@@ -84,7 +84,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: 898,
+			x: 858,
 			y: 157,
 			width: 68,
 			height: 16,
@@ -94,7 +94,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: 838,
+			x: 858,
 			y: 192,
 			size: 68,
 			visual: true,
@@ -149,20 +149,20 @@ var CONSUME_TICKS = 100;
 
 TileEntity.registerPrototype(BlockID.compressorAv, {
 	defaultValues: {
-		count: 0,
-		target: 0,
-		consumed: 0,
 		id: 0,
-		result: null
+		count: 0,
+		consumed: 0,
+		target: 0,
+		result: 0
 	},
-	init: function() {
+	updateContainer: function() {
 		this.input = this.container.getSlot("slot_0");
 		this.result = this.container.getSlot("slot_1");
-		this.updateScreen();
 	},
 	tick: function() {
 		var isDirty = false;
-		if (this.data.count >= this.data.target) {
+		this.updateContainer();
+		if (this.data.target != 0 && this.data.count >= this.data.target) {
 			var result = Compressor.getRecipe(this.data.id);
 			if (result) {
 				if (this.data.consumed >= CONSUME_TICKS) {
@@ -172,6 +172,8 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 					if (this.data.count == 0) {
 						this.data.id = 0;
 					}
+					this.data.target = 0;
+					this.data.result = 0;
 					this.data.consumed = 0;
 				} else {
 					this.data.consumed++;
@@ -197,12 +199,12 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 				}
 			}
 		}
-		if (isDirty) {
+		if (isDirty && this.container.isOpened()) {
 			this.updateScreen();
 		}
 	},
 	updateScreen: function() {
-		if (this.data.count > 0) {
+		if (this.data.count > 0 && this.data.result != 0) {
 		    this.container.setText("intext", Translation.translate("Input"));
 		    this.container.setText("outext", Translation.translate("Output"));
 		    this.container.setSlot("input", this.data.id, 1, 0);
