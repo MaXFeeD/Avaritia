@@ -84,7 +84,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: 888,
+			x: 883,
 			y: 157,
 			width: 68,
 			height: 16,
@@ -154,6 +154,9 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 		consumed: 0,
 		target: 0,
 		result: 0
+	},
+	init: function() {
+		this.updateScreen();
 	},
 	updateContainer: function() {
 		this.input = this.container.getSlot("slot_0");
