@@ -1,3 +1,110 @@
+var compressorGUI = new UI.StandartWindow({
+	standart: {
+		header: {
+			text: {
+				text: Translation.translate("Compressor")
+			}
+		},
+		background: {
+			color: android.graphics.Color.parseColor("#c6c6c6")
+		},
+		inventory: {
+			standart: true
+		}
+	},
+	elements: {
+		intext: {
+			type: "text",
+			x: 432,
+			y: 157,
+			width: 68,
+			height: 16,
+			font: {
+				alignment: 1
+			}
+		},
+		input: {
+			type: "slot",
+			x: 402,
+			y: 192,
+			size: 68,
+			visual: true,
+			needClean: true,
+			isTransparentBackground: true,
+			bitmap: "transparent"
+		},
+		slot_0: {
+			type: "slot",
+			x: 490,
+			y: 192,
+			size: 68,
+			visual: false,
+			needClean: false,
+			isTransparentBackground: false
+		},
+		progress: {
+			type: "scale",
+			x: 574,
+			y: 200,
+			pixelate: true,
+			bitmap: "progress_singular",
+			background: "progress_background",
+			scale: 3.6,
+			value: 0
+		},
+		singular: {
+			type: "scale",
+			x: 667,
+			y: 190,
+			direction: 1,
+			pixelate: true,
+			bitmap: "singular",
+			background: "singular_background",
+			scale: 4.6,
+			value: 0
+		},
+		slot_1: {
+			type: "slot",
+			x: 760,
+			y: 192,
+			size: 68,
+			visual: false,
+			needClean: false,
+			isTransparentBackground: false
+		},
+		count: {
+			type: "text",
+			x: 660,
+			y: 272,
+			width: 120,
+			height: 16,
+			font: {
+				alignment: 1
+			}
+		},
+		outext: {
+			type: "text",
+			x: 883,
+			y: 157,
+			width: 68,
+			height: 16,
+			font: {
+				alignment: 1
+			}
+		},
+		output: {
+			type: "slot",
+			x: 858,
+			y: 192,
+			size: 68,
+			visual: true,
+			needClean: true,
+			isTransparentBackground: true,
+			bitmap: "transparent"
+		}
+	}
+});
+
 var Compressor = {
 	recipes: new Object(),
 	addRecipe: function(key, recipe) {
@@ -41,114 +148,6 @@ Compressor.addRecipe(22, {
 var CONSUME_TICKS = 100;
 
 TileEntity.registerPrototype(BlockID.compressorAv, {
-	getGuiScreen: function() {
-		return new UI.StandartWindow({
-			standart: {
-				header: {
-					text: {
-						text: Translation.translate("Compressor")
-					}
-				},
-				background: {
-					color: android.graphics.Color.parseColor("#c6c6c6")
-				},
-				inventory: {
-					standart: true
-				}
-			},
-			elements: {
-				intext: {
-					type: "text",
-					x: 432,
-					y: 157,
-					width: 68,
-					height: 16,
-					font: {
-						alignment: 1
-					}
-				},
-				input: {
-					type: "slot",
-					x: 402,
-					y: 192,
-					size: 68,
-					visual: true,
-					needClean: true,
-					isTransparentBackground: true,
-					bitmap: "transparent"
-				},
-				slot_0: {
-					type: "slot",
-					x: 490,
-					y: 192,
-					size: 68,
-					visual: false,
-					needClean: false,
-					isTransparentBackground: false
-				},
-				progress: {
-					type: "scale",
-					x: 574,
-					y: 200,
-					pixelate: true,
-					bitmap: "progress_singular",
-					background: "progress_background",
-					scale: 3.6,
-					value: 0
-				},
-				singular: {
-					type: "scale",
-					x: 667,
-					y: 190,
-					direction: 1,
-					pixelate: true,
-					bitmap: "singular",
-					background: "singular_background",
-					scale: 4.6,
-					value: 0
-				},
-				slot_1: {
-					type: "slot",
-					x: 760,
-					y: 192,
-					size: 68,
-					visual: false,
-					needClean: false,
-					isTransparentBackground: false
-				},
-				count: {
-					type: "text",
-					x: 660,
-					y: 272,
-					width: 120,
-					height: 16,
-					font: {
-						alignment: 1
-					}
-				},
-				outext: {
-					type: "text",
-					x: 883,
-					y: 157,
-					width: 68,
-					height: 16,
-					font: {
-						alignment: 1
-					}
-				},
-				output: {
-					type: "slot",
-					x: 858,
-					y: 192,
-					size: 68,
-					visual: true,
-					needClean: true,
-					isTransparentBackground: true,
-					bitmap: "transparent"
-				}
-			}
-		});
-	},
 	defaultValues: {
 		id: 0,
 		count: 0,
@@ -156,36 +155,12 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 		target: 0,
 		result: 0
 	},
+	init: function() {
+		this.updateScreen();
+	},
 	updateContainer: function() {
 		this.input = this.container.getSlot("slot_0");
 		this.result = this.container.getSlot("slot_1");
-	},
-	updateScreen: function() {
-		this.container.validateAll();
-		if (this.data.count > 0 && this.data.result != 0) {
-			this.container.setText("intext", Translation.translate("Input"));
-			this.container.setText("outext", Translation.translate("Output"));
-			this.container.setSlot("input", this.data.id, 1, 0);
-			this.container.setSlot("output", this.data.result, 1, 0);
-			this.container.setText("count", this.data.count + " / " + this.data.target);
-		} else {
-			this.container.setText("intext", "");
-			this.container.setText("outext", "");
-			this.container.clearSlot("input");
-			this.container.clearSlot("output");
-			this.container.setText("count", "");
-		}
-		if (this.data.target > 0) {
-			this.container.setScale("progress", this.data.consumed / CONSUME_TICKS);
-			this.container.setScale("singular", this.data.count / this.data.target);
-		} else {
-			this.container.setScale("progress", 0);
-			this.container.setScale("singular", 0);
-		}
-		this.container.invalidateUI();
-	},
-	click: function(id, count, data, coords) {
-		this.updateScreen();
 	},
 	tick: function() {
 		var isDirty = false;
@@ -227,8 +202,34 @@ TileEntity.registerPrototype(BlockID.compressorAv, {
 				}
 			}
 		}
-		if (this.container.isOpened() && isDirty) {
+		if (isDirty && this.container.isOpened()) {
 			this.updateScreen();
 		}
+	},
+	updateScreen: function() {
+		if (this.data.count > 0 && this.data.result != 0) {
+		    this.container.setText("intext", Translation.translate("Input"));
+		    this.container.setText("outext", Translation.translate("Output"));
+		    this.container.setSlot("input", this.data.id, 1, 0);
+		    this.container.setSlot("output", this.data.result, 1, 0);
+		    this.container.setText("count", this.data.count + " / " + this.data.target);
+		} else {
+		    this.container.setText("intext", "");
+		    this.container.setText("outext", "");
+		    this.container.clearSlot("input");
+		    this.container.clearSlot("output");
+		    this.container.setText("count", "");
+		}
+		if (this.data.target > 0) {
+		    this.container.setScale("progress", this.data.consumed / CONSUME_TICKS);
+		    this.container.setScale("singular", this.data.count / this.data.target);
+		} else {
+		    this.container.setScale("progress", 0);
+		    this.container.setScale("singular", 0);
+		}
+		this.container.validateAll();
+	},
+	getGuiScreen: function() {
+		return compressorGUI;
 	}
 });

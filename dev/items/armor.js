@@ -50,9 +50,9 @@ Callback.addCallback("tick", function() {
 
 Callback.addCallback("tick", function() {
 	if (Player.getArmorSlot(1).id == ItemID.inf_chestplate && Player.getFlying(true)) {
-		//wing.load();
+		wing.load();
     } else if (Player.getArmorSlot(1).id == ItemID.inf_chestplate || Player.getFlying(false)) {
-		//wing.destroy();
+		wing.destroy();
 	}
 });
 

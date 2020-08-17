@@ -125,25 +125,58 @@ Callback.addCallback("tick", function(){
 	}
 });
 
-var render = new Render(); 
-render.setPart("head", [{
-	type: "box", uv: { x: 0, y: 0 },
-	coords: { x: 0, y: 31, z: 0 },
-	size: { x: 64, y: 64, z: 0 }
-}], {});
-
+var inf_render = new Render(); 
+    var partObj = [ 
+        {
+            type: "box",
+            coords: {
+                x: 0,
+                y: 31,
+                z: 0
+            },
+            size: {
+                x: 64,
+                y: 64,
+                z: 0
+            },
+            uv: {
+                x: 0,
+                y: 0
+            }
+        }];
+inf_render.setPart("head", partObj, {});
+		
 var coords = Player.getPosition();
-var wing = new Animation.Base(coords.x, coords.y + 1, coords.z);
-if (isHorizon) {
-	wing.setInterpolationEnabled(true);
-}
-wing.describe({
-	render: render.getId(),
-	skin: "armor/infinity_armor_wing_full.png"
+let wing = new Animation.Base(coords.x, coords.y, coords.z);
+wing.describe({ render: inf_render.getId(),
+skin: "armor/infinity_armor_wing_full_0.png"});
+
+let rad = 0.1;
+Callback.addCallback("tick", function() {
+	var coords = Player.getPosition();
+	wing.setPos(coords.x, coords.y + 1, coords.z);
+	rad =+ 0.1;
+	inf_render.setPartParams("head", {
+		rotation: [0, rad, 0]
+	});
+ 
+ wing.refresh();
 });
 
-wing.loadCustom(function() {
-	var coords = Player.getPosition();
-	this.setPos(coords.x, coords.y + 1, coords.z); 
-    this.refresh();
+Callback.addCallback("LevelLeft", function() {
+ wing.isLoaded = false;
+ wing.leftTicks = 1;
 });
+
+
+wing.leftTicks = 1;
+wing.loadCustom(function() {
+    this.setPos(this.coords.x + 0.05, this.coords.y, this.coords.z - 0.05); 
+    this.refresh();
+    if(this.leftTicks > 0) this.leftTicks--;
+    else this.destroy();
+});
+
+wing.setInterpolationEnabled(true);
+
+
