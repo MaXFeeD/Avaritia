@@ -152,15 +152,18 @@ wing.describe({ render: inf_render.getId(),
 skin: "armor/infinity_armor_wing_full_0.png"});
 
 let rad = 0.1;
+let isFly = false;
 Callback.addCallback("tick", function() {
 	var coords = Player.getPosition();
 	wing.setPos(coords.x, coords.y + 1, coords.z);
-	rad =+ 0.1;
-	inf_render.setPartParams("head", {
+	rad += 0.1;
+	if(isFly){
+	wing.transform().lock().clear().rotate(0, rad, 0).unlock();
+	/*inf_render.setPartParams("head", {
 		rotation: [0, rad, 0]
-	});
- 
- wing.refresh();
+	});*/
+	wing.refresh();
+ }
 });
 
 Callback.addCallback("LevelLeft", function() {

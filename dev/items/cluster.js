@@ -24,14 +24,15 @@ function getItemInPlayerInventory(id, count, data){
 	return total >= count;
 }
 
+var drop = new Array();
 function checkClusterable(xpos, ypos, zpos) {
-	var drop = new Array();
-	var blockID = World.getBlockID(xpos, ypos, zpos);
+	let ptime = World.getThreadTime() % 2;
+	let blockID = World.getBlock(xpos, ypos, zpos);
 	drop.push(blockID);
 	if (!getItemInPlayerInventory(ItemID.gypMatter, 1, 0)) {
 		Player.addItemToInventory(ItemID.gypMatter, 1, 0);
 	}else if(drop[4095] != null){
-		alert(Translation.translate('Free the cluster of matter'));
+		if(ptime == 0 || ptime == 2)alert(Translation.translate('Free the cluster of matter'));
 	}
 	
 	Callback.addCallback("tick", function (){
@@ -43,8 +44,8 @@ function checkClusterable(xpos, ypos, zpos) {
 
 Item.registerUseFunction("gypMatter", function(coords, item, block) {
 		if(Entity.getSneaking(Player.get())){
-			for (var i = 0; i < drop.length; i++) {
-				World.drop(coords.x, coords.y, coords.z, drop[i]);
+			for (let i = 0; i < drop.length; i++) {
+				World.drop(coords.x, coords.y, coords.z, drop[i][0], 1, drop[i][1]);
 				drop.pop();
 				i--;
 			}

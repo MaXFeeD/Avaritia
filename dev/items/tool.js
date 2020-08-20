@@ -140,7 +140,7 @@ Callback.addCallback("DestroyBlock", function(coords, block, player) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (World.getBlockID(xx, yy, zz) !== 7) {
-						checkClusterable(xx, yy, zz);
+						if(Game.getGameMode()==1)checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}
@@ -191,7 +191,7 @@ Callback.addCallback("DestroyBlock", function(coords, block, player) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (!DESTROYER_BLOCKS.hasId(World.getBlockID(xx, yy, zz))) {
-						checkClusterable(xx, yy, zz);
+						if(Game.getGameMode()==1)checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}
@@ -232,6 +232,7 @@ Callback.addCallback("ItemUse", function(coords, item, block) {
 				for (var yco = coords.y - 20; yco < coords.y + 20; yco++) {
 					var id = World.getBlockID(xco, yco, zco);
 					if (id == 2) World.setBlock(xco, yco, zco, 3);
+					if(Game.getGameMode()==1)checkClusterable(xco, yco, zco);
 					else if (AXE_BLOCKS.hasId(id)) World.setBlock(xco, yco, zco, 0);
 				}
 			}

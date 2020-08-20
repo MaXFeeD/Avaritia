@@ -7,8 +7,8 @@ blocks/workbench.js
 
 items/define.js
 items/food.js
-items/tool.js
 items/cluster.js
+items/tool.js
 items/armor.js
 items/animation.js
 
