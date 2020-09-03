@@ -22,6 +22,14 @@ IMPORT("ItemAnimator:1");
 IMPORT("SoundAPI");
 IMPORT("Timer");
 
+
+const AvaritiaAPI = {
+};
+
+ModAPI.registerAPI("AvaritiaAPI", {
+	Core: AvaritiaAPI
+});
+
 var isHorizon = getCoreAPILevel() > 8;
 
 Item.setRequiresIconOverride = ModAPI.requireGlobal("Item.setRequiresIconOverride");

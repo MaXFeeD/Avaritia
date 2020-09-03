@@ -5,6 +5,8 @@ blocks/resource.js
 blocks/machine.js
 blocks/workbench.js
 
+animation/wings.js
+
 items/define.js
 items/food.js
 items/cluster.js
