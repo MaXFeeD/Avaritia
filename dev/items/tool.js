@@ -15,7 +15,7 @@ ToolAPI.setTool(ItemID.cosmSword, "cosmsw", ToolType.sword);
 Item.setToolRender(ItemID.cosmSword, true);
 
 IDRegistry.genItemID("skull_sword");
-Item.createItem("skull_sword", "Skullfire sword", {
+Item.createItem("skull_sword", "Skullfire Sword", {
 	name: "skull_sword", meta: 0
 }, { stack: 1 });
 Item.setEnchantType("skull_sword", 14, 25);
@@ -66,10 +66,6 @@ cosmBowAnimator.Create({
 });
 
 cosmArrow.Create({
-	namedID: "arrow",
-	name: "Heawen Arrow",
-	texture: "arrow",
-	data: 0,
 	skin: "mob/heavenarrow",
 	particle: "heavenarrow",
 	damage: 80,
@@ -81,7 +77,7 @@ cosmArrow.Create({
 cosmCrosshair.setUI();
 cosmBow.Create({
 	namedID: "infbow",
-	name: "Cosm Bow",
+	name: "Longbow of the Heavens",
 	baseTexture: "bow_idle",
 	baseTextureData: 0,
 	maxDamage: 256,
@@ -110,21 +106,21 @@ Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
 });*/
 
 IDRegistry.genItemID("cosmPickaxe");
-Item.createItem("cosmPickaxe", "World Braker", {
+Item.createItem("cosmPickaxe", "World Breaker", {
 	name: "infpickaxe", meta: 0
 }, { stack: 1 });
 Item.setEnchantType("cosmPickaxe", 18, 10);
 
 ToolAPI.addToolMaterial("cosmpi", {
 	durability: 999999999,
-	level: 10, efficiency: 10,
+	level: 10, efficiency: 256,
 	damage: 7, enchantability: 14
 });
 ToolAPI.setTool(ItemID.cosmPickaxe, "cosmpi", ToolType.pickaxe);
 Item.setToolRender(ItemID.cosmPickaxe, true);
 
 IDRegistry.genItemID("cosmhammer");
-Item.createItem("cosmhammer", "hammer", {
+Item.createItem("cosmhammer", "World Breaker", {
 	name: "infhammer", meta: 0
 }, { stack: 1 });
 ToolAPI.setTool(ItemID.cosmhammer, "cosmpi", ToolType.pickaxe);
@@ -140,13 +136,17 @@ Callback.addCallback("DestroyBlock", function(coords, block, player) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (World.getBlockID(xx, yy, zz) !== 7) {
-						if(Game.getGameMode()==1)checkClusterable(xx, yy, zz);
+						//if(Game.getGameMode()==0)checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}
 			}
 		}
 	}
+	if(Player.getCarriedItem().id == ItemID.cosmPickaxe){
+		Block.setDestroyTime(7, 0); 
+		World.destroyBlock(coords.x, coords.y, coords.z, true);
+	}else Block.setDestroyTime(7, -1);
 });
 
 IDRegistry.genItemID("cosmShovel");
@@ -156,7 +156,7 @@ Item.createItem("cosmShovel", "Planet Eater", {
 
 ToolAPI.addToolMaterial("cosmsh", {
 	durability: 999999999,
-	level: 8, efficiency: 8,
+	level: 8, efficiency: 256,
 	damage: 10,
 	enchantability: 14
 });
@@ -164,7 +164,7 @@ ToolAPI.setTool(ItemID.cosmShovel, "cosmsh", ToolType.shovel);
 Item.setToolRender(ItemID.cosmShovel, true);
 
 IDRegistry.genItemID("cosmdes");
-Item.createItem("cosmdes", "destroyer", {
+Item.createItem("cosmdes", "Planet Eater", {
 	name: "infdestroyer", meta: 0
 }, { stack: 1 });
 ToolAPI.setTool(ItemID.cosmdes, "cosmsh", ToolType.shovel);
@@ -175,7 +175,7 @@ DESTROYER_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };
 
-var AXE_BLOCKS = [17, 18, 31, 38];
+var AXE_BLOCKS = [6, 17, 18, 31, 38, 81, 83, 106, 111, 175];
 AXE_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };
@@ -191,7 +191,7 @@ Callback.addCallback("DestroyBlock", function(coords, block, player) {
 			for (var yy = coords.y - y; yy <= coords.y + y; yy++) {
 				for (var zz = coords.z - z; zz <= coords.z + z; zz++) {
 					if (!DESTROYER_BLOCKS.hasId(World.getBlockID(xx, yy, zz))) {
-						if(Game.getGameMode()==1)checkClusterable(xx, yy, zz);
+						//if(Game.getGameMode()==0)checkClusterable(xx, yy, zz);
 						World.setBlock(xx, yy, zz, 0);
 					}
 				}
@@ -229,10 +229,10 @@ Callback.addCallback("ItemUse", function(coords, item, block) {
 	if (item.id == ItemID.cosmAxe && Entity.getSneaking(Player.get())) {
 		for (var xco = coords.x - 13; xco < coords.x + 13; xco++) {
 			for (var zco = coords.z - 13; zco < coords.z + 13; zco++) {
-				for (var yco = coords.y - 20; yco < coords.y + 20; yco++) {
+				for (var yco = coords.y - 10; yco < coords.y + 30; yco++) {
 					var id = World.getBlockID(xco, yco, zco);
 					if (id == 2) World.setBlock(xco, yco, zco, 3);
-					if(Game.getGameMode()==1)checkClusterable(xco, yco, zco);
+					//if(Game.getGameMode()==0)checkClusterable(xco, yco, zco);
 					else if (AXE_BLOCKS.hasId(id)) World.setBlock(xco, yco, zco, 0);
 				}
 			}

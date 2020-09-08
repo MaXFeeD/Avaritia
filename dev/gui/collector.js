@@ -19,14 +19,14 @@ TileEntity.registerPrototype(BlockID.neutCo, {
 		    elements: {
 		        output: {
 		            type: "slot",
-		            x: 570,
-		            y: 160,
+		            x: UI.getScreenWidth()/2 - 55, //570,
+		            y: UI.getScreenHeight()/2 - 112, //160
 		            size: 102
 		        },
 		        progress: {
 		            type: "text",
-		            x: 625,
-		            y: 290,
+		            x: UI.getScreenWidth()/2, //625,
+		            y: UI.getScreenHeight()/2 - 242, //290,
 		            width: 120,
 		            height: 16,
 		            font: {

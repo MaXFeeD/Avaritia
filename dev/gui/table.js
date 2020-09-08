@@ -2,7 +2,7 @@ var guiCompressedTable = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: "Compressed crafting table"
+				text: "Compressed Crafting Table"
 			}
 		},
 		background: {

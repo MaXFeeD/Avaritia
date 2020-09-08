@@ -23,11 +23,11 @@ let isFly = false;
 Callback.addCallback("tick", function() {
  if (Player.getArmorSlot(1).id == ItemID.inf_chestplate && Player.getFlying(true)) {
 	 if(isFly){
-		 Entity.setRender(Player.get(), inf_render/*.renderType*/);
+		 Entity.setRender(Player.get(), inf_render);
 		}
 		isFly;
     } else if (Player.getArmorSlot(1).id != ItemID.inf_chestplate || Player.getFlying(false)) {
-		Entity.setRender(Player.get(), EntityRenderType.PLAYER);
+		Entity.setRender(Player.get(), 30);
 		!isFly;
 	}
 });

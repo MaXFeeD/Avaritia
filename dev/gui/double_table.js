@@ -2,7 +2,7 @@ var guiDouble = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: "Double compressed crafting table"
+				text: "Double Compressed Crafting Table"
 			}
 		},
 		background: {

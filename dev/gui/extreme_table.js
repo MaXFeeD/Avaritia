@@ -1,8 +1,9 @@
+let ssize = UI.getScreenHeight()/9.6;
 var guiExtremeTable = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: Translation.translate("Extreme crafting table")
+				text: Translation.translate("Extreme Crafting Table")
 			}
 		},
 		background: {
@@ -16,36 +17,36 @@ var guiExtremeTable = new UI.StandartWindow({
 	elements: {
 		scale_0: {
 			type: "scale",
-			x: 843, y: 237,
+			x: UI.getScreenWidth()/2.2 + ssize*9, 
+			y: ssize*5,
 			direction: 0,
 			bitmap: "progress_background",
-			scale: 3.2,
+			scale: ssize/16,
 			value: 1
 		},
 		outputSlot: {
 			type: "slot",
-			x: 930, y: 235,
-			size: 50
+			x: UI.getScreenWidth()/2.2 + ssize*10, 
+			y: ssize*5,
+			size: ssize
 		}
 	}
 });
 
-/* let slot = this.container.getSlot("slot");
-if(slot.id == 266) return true */
 
-var content = guiExtremeTable.getContent();
-var row = 0, x = 380, y = 35;
-for (var i = 0; i < 81; i++) {
+let content = guiExtremeTable.getContent();
+let row = 0, x = UI.getScreenWidth()/2.2, y = UI.getScreenHeight()/13.7;
+for (let i = 0; i < 81; i++) {
 	content.elements["inputSlot" + i] = {
 		type: "slot",
 		x: x, y: y,
-		size: 50
+		size: ssize
 	};
-	x += 50;
+	x += ssize;
 	row++;
 	if (row >= 9) {
-		x = 380;
-		y += 50;
+		x = UI.getScreenWidth()/2.2;
+		y += ssize;
 		row = 0;
 	}
 }

@@ -5,6 +5,8 @@ const AVARITIA_RESOURCE_BLOCKS_NAME = Translation.translate("Resource Blocks");
 const AVARITIA_MACHINES = "avaritia_machines";
 const AVARITIA_MACHINES_NAME = Translation.translate("Machines");
 
+const AVARITIA_RESOURCE_ITEMS = "avaritia_res_it";
+const AVARITIA_RESOURCE_ITEMS_NAME = Translation.translate("Resources");
 const AVARITIA_SINGULARITIES = "avaritia_singularity";
 const AVARITIA_SINGULARITIES_NAME = Translation.translate("Singularities");
 const AVARITIA_FOOD = "avariria_food";
@@ -29,6 +31,17 @@ Item.addCreativeGroup(AVARITIA_RESOURCE_BLOCKS, AVARITIA_RESOURCE_BLOCKS_NAME, [
 Item.addCreativeGroup(AVARITIA_MACHINES, AVARITIA_MACHINES_NAME, [
 	BlockID.neutCo,
 	BlockID.compressorAv
+]);
+
+Item.addCreativeGroup(AVARITIA_RESOURCE_ITEMS, AVARITIA_RESOURCE_ITEMS_NAME, [
+	ItemID.crystal_matrix_ingot,
+	ItemID.diamond_lattice,
+	ItemID.neutron_pile,
+	ItemID.neutron_nugget,
+	ItemID.ingotNeutronium,
+	ItemID.catalystInfinity,
+	ItemID.ingotInfinity,
+	ItemID.record_fragment
 ]);
 
 Item.addCreativeGroup(AVARITIA_SINGULARITIES, AVARITIA_SINGULARITIES_NAME, [

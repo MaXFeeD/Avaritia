@@ -3,9 +3,7 @@ var holemesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
 	scale: [0.0675, 0.0675, 0.0675],
 	translate: [0, -2.4, 0]
 });
-if (!isHorizon) {
-	holerender.getPart("body").setMesh(holemesh);
-}
+	holerender.getPart("head").setMesh(holemesh);
 
 var GapingVoid = function() {
 	this.RENDER = holerender;
@@ -14,7 +12,7 @@ var GapingVoid = function() {
 	this.POOT_RANGE = 0.2;
 	this.PARTICLES = Native.ParticleType.portal;
 	this.PARTICLE_SPEED = 4.5;
-	this.PARTICLE_COUNT = 10;
+	this.PARTICLE_COUNT = 10; 
 	
 	this.RADIUS_SCALE = 0.5;
 	this.COLLAPSE = 0.95;
@@ -130,19 +128,16 @@ GapingVoid.prototype.eatBlocks = function() {
 
 GapingVoid.prototype.initialize = function(ticks) {
 	this.animation = new Animation.Base(this.coords.x, this.coords.y, this.coords.z);
-	if (isHorizon) {
-		this.animation.describe({
-			mesh: this.MESH,
-		    skin: this.SPAWN_SKIN,
-		    scale: this.SPAWN_SCALE
-		});
-	} else {
+	this.animation.describe({
+		mesh: this.MESH,
+		skin: this.SPAWN_SKIN,
+		scale: this.SPAWN_SCALE
+	});/*
 		this.animation.describe({
 			render: this.RENDER.getId(),
 			skin: this.SPAWN_SKIN,
 			scale: this.SPAWN_SCALE
-		});
-	}
+		});*/
 	var hole = this, ticks = ticks >= 0 ? ticks : 0;
 	this.animation.loadCustom(function() {
 		if (!this.ticks) this.ticks = ticks;

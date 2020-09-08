@@ -30,10 +30,8 @@ ModAPI.registerAPI("AvaritiaAPI", {
 	Core: AvaritiaAPI
 });
 
-var isHorizon = getCoreAPILevel() > 8;
-
 Item.setRequiresIconOverride = ModAPI.requireGlobal("Item.setRequiresIconOverride");
-if (!isHorizon) Game.getGameMode = ModAPI.requireGlobal("Level.getGameMode");
+Game.getGameMode = ModAPI.requireGlobal("Level.getGameMode");
 var EntityDataRegistry = ModAPI.requireGlobal("EntityDataRegistry");
 
 var ArmorTick = {

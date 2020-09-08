@@ -15,8 +15,8 @@ var compressorGUI = new UI.StandartWindow({
 	elements: {
 		intext: {
 			type: "text",
-			x: 432,
-			y: 157,
+			x: UI.getScreenWidth()/2, //432,
+			y: UI.getScreenHeight()/3, //157,
 			width: 68,
 			height: 16,
 			font: {
@@ -25,8 +25,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		input: {
 			type: "slot",
-			x: 402,
-			y: 192,
+			x: UI.getScreenWidth()/2.1, //402,
+			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: true,
 			needClean: true,
@@ -35,8 +35,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_0: {
 			type: "slot",
-			x: 490,
-			y: 192,
+			x: UI.getScreenWidth()/1.7, //490,
+			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: false,
 			needClean: false,
@@ -44,8 +44,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		progress: {
 			type: "scale",
-			x: 574,
-			y: 200,
+			x: UI.getScreenWidth()/1.5, //574,
+			y: UI.getScreenHeight()/2.4, //200,
 			pixelate: true,
 			bitmap: "progress_singular",
 			background: "progress_background",
@@ -54,8 +54,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		singular: {
 			type: "scale",
-			x: 667,
-			y: 190,
+			x: UI.getScreenWidth()/1.3, //667,
+			y: UI.getScreenHeight()/2.5, //190,
 			direction: 1,
 			pixelate: true,
 			bitmap: "singular",
@@ -65,8 +65,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_1: {
 			type: "slot",
-			x: 760,
-			y: 192,
+			x: UI.getScreenWidth()/1.1, //760,
+			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: false,
 			needClean: false,
@@ -74,8 +74,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		count: {
 			type: "text",
-			x: 660,
-			y: 272,
+			x: UI.getScreenWidth()/1.3, //660,
+			y: UI.getScreenHeight()/1.8, //272,
 			width: 120,
 			height: 16,
 			font: {
@@ -84,8 +84,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: 883,
-			y: 157,
+			x: UI.getScreenWidth() + 10,//883,
+			y: UI.getScreenHeight()/3, //157,
 			width: 68,
 			height: 16,
 			font: {
@@ -94,8 +94,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: 858,
-			y: 192,
+			x: UI.getScreenWidth(),//858,
+			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: true,
 			needClean: true,

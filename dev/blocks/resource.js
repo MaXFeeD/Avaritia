@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("infBlock");
 Block.createBlock("infBlock", [{
-	name: "Infinity block",
+	name: "Infinity Block",
 	texture: [["infinity", 0]],
 	inCreative: true
 }], "opaque");
@@ -9,7 +9,7 @@ ToolAPI.registerBlockMaterial(BlockID.infBlock, "stone", 4, true);
 
 IDRegistry.genBlockID("neutroniumBlock");
 Block.createBlock("neutroniumBlock", [{
-	name: "Neutronium block",
+	name: "Neutronium Block",
 	texture: [["neutronium", 0]],
 	inCreative: true
 }], "opaque");
@@ -18,7 +18,7 @@ ToolAPI.registerBlockMaterial(BlockID.neutroniumBlock, "stone", 4, true);
 
 IDRegistry.genBlockID("crystal_matrixAV");
 Block.createBlock("crystal_matrixAV", [{
-	name: "Crystal matrix",
+	name: "Crystal Matrix",
 	texture: [["crystal_matrix", 0]],
 	inCreative: true
 }], "opaque");

@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("compressorAv");
 Block.createBlockWithRotation("compressorAv", [{
-	name: "Compressor neutronium",
+	name: "Compressor Neutronium",
 	texture: [["colside", 0],
 			  ["comptop", 0],
 			  ["colside", 0],
@@ -14,7 +14,7 @@ ToolAPI.registerBlockMaterial(BlockID.compressorAv, "stone", 4, true);
 
 IDRegistry.genBlockID("neutCo"); 
 Block.createBlockWithRotation("neutCo", [{
-	name: "Neutroinium collector",
+	name: "Neutroinium Collector",
 	texture: [["colside", 0],
 			  ["coltop", 0],
 			  ["colside", 0],

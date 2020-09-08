@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("compreBlock");
 Block.createBlock("compreBlock", [{
-	name: "Compresed workbench",
+	name: "Compresed Workbench",
 	texture: [["compressed", 0]],
 	inCreative: true
 }], "opaque");
@@ -9,7 +9,7 @@ ToolAPI.registerBlockMaterial(BlockID.compreBlock, "wood", 0, true);
 
 IDRegistry.genBlockID("dcompreBlock");
 Block.createBlock("dcompreBlock", [{
-	name: "Double compressed workbench",
+	name: "Double Compressed Workbench",
 	texture: [["double_compressed", 0]],
 	inCreative: true
 }], "opaque");
@@ -18,7 +18,7 @@ ToolAPI.registerBlockMaterial(BlockID.dcompreBlock, "wood", 2, true);
 
 IDRegistry.genBlockID("extWorckbench");
 Block.createBlockWithRotation("extWorckbench", [{
-	name: "Extrеme workbench",
+	name: "Extrеme Workbench",
 	texture: [["crafting", 2],
 			  ["craftingtop", 0],
 			  ["craftingside", 0],
