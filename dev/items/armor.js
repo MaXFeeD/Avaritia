@@ -13,9 +13,9 @@ ArmorTick.attachTo({
 	id: ItemID.inf_helmet,
 	type: 0,
 	tick: function() {
-		Entity.addEffect(Player.get(), 16, 1, 19, false, false);
-		Entity.addEffect(Player.get(), 23, 190, 19, false, false);
-		Entity.addEffect(Player.get(), 13, 190, 19, false, false);
+		Entity.addEffect(Player.get(), 16, 1, 1, true, true);
+		Entity.addEffect(Player.get(), 23, 190, 1, true, true);
+		Entity.addEffect(Player.get(), 13, 190, 1, true, true);
 	}
 });
 
@@ -34,8 +34,8 @@ ArmorTick.attachTo({
 	id: ItemID.inf_chestplate,
 	type: 1,
 	tick: function() {
-		Entity.addEffect(Player.get(), 11, 190, 19, false, false);
-		Entity.addEffect(Player.get(), 10, 190, 19, false, false);
+		Entity.addEffect(Player.get(), 11, 190, 1, true, true);
+		Entity.addEffect(Player.get(), 10, 190, 1, true, true);
 		if(Game.getGameMode() != 1) {
 			Player.setFlyingEnabled(true);
 		}
@@ -63,7 +63,7 @@ ArmorTick.attachTo({
 	id: ItemID.inf_leggings,
 	type: 2,
 	tick: function() {
-		Entity.addEffect(Player.get(), 1, 9, 19, false, false);
+		Entity.addEffect(Player.get(), 1, 9, 1, true, true);
 	}
 });
 
@@ -82,6 +82,6 @@ ArmorTick.attachTo({
 	id: ItemID.inf_boots,
 	type: 3,
 	tick: function() {
-		Entity.addEffect(Player.get(), 8, 3, 19, false, false);
+		Entity.addEffect(Player.get(), 8, 3, 1, true, true);
 	}
 });
