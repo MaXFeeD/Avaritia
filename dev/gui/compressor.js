@@ -15,7 +15,7 @@ var compressorGUI = new UI.StandartWindow({
 	elements: {
 		intext: {
 			type: "text",
-			x: UI.getScreenWidth()/2, //432,
+			x: getW/2 + 10 - getW/8.54, //432,
 			y: UI.getScreenHeight()/3, //157,
 			width: 68,
 			height: 16,
@@ -25,7 +25,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		input: {
 			type: "slot",
-			x: UI.getScreenWidth()/2.1, //402,
+			x: getW/2.1 - getW/8.54, //402,
 			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: true,
@@ -35,7 +35,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_0: {
 			type: "slot",
-			x: UI.getScreenWidth()/1.7, //490,
+			x: getW/1.7 - getW/8.54, //490,
 			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: false,
@@ -44,7 +44,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		progress: {
 			type: "scale",
-			x: UI.getScreenWidth()/1.5, //574,
+			x: getW/1.5 - getW/8.54, //574,
 			y: UI.getScreenHeight()/2.4, //200,
 			pixelate: true,
 			bitmap: "progress_singular",
@@ -54,7 +54,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		singular: {
 			type: "scale",
-			x: UI.getScreenWidth()/1.3, //667,
+			x: getW/1.3 - getW/8.54, //667,
 			y: UI.getScreenHeight()/2.5, //190,
 			direction: 1,
 			pixelate: true,
@@ -65,7 +65,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_1: {
 			type: "slot",
-			x: UI.getScreenWidth()/1.1, //760,
+			x: getW/1.1 - getW/5.69, //760,
 			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: false,
@@ -74,7 +74,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		count: {
 			type: "text",
-			x: UI.getScreenWidth()/1.3, //660,
+			x: getW/1.3 - getW/8.1, //660,
 			y: UI.getScreenHeight()/1.8, //272,
 			width: 120,
 			height: 16,
@@ -84,7 +84,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: UI.getScreenWidth() + 10,//883,
+			x: getW - getW/10,//883,
 			y: UI.getScreenHeight()/3, //157,
 			width: 68,
 			height: 16,
@@ -94,7 +94,7 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: UI.getScreenWidth(),//858,
+			x: getW - getW/7.5,//858,
 			y: UI.getScreenHeight()/2.5, //192,
 			size: 68,
 			visual: true,
@@ -142,8 +142,16 @@ Compressor.addRecipe(22, {
 	out: ItemID.lapissing
 });
 
-// TODO: Diamonds (x300)
-// TODO: Emeralds (x200)
+Compressor.addRecipe(57, {
+	count: 300,
+	out: ItemID.diamondsing
+});
+
+Compressor.addRecipe(133, {
+	count: 200,
+	out: ItemID.emeraldsing
+});
+
 
 var CONSUME_TICKS = 100;
 

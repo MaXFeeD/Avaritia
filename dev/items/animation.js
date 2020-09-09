@@ -24,6 +24,16 @@ Item.registerIconOverrideFunction(ItemID.redstonesing, function(item, texture) {
 });
 Item.setRequiresIconOverride(ItemID.redstonesing, true);
 
+Item.registerIconOverrideFunction(ItemID.diamondsing, function(item, texture) {
+	return { name: "singularity_diamond", meta: fiveBlinkIndex };
+});
+Item.setRequiresIconOverride(ItemID.diamondsing, true);
+
+Item.registerIconOverrideFunction(ItemID.emeraldsing, function(item, texture) {
+	return { name: "singularity_emerald", meta: fiveBlinkIndex };
+});
+Item.setRequiresIconOverride(ItemID.emeraldsing, true);
+
 var fourBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.endestPearl, function(item, texture) {
 	return { name: "endest", meta: fourBlinkIndex };

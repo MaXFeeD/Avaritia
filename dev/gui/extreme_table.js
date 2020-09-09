@@ -1,4 +1,5 @@
-let ssize = UI.getScreenHeight()/9.6;
+let ssize = UI.getScreenHeight()/12;
+let getW = UI.getScreenHeight()*1.7;
 var guiExtremeTable = new UI.StandartWindow({
 	standart: {
 		header: {
@@ -17,17 +18,17 @@ var guiExtremeTable = new UI.StandartWindow({
 	elements: {
 		scale_0: {
 			type: "scale",
-			x: UI.getScreenWidth()/2.2 + ssize*9, 
+			x: getW/2.2 + ssize*9, 
 			y: ssize*5,
 			direction: 0,
 			bitmap: "progress_background",
-			scale: ssize/16,
+			scale: ssize/20,
 			value: 1
 		},
 		outputSlot: {
 			type: "slot",
-			x: UI.getScreenWidth()/2.2 + ssize*10, 
-			y: ssize*5,
+			x: getW/2.4 + ssize*11, 
+			y: ssize*4.9,
 			size: ssize
 		}
 	}
@@ -35,7 +36,7 @@ var guiExtremeTable = new UI.StandartWindow({
 
 
 let content = guiExtremeTable.getContent();
-let row = 0, x = UI.getScreenWidth()/2.2, y = UI.getScreenHeight()/13.7;
+let row = 0, x = getW/2.2, y = UI.getScreenHeight()/13.7;
 for (let i = 0; i < 81; i++) {
 	content.elements["inputSlot" + i] = {
 		type: "slot",
@@ -45,7 +46,7 @@ for (let i = 0; i < 81; i++) {
 	x += ssize;
 	row++;
 	if (row >= 9) {
-		x = UI.getScreenWidth()/2.2;
+		x = getW/2.2;
 		y += ssize;
 		row = 0;
 	}

@@ -71,8 +71,20 @@ Item.createItem("redstonesing", "Redstone Singularity", {
 });
 
 IDRegistry.genItemID("quartzsing");
-Item.createItem("quartzsing", "Quartz Singularity", {
+Item.createItem("quartzsing", "Nether Quartz Singularity", {
 	name: "singularity_quartz",
+	meta: 0
+});
+
+IDRegistry.genItemID("diamondsing");
+Item.createItem("diamondsing", "Diamond Singularity", {
+	name: "singularity_diamond",
+	meta: 0
+});
+
+IDRegistry.genItemID("emeraldsing");
+Item.createItem("emeraldsing", "Emerald Singularity", {
+	name: "singularity_emerald",
 	meta: 0
 });
 
