@@ -1,7 +1,7 @@
 var holerender = new Render();
 var holemesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
 	scale: [0.0675, 0.0675, 0.0675],
-	translate: [0, -2.4, 0]
+	translate: [0, 0/*-2.4*/, 0]
 });
 	holerender.getPart("head").setMesh(holemesh);
 

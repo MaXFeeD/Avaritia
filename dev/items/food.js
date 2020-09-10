@@ -1,5 +1,5 @@
 IDRegistry.genItemID("ultimstew");
-Item.createFoodItem("ultimstew", "Cosmos soup", {
+Item.createFoodItem("ultimstew", "Cosmos Soup", {
 	name: "ultimstew",
 	meta: 0,
 }, {
@@ -19,7 +19,7 @@ Callback.addCallback("FoodEaten", function(heal, satRatio) {
 });
 
 IDRegistry.genItemID("cosmMeatballs");
-Item.createFoodItem("cosmMeatballs", "Cosmos meatballs", {
+Item.createFoodItem("cosmMeatballs", "Cosmos Meatballs", {
 	name: "cosm_meatballs",
 	meta: 0,
 }, {

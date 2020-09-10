@@ -1,3 +1,4 @@
+let getH = UI.getScreenHeight();
 var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
@@ -17,8 +18,8 @@ var compressorGUI = new UI.StandartWindow({
 			type: "text",
 			x: getW/2 + 10 - getW/8.54, //432,
 			y: UI.getScreenHeight()/3, //157,
-			width: 68,
-			height: 16,
+			width: getH/7.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
@@ -27,7 +28,7 @@ var compressorGUI = new UI.StandartWindow({
 			type: "slot",
 			x: getW/2.1 - getW/8.54, //402,
 			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			size: getH/7.3,
 			visual: true,
 			needClean: true,
 			isTransparentBackground: true,
@@ -37,19 +38,19 @@ var compressorGUI = new UI.StandartWindow({
 			type: "slot",
 			x: getW/1.7 - getW/8.54, //490,
 			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			size: getH/7.3,
 			visual: false,
 			needClean: false,
 			isTransparentBackground: false
 		},
 		progress: {
 			type: "scale",
-			x: getW/1.5 - getW/8.54, //574,
-			y: UI.getScreenHeight()/2.4, //200,
+			x: getW/1.5 - getW/9, //574,
+			y: getH/2.4, //200,
 			pixelate: true,
 			bitmap: "progress_singular",
 			background: "progress_background",
-			scale: 3.6,
+			scale: getH/150,
 			value: 0
 		},
 		singular: {
@@ -60,14 +61,14 @@ var compressorGUI = new UI.StandartWindow({
 			pixelate: true,
 			bitmap: "singular",
 			background: "singular_background",
-			scale: 4.6,
+			scale: getH/120,
 			value: 0
 		},
 		slot_1: {
 			type: "slot",
 			x: getW/1.1 - getW/5.69, //760,
 			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			size: getH/7.3,
 			visual: false,
 			needClean: false,
 			isTransparentBackground: false
@@ -76,8 +77,8 @@ var compressorGUI = new UI.StandartWindow({
 			type: "text",
 			x: getW/1.3 - getW/8.1, //660,
 			y: UI.getScreenHeight()/1.8, //272,
-			width: 120,
-			height: 16,
+			width: getH/4.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
@@ -86,17 +87,17 @@ var compressorGUI = new UI.StandartWindow({
 			type: "text",
 			x: getW - getW/10,//883,
 			y: UI.getScreenHeight()/3, //157,
-			width: 68,
-			height: 16,
+			width: getH/7.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
 		},
 		output: {
 			type: "slot",
-			x: getW - getW/7.5,//858,
+			x: getW - getW/7,//858,
 			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			size: getH/7.3,
 			visual: true,
 			needClean: true,
 			isTransparentBackground: true,
