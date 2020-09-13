@@ -9,7 +9,7 @@ animation/wings.js
 
 items/define.js
 items/food.js
-#items/cluster.js
+# items/cluster.js
 items/tool.js
 items/armor.js
 items/animation.js
@@ -24,6 +24,7 @@ items/crafts.js
 
 entity/sphere.js
 
+#integration/recipesviewer.js
 # integration/Botania.js
 # integration/BloodMagic.js
 # integration/Forestry.js

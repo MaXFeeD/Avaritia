@@ -1,4 +1,5 @@
 let getH = UI.getScreenHeight();
+let cW = getW/12;
 var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
@@ -16,8 +17,8 @@ var compressorGUI = new UI.StandartWindow({
 	elements: {
 		intext: {
 			type: "text",
-			x: getW/2 + 10 - getW/8.54, //432,
-			y: UI.getScreenHeight()/3, //157,
+			x: getW/2 + 10 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/3, 
 			width: getH/7.3,
 			height: getH/30.3,
 			font: {
@@ -26,8 +27,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		input: {
 			type: "slot",
-			x: getW/2.1 - getW/8.54, //402,
-			y: UI.getScreenHeight()/2.5, //192,
+			x: getW/2.1 - getW/8.54 + cW , 
+			y: UI.getScreenHeight()/2.5, 
 			size: getH/7.3,
 			visual: true,
 			needClean: true,
@@ -36,8 +37,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_0: {
 			type: "slot",
-			x: getW/1.7 - getW/8.54, //490,
-			y: UI.getScreenHeight()/2.5, //192,
+			x: getW/1.7 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/2.5, 
 			size: getH/7.3,
 			visual: false,
 			needClean: false,
@@ -45,8 +46,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		progress: {
 			type: "scale",
-			x: getW/1.5 - getW/9, //574,
-			y: getH/2.4, //200,
+			x: getW/1.5 - getW/9 + cW, 
+			y: getH/2.4, 
 			pixelate: true,
 			bitmap: "progress_singular",
 			background: "progress_background",
@@ -55,8 +56,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		singular: {
 			type: "scale",
-			x: getW/1.3 - getW/8.54, //667,
-			y: UI.getScreenHeight()/2.5, //190,
+			x: getW/1.3 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/2.5, 
 			direction: 1,
 			pixelate: true,
 			bitmap: "singular",
@@ -66,8 +67,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_1: {
 			type: "slot",
-			x: getW/1.1 - getW/5.69, //760,
-			y: UI.getScreenHeight()/2.5, //192,
+			x: getW/1.1 - getW/5.69 + cW, 
+			y: UI.getScreenHeight()/2.5, 
 			size: getH/7.3,
 			visual: false,
 			needClean: false,
@@ -75,8 +76,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		count: {
 			type: "text",
-			x: getW/1.3 - getW/8.1, //660,
-			y: UI.getScreenHeight()/1.8, //272,
+			x: getW/1.3 - getW/8.1 + cW,
+			y: UI.getScreenHeight()/1.8, 
 			width: getH/4.3,
 			height: getH/30.3,
 			font: {
@@ -85,8 +86,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		outext: {
 			type: "text",
-			x: getW - getW/10,//883,
-			y: UI.getScreenHeight()/3, //157,
+			x: getW - getW/10 + cW,
+			y: UI.getScreenHeight()/3, 
 			width: getH/7.3,
 			height: getH/30.3,
 			font: {
@@ -95,8 +96,8 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		output: {
 			type: "slot",
-			x: getW - getW/7,//858,
-			y: UI.getScreenHeight()/2.5, //192,
+			x: getW - getW/7 + cW,
+			y: UI.getScreenHeight()/2.5,
 			size: getH/7.3,
 			visual: true,
 			needClean: true,

@@ -134,7 +134,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"         ",
 	"         "], {
 		a: { id: ItemID.neutron_pile },
-		b: { id: 256 }, c: { id: 391 },
+		b: { id: 295 }, c: { id: 391 },
 		d: { id: 392 }, e: { id:81 },
 		g: { id: 40 }, f: { id: 39 },
 		i: { id: 372 }
@@ -142,8 +142,8 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 RecipeTE.addShapeRecipe("extWorckbench", {
 	id: ItemID.catalystInfinity,
 	count: 1
-}, ["aiglrqube",
-	"f        ",
+}, ["acnvsumpf",
+	"iglrqde  ",
 	"         ",
 	"         ",
 	"         ",
@@ -151,15 +151,21 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"         ",
 	"         ",
 	"         "], {
-		a: { id: 133 },
+		a: { id: ItemID.diamond_lattice },
+		c: { id: ItemID.crystal_matrix_ingot },
+		n: { id: ItemID.neutron_pile },
+		v: { id: ItemID.neutron_nugget },
+		s: { id: ItemID.ingotNeutronium },
 		i: { id: ItemID.ironsing },
 		g: { id: ItemID.goldsing },
 		l: { id: ItemID.lapissing },
 		r: { id: ItemID.redstonesing },
 		q: { id: ItemID.quartzsing },
+		d: { id: ItemID.diamondsing },
+		e: { id: ItemID.emeraldsing },
 		u: { id: ItemID.ultimstew },
-		b: { id: ItemID.cosmMeatballs },
-		e: { id: ItemID.endestPearl },
+		m: { id: ItemID.cosmMeatballs },
+		p: { id: ItemID.endestPearl },
 		f: { id: ItemID.record_fragment }
 	});
 RecipeTE.addShapeRecipe("extWorckbench", {
