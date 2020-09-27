@@ -223,7 +223,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 }, ["      aaa",
 	"     aaba",
 	"      aaa",
-	"     c  a",
+	"     c a ",
 	"    c    ",
 	"   c     ",
 	"  c      ",
@@ -277,8 +277,8 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"     a   ",
 	"     a   ",
 	"     a   "], {
-		a: { id: ItemID.ingotInfinity },
-		b: { id: ItemID.ingotNeutronium }
+		b: { id: ItemID.ingotInfinity },
+		a: { id: ItemID.ingotNeutronium }
 	});
 RecipeTE.addShapeRecipe("extWorckbench", {
 	id: ItemID.skull_sword,
