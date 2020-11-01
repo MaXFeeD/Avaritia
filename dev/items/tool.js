@@ -175,7 +175,7 @@ DESTROYER_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };
 
-var AXE_BLOCKS = [6, 17, 18, 31, 38, 81, 83, 106, 111, 175];
+var AXE_BLOCKS = [6, 17, 18, 31, 38, 81, 83, 103, 106, 111, 175, 418, 419];
 AXE_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };

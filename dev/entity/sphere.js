@@ -77,7 +77,7 @@ GapingVoid.prototype.spawnParticles = function(range) {
 		var sy = py * this.PARTICLE_SPEED;
 		var sz = pz * this.PARTICLE_SPEED;
 		Particles.addParticle(this.PARTICLES, this.coords.x + px,
-			this.coords.y + py, this.coords.z + pz, sx, sy, sz, 0);
+			this.coords.y + py - 1.2, this.coords.z + pz, sx, sy, sz, 0);
 	}
 };
 
