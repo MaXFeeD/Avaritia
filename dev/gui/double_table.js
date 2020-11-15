@@ -2,7 +2,7 @@ var guiDouble = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: "Double Compressed Crafting Table"
+				text: Translation.translate('Double Compressed Crafting Table')
 			}
 		},
 		background: {

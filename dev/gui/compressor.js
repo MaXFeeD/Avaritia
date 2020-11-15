@@ -4,7 +4,7 @@ var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: Translation.translate("Compressor")
+				text: Translation.translate('Neutronium Compressor')
 			}
 		},
 		background: {

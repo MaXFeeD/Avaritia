@@ -6,7 +6,7 @@ TileEntity.registerPrototype(BlockID.neutCo, {
 		    standart: {
 		        header: {
 		            text: {
-		                text: Translation.translate("Collector")
+		                text: Translation.translate('Neutron Collector')
 		            }
 		        },
 		        background: {

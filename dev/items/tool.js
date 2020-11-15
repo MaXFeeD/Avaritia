@@ -38,7 +38,7 @@ Callback.addCallback("EntityDeath", function(victim) {
 	}
 });
 
-
+/*
 let cosmBowAnimator = new ItemAnimator();
 let cosmCrosshair = new Crosshair();
 let cosmArrow = new Arrow();
@@ -94,7 +94,6 @@ cosmBow.Create({
 });
 
 
-/*
 var INFINITE_BOW_ARROW_SHOT_COUNT = 16;
 
 Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {

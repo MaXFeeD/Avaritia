@@ -4,7 +4,7 @@ var guiExtremeTable = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: Translation.translate("Extreme Crafting Table")
+				text: Translation.translate('Extreme Crafting Table')
 			}
 		},
 		background: {

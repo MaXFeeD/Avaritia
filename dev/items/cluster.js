@@ -1,5 +1,5 @@
 IDRegistry.genItemID("gypMatter");
-Item.createItem("gypMatter", "Ghyper Matter", {
+Item.createItem("gypMatter", "Matter Cluster", {
 	name: "matter_cluster",
 	meta: 1
 }, {
