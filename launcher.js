@@ -1,6 +1,6 @@
 try {
 	ConfigureMultiplayer({
-		isClientOnly: false
+		isClientOnly: true
 	});
 } catch(e) {}
 
