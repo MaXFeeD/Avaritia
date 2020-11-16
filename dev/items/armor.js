@@ -78,10 +78,21 @@ Item.createArmorItem("inf_boots", "Infinity Boots", {
 	texture: "armor/infinity_armor_full_1.png",
 	durability: Number.MAX_VALUE
 });
+
+
+Callback.addCallback("EntityHurt", function(victim, attacker){
+	if(Player.getArmorSlot(0).id == ItemID.inf_helmet &&
+	Player.getArmorSlot(1).id == ItemID.inf_chestplate &&
+	Player.getArmorSlot(2).id == ItemID.inf_leggings &&
+	Player.getArmorSlot(3).id == ItemID.inf_boots && 
+	attacker == Player.get())Game.prevent();
+});
+
 ArmorTick.attachTo({
 	id: ItemID.inf_boots,
 	type: 3,
 	tick: function() {
+		
 		Entity.addEffect(Player.get(), 8, 3, 260, false, false);
 	}
 });

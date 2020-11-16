@@ -38,7 +38,7 @@ Callback.addCallback("EntityDeath", function(victim) {
 	}
 });
 
-/*
+
 let cosmBowAnimator = new ItemAnimator();
 let cosmCrosshair = new Crosshair();
 let cosmArrow = new Arrow();
@@ -102,7 +102,7 @@ Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
 			Entity.spawn(coords.x + 0.5 + Math.random() / 0.3, coords.y + 3, coords.z + 1.5 + Math.random()/0.3, 80, [heavenarrow]);
 		}
 	}
-});*/
+});
 
 IDRegistry.genItemID("cosmPickaxe");
 Item.createItem("cosmPickaxe", "World Breaker", {

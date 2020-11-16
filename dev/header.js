@@ -22,6 +22,8 @@ IMPORT("ItemAnimator:1");
 IMPORT("SoundAPI");
 IMPORT("Timer");
 
+alert('               <<<<<<<<AVARITIA>>>>>>>>');
+for(let i = 1; i < 6; i++)alert('WARNING!!! Longbow of the Heavens is UNstable!!!');
 
 const AvaritiaAPI = {
 };
