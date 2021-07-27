@@ -1,4 +1,4 @@
-var inf_render = new Render(); 
+/*var inf_render = new Render(); 
     var partObj = [ 
         {
             type: "box",
@@ -30,5 +30,24 @@ Callback.addCallback("tick", function() {
 		Entity.setRender(Player.get(), 30);
 		!isFly;
 	}
-});
+});*/
 
+
+
+const VertexForWings = [[0,0,0,0,0],[0,0,2,32,0],[0,-2,0,0,32],[0,-2,2,32,32],[0,0,2,32,0],[0,-2,0,0,32]];
+const lwing = new RenderMesh(), rwing = new RenderMesh(), lglow = new RenderMesh(), rglow = new RenderMesh();
+const arender = new ActorRenderer();
+//const arenderDop = new ActorRenderer().setTexture('armor/infinity_armor_wingglow.png');
+for(let i in VertexForWings){
+		lwing.addVertex(VertexForWings[i][0], VertexForWings[i][1], VertexForWings[i][2], VertexForWings[i][3], VertexForWings[i][4]);
+		lglow.addVertex(VertexForWings[i][0], VertexForWings[i][1], VertexForWings[i][2], VertexForWings[i][3], VertexForWings[i][4]);
+		rwing.addVertex(VertexForWings[i][0], VertexForWings[i][1], VertexForWings[i][2], VertexForWings[i][3], VertexForWings[i][4]);
+		rglow.addVertex(VertexForWings[i][0], VertexForWings[i][1], VertexForWings[i][2], VertexForWings[i][3], VertexForWings[i][4]);
+	}
+	
+	lwing.rotate(0,1,0,0,-1*Math.PI/180*75,0);
+	rwing.rotate(0,1,0,0,1*Math.PI/180*75,0);
+	rglow.rotate(0,1,0,0,1*Math.PI/180*75,0);
+	lglow.rotate(0,1,0,0,-1*Math.PI/180*75,0);
+	
+	

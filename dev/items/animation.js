@@ -1,4 +1,4 @@
-var fiveBlinkIndex = 0;
+const fiveBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ironsing, function(item, texture) {
 	return { name: "singularity_iron", meta: fiveBlinkIndex };
 });
@@ -34,19 +34,19 @@ Item.registerIconOverrideFunction(ItemID.emeraldsing, function(item, texture) {
 });
 Item.setRequiresIconOverride(ItemID.emeraldsing, true);
 
-var fourBlinkIndex = 0;
+const fourBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.endestPearl, function(item, texture) {
 	return { name: "endest", meta: fourBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.endestPearl, true);
 
-var sevenBlinkIndex = 0;
+const sevenBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.cosmMeatballs, function(item, texture) {
 	return { name: "cosm_meatballs", meta: sevenBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.cosmMeatballs, true);
 
-var eigthBlinkIndex = 0;
+const eigthBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.inf_chestplate, function(item, texture) {
 	return { name: "chestaplateAV", meta: eigthBlinkIndex };
 });
@@ -92,7 +92,7 @@ Item.registerIconOverrideFunction(ItemID.inf_leggings, function(item, texture) {
 });
 Item.setRequiresIconOverride(ItemID.inf_leggings, true);
 
-var threeBlinkIndex = 0;
+const threeBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.skull_sword, function(item, texture) {
 	return { name: "skull_sword", meta: threeBlinkIndex };
 });
@@ -103,20 +103,19 @@ Item.registerIconOverrideFunction(ItemID.orb_armok, function(item, texture){
 });
 Item.setRequiresIconOverride(ItemID.orb_armok, true);
 
-var twoBlinkIndex = 0;
+const twoBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ingotNeutronium, function(item, texture){
 	return { name: "neutronium_ingot", meta: twoBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.ingotNeutronium, true);
 
-var longestBlinkIndex = 0;
+const longestBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ultimstew, function(item, texture){
 	return { name: "ultimstew", meta: longestBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.ultimstew, true);
 
 Callback.addCallback("tick", function(){
-	var time = World.getThreadTime() % 5;
 	if (time == 0 || time == 5) {
 		if (twoBlinkIndex < 2) twoBlinkIndex++;
 		else twoBlinkIndex = 0;

@@ -15,7 +15,7 @@
    
 */
 
-IMPORT("RecipeTileEntityLib");
+IMPORT("RecipeTileEntity");
 IMPORT("ToolType");
 IMPORT("Bow");
 IMPORT("ItemAnimator:1");

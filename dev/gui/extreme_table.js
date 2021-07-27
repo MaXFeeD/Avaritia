@@ -52,8 +52,12 @@ for (let i = 0; i < 81; i++) {
 	}
 }
 
-RecipeTE.registerWorkbench("extWorckbench", {
-	GuiScreen: guiExtremeTable,
-	rows: 9,
-	cols: 9
+
+RecipeTE.registerWorkbench('extWorckbench', {
+	window: guiExtremeTable,
+	columns: 9,
+	rows: 9
 });
+
+RecipeTE.registerTileEntity(BlockID['extWorckbench'], new RecipeTE.WorkbenchTileEntity('extWorckbench'));
+
