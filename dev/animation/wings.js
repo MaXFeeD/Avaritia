@@ -30,7 +30,7 @@ Callback.addCallback("tick", function() {
 		Entity.setRender(Player.get(), 30);
 		!isFly;
 	}
-});*/
+});
 
 
 
@@ -50,4 +50,4 @@ for(let i in VertexForWings){
 	rglow.rotate(0,1,0,0,1*Math.PI/180*75,0);
 	lglow.rotate(0,1,0,0,-1*Math.PI/180*75,0);
 	
-	
+	*/
