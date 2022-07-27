@@ -13,15 +13,9 @@ ArmorTick.attachTo({
 	id: ItemID.inf_helmet,
 	type: 0,
 	tick: function() {
-<<<<<<< HEAD
-		Entity.addEffect(Player.get(), 16, 1, 1, true, true);
-		Entity.addEffect(Player.get(), 23, 190, 1, true, true);
-		Entity.addEffect(Player.get(), 13, 190, 1, true, true);
-=======
 		Entity.addEffect(Player.get(), 16, 1, 260, false, false);
 		Entity.addEffect(Player.get(), 23, 190, 260, false, false);
 		Entity.addEffect(Player.get(), 13, 190, 260, false, false);
->>>>>>> target/master
 	}
 });
 
@@ -48,14 +42,6 @@ ArmorTick.attachTo({
 	id: ItemID.inf_chestplate,
 	type: 1,
 	tick: function() {
-<<<<<<< HEAD
-		Entity.addEffect(Player.get(), 11, 190, 1, true, true);
-		Entity.addEffect(Player.get(), 10, 190, 1, true, true);
-		if(Game.getGameMode() != 1) {
-			Player.setFlyingEnabled(true);
-		}
-	}
-=======
 		if(Player.getFlying()){
 			alert('fly');
             }
@@ -80,7 +66,6 @@ ArmorTick.attachTo({
 		if(Game.getGameMode() != 1) Player.setFlyingEnabled(true);
 	    
     }
->>>>>>> target/master
 });
 
 Callback.addCallback("tick", function() {
@@ -104,11 +89,7 @@ ArmorTick.attachTo({
 	id: ItemID.inf_leggings,
 	type: 2,
 	tick: function() {
-<<<<<<< HEAD
-		Entity.addEffect(Player.get(), 1, 9, 1, true, true);
-=======
 		Entity.addEffect(Player.get(), 1, 9, 260, false, false);
->>>>>>> target/master
 	}
 });
 
@@ -137,11 +118,7 @@ ArmorTick.attachTo({
 	id: ItemID.inf_boots,
 	type: 3,
 	tick: function() {
-<<<<<<< HEAD
-		Entity.addEffect(Player.get(), 8, 3, 1, true, true);
-=======
 		
 		Entity.addEffect(Player.get(), 8, 3, 260, false, false);
->>>>>>> target/master
 	}
 });
