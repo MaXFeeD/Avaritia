@@ -1,41 +1,41 @@
 IDRegistry.genItemID("crystal_matrix_ingot");
-Item.createItem("crystal_matrix_ingot", "Crystal matrix ingot", {
+Item.createItem("crystal_matrix_ingot", "Crystal Matrix Ingot", {
 	name: "crystal_matrix_ingot",
 	meta: 0
 });
 
 IDRegistry.genItemID("diamond_lattice");
-Item.createItem("diamond_lattice", "Diamond lattice", {
+Item.createItem("diamond_lattice", "Diamond Lattice", {
 	name: "diamond_lattice",
 	meta: 0
 });
 
 IDRegistry.genItemID("neutron_pile");
-Item.createItem("neutron_pile", "Neutronium pile", {
+Item.createItem("neutron_pile", "Neutronium Pile", {
 	name: "neutron_pile",
 	meta: 0
 });
 
 IDRegistry.genItemID("neutron_nugget");
-Item.createItem("neutron_nugget", "Neutronium nugget", {
+Item.createItem("neutron_nugget", "Neutronium Nugget", {
 	name: "neutron_nugget",
 	meta: 0
 });
 
 IDRegistry.genItemID("ingotNeutronium");
-Item.createItem("ingotNeutronium", "Neutronium ingot", {
+Item.createItem("ingotNeutronium", "Neutronium Ingot", {
 	name: "neutronium_ingot",
 	meta: 0
 });
 
 IDRegistry.genItemID("catalystInfinity");
-Item.createItem("catalystInfinity", "Infinity catalyst", {
+Item.createItem("catalystInfinity", "Infinity Catalyst", {
 	name: "infinity_catalyst",
 	meta: 0
 });
 
 IDRegistry.genItemID("ingotInfinity");
-Item.createItem("ingotInfinity", "Infinity ingot", {
+Item.createItem("ingotInfinity", "Infinity Ingot", {
 	name: "infinity_ingot",
 	meta: 0
 });
@@ -71,13 +71,25 @@ Item.createItem("redstonesing", "Redstone Singularity", {
 });
 
 IDRegistry.genItemID("quartzsing");
-Item.createItem("quartzsing", "Quartz Singularity", {
+Item.createItem("quartzsing", "Nether Quartz Singularity", {
 	name: "singularity_quartz",
 	meta: 0
 });
 
+IDRegistry.genItemID("diamondsing");
+Item.createItem("diamondsing", "Diamond Singularity", {
+	name: "singularity_diamond",
+	meta: 0
+});
+
+IDRegistry.genItemID("emeraldsing");
+Item.createItem("emeraldsing", "Emerald Singularity", {
+	name: "singularity_emerald",
+	meta: 0
+});
+
 IDRegistry.genItemID("endestPearl");
-Item.createThrowableItem("endestPearl", "Endest pearl", {
+Item.createThrowableItem("endestPearl", "Endest Pearl", {
 	name: "endest",
 	meta: 0
 }, {

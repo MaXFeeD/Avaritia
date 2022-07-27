@@ -94,7 +94,6 @@ cosmBow.Create({
 });
 
 
-/*
 var INFINITE_BOW_ARROW_SHOT_COUNT = 16;
 
 Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
@@ -103,7 +102,7 @@ Callback.addCallback("BowArrowHit", function(projectile, item, target, coords) {
 			Entity.spawn(coords.x + 0.5 + Math.random() / 0.3, coords.y + 3, coords.z + 1.5 + Math.random()/0.3, 80, [heavenarrow]);
 		}
 	}
-});*/
+});
 
 IDRegistry.genItemID("cosmPickaxe");
 Item.createItem("cosmPickaxe", "World Breaker", {
@@ -175,7 +174,7 @@ DESTROYER_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };
 
-var AXE_BLOCKS = [6, 17, 18, 31, 38, 81, 83, 106, 111, 175];
+var AXE_BLOCKS = [6, 17, 18, 31, 38, 81, 83, 103, 106, 111, 175, 418, 419];
 AXE_BLOCKS.hasId = function(id) {
 	return this.indexOf(id) != -1;
 };

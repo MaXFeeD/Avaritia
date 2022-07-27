@@ -1,4 +1,4 @@
-var fiveBlinkIndex = 0;
+let fiveBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ironsing, function(item, texture) {
 	return { name: "singularity_iron", meta: fiveBlinkIndex };
 });
@@ -24,19 +24,29 @@ Item.registerIconOverrideFunction(ItemID.redstonesing, function(item, texture) {
 });
 Item.setRequiresIconOverride(ItemID.redstonesing, true);
 
-var fourBlinkIndex = 0;
+Item.registerIconOverrideFunction(ItemID.diamondsing, function(item, texture) {
+	return { name: "singularity_diamond", meta: fiveBlinkIndex };
+});
+Item.setRequiresIconOverride(ItemID.diamondsing, true);
+
+Item.registerIconOverrideFunction(ItemID.emeraldsing, function(item, texture) {
+	return { name: "singularity_emerald", meta: fiveBlinkIndex };
+});
+Item.setRequiresIconOverride(ItemID.emeraldsing, true);
+
+let fourBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.endestPearl, function(item, texture) {
 	return { name: "endest", meta: fourBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.endestPearl, true);
 
-var sevenBlinkIndex = 0;
+let sevenBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.cosmMeatballs, function(item, texture) {
 	return { name: "cosm_meatballs", meta: sevenBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.cosmMeatballs, true);
 
-var eigthBlinkIndex = 0;
+let eigthBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.inf_chestplate, function(item, texture) {
 	return { name: "chestaplateAV", meta: eigthBlinkIndex };
 });
@@ -82,7 +92,7 @@ Item.registerIconOverrideFunction(ItemID.inf_leggings, function(item, texture) {
 });
 Item.setRequiresIconOverride(ItemID.inf_leggings, true);
 
-var threeBlinkIndex = 0;
+let threeBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.skull_sword, function(item, texture) {
 	return { name: "skull_sword", meta: threeBlinkIndex };
 });
@@ -93,21 +103,22 @@ Item.registerIconOverrideFunction(ItemID.orb_armok, function(item, texture){
 });
 Item.setRequiresIconOverride(ItemID.orb_armok, true);
 
-var twoBlinkIndex = 0;
+let twoBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ingotNeutronium, function(item, texture){
 	return { name: "neutronium_ingot", meta: twoBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.ingotNeutronium, true);
 
-var longestBlinkIndex = 0;
+let longestBlinkIndex = 0;
 Item.registerIconOverrideFunction(ItemID.ultimstew, function(item, texture){
 	return { name: "ultimstew", meta: longestBlinkIndex };
 });
 Item.setRequiresIconOverride(ItemID.ultimstew, true);
 
+
+let time = World.getThreadTime() % 500;//25 sec
 Callback.addCallback("tick", function(){
-	var time = World.getThreadTime() % 7;
-	if (time == 0 || time == 7) {
+	if (time == 0 || time == 10) {
 		if (twoBlinkIndex < 2) twoBlinkIndex++;
 		else twoBlinkIndex = 0;
 		if (threeBlinkIndex < 3) threeBlinkIndex++;

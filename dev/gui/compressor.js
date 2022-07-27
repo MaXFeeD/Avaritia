@@ -1,8 +1,10 @@
+let getH = UI.getScreenHeight();
+let cW = getW/12;
 var compressorGUI = new UI.StandartWindow({
 	standart: {
 		header: {
 			text: {
-				text: Translation.translate("Compressor")
+				text: Translation.translate('Neutronium Compressor')
 			}
 		},
 		background: {
@@ -15,19 +17,19 @@ var compressorGUI = new UI.StandartWindow({
 	elements: {
 		intext: {
 			type: "text",
-			x: UI.getScreenWidth()/2, //432,
-			y: UI.getScreenHeight()/3, //157,
-			width: 68,
-			height: 16,
+			x: getW/2 + 10 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/3, 
+			width: getH/7.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
 		},
 		input: {
 			type: "slot",
-			x: UI.getScreenWidth()/2.1, //402,
-			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			x: getW/2.1 - getW/8.54 + cW , 
+			y: UI.getScreenHeight()/2.5, 
+			size: getH/7.3,
 			visual: true,
 			needClean: true,
 			isTransparentBackground: true,
@@ -35,68 +37,68 @@ var compressorGUI = new UI.StandartWindow({
 		},
 		slot_0: {
 			type: "slot",
-			x: UI.getScreenWidth()/1.7, //490,
-			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			x: getW/1.7 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/2.5, 
+			size: getH/7.3,
 			visual: false,
 			needClean: false,
 			isTransparentBackground: false
 		},
 		progress: {
 			type: "scale",
-			x: UI.getScreenWidth()/1.5, //574,
-			y: UI.getScreenHeight()/2.4, //200,
+			x: getW/1.5 - getW/9 + cW, 
+			y: getH/2.4, 
 			pixelate: true,
 			bitmap: "progress_singular",
 			background: "progress_background",
-			scale: 3.6,
+			scale: getH/150,
 			value: 0
 		},
 		singular: {
 			type: "scale",
-			x: UI.getScreenWidth()/1.3, //667,
-			y: UI.getScreenHeight()/2.5, //190,
+			x: getW/1.3 - getW/8.54 + cW, 
+			y: UI.getScreenHeight()/2.5, 
 			direction: 1,
 			pixelate: true,
 			bitmap: "singular",
 			background: "singular_background",
-			scale: 4.6,
+			scale: getH/120,
 			value: 0
 		},
 		slot_1: {
 			type: "slot",
-			x: UI.getScreenWidth()/1.1, //760,
-			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			x: getW/1.1 - getW/5.69 + cW, 
+			y: UI.getScreenHeight()/2.5, 
+			size: getH/7.3,
 			visual: false,
 			needClean: false,
 			isTransparentBackground: false
 		},
 		count: {
 			type: "text",
-			x: UI.getScreenWidth()/1.3, //660,
-			y: UI.getScreenHeight()/1.8, //272,
-			width: 120,
-			height: 16,
+			x: getW/1.3 - getW/8.1 + cW,
+			y: UI.getScreenHeight()/1.8, 
+			width: getH/4.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
 		},
 		outext: {
 			type: "text",
-			x: UI.getScreenWidth() + 10,//883,
-			y: UI.getScreenHeight()/3, //157,
-			width: 68,
-			height: 16,
+			x: getW - getW/10 + cW,
+			y: UI.getScreenHeight()/3, 
+			width: getH/7.3,
+			height: getH/30.3,
 			font: {
 				alignment: 1
 			}
 		},
 		output: {
 			type: "slot",
-			x: UI.getScreenWidth(),//858,
-			y: UI.getScreenHeight()/2.5, //192,
-			size: 68,
+			x: getW - getW/7 + cW,
+			y: UI.getScreenHeight()/2.5,
+			size: getH/7.3,
 			visual: true,
 			needClean: true,
 			isTransparentBackground: true,
@@ -142,8 +144,16 @@ Compressor.addRecipe(22, {
 	out: ItemID.lapissing
 });
 
-// TODO: Diamonds (x300)
-// TODO: Emeralds (x200)
+Compressor.addRecipe(57, {
+	count: 300,
+	out: ItemID.diamondsing
+});
+
+Compressor.addRecipe(133, {
+	count: 200,
+	out: ItemID.emeraldsing
+});
+
 
 var CONSUME_TICKS = 100;
 

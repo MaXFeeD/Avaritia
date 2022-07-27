@@ -1,7 +1,7 @@
 var holerender = new Render();
 var holemesh = new RenderMesh(__dir__ + "models/blackhole.obj", "obj", {
 	scale: [0.0675, 0.0675, 0.0675],
-	translate: [0, -2.4, 0]
+	translate: [0, -1.2, 0]
 });
 	holerender.getPart("head").setMesh(holemesh);
 
@@ -77,7 +77,7 @@ GapingVoid.prototype.spawnParticles = function(range) {
 		var sy = py * this.PARTICLE_SPEED;
 		var sz = pz * this.PARTICLE_SPEED;
 		Particles.addParticle(this.PARTICLES, this.coords.x + px,
-			this.coords.y + py, this.coords.z + pz, sx, sy, sz, 0);
+			this.coords.y + py - 1.2, this.coords.z + pz, sx, sy, sz, 0);
 	}
 };
 

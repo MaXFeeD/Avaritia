@@ -6,7 +6,7 @@ TileEntity.registerPrototype(BlockID.neutCo, {
 		    standart: {
 		        header: {
 		            text: {
-		                text: Translation.translate("Collector")
+		                text: Translation.translate('Neutron Collector')
 		            }
 		        },
 		        background: {
@@ -19,14 +19,14 @@ TileEntity.registerPrototype(BlockID.neutCo, {
 		    elements: {
 		        output: {
 		            type: "slot",
-		            x: UI.getScreenWidth()/2 - 55, //570,
+		            x: getW/2 + getW/8.5, //570,
 		            y: UI.getScreenHeight()/2 - 112, //160
 		            size: 102
 		        },
 		        progress: {
 		            type: "text",
-		            x: UI.getScreenWidth()/2, //625,
-		            y: UI.getScreenHeight()/2 - 242, //290,
+		            x: getW/2 + getW/5.7, //625,
+		            y: UI.getScreenHeight()/2, //290,
 		            width: 120,
 		            height: 16,
 		            font: {

@@ -55,7 +55,7 @@ Callback.addCallback("LevelLoaded", function() {
 		"aaa"], ["a", ItemID.crystal_matrix_ingot, 0, "b", BlockID.dcompreBlock, 0]);
 });
 
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: BlockID.neutCo,
 	count: 1
 }, ["aabbbbbaa",
@@ -70,7 +70,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		a: { id: 42 }, b: { id: 155 }, c: { id: 152 },
 		d: { id:ItemID.crystal_matrix_ingot }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.endestPearl,
 	count: 1
 }, ["   aaa   ",
@@ -86,7 +86,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		c: { id:ItemID.ingotNeutronium },
 		s: { id:399 }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: BlockID.compressorAv,
 	count: 1
 }, ["aaabbbaaa",
@@ -104,7 +104,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		r: { id: 152 },
 		g: { id: BlockID.neutroniumBlock }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmMeatballs,
 	count: 2
 }, ["abbccddee",
@@ -121,7 +121,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		d: { id: 319 }, f: { id: 349 },
 		e: { id:411 }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.ultimstew,
 	count: 1
 }, ["abbccddee",
@@ -134,16 +134,16 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"         ",
 	"         "], {
 		a: { id: ItemID.neutron_pile },
-		b: { id: 256 }, c: { id: 391 },
+		b: { id: 295 }, c: { id: 391 },
 		d: { id: 392 }, e: { id:81 },
 		g: { id: 40 }, f: { id: 39 },
 		i: { id: 372 }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.catalystInfinity,
 	count: 1
-}, ["aiglrqube",
-	"f        ",
+}, ["acnvsumpf",
+	"iglrqde  ",
 	"         ",
 	"         ",
 	"         ",
@@ -151,18 +151,24 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"         ",
 	"         ",
 	"         "], {
-		a: { id: 133 },
+		a: { id: ItemID.diamond_lattice },
+		c: { id: ItemID.crystal_matrix_ingot },
+		n: { id: ItemID.neutron_pile },
+		v: { id: ItemID.neutron_nugget },
+		s: { id: ItemID.ingotNeutronium },
 		i: { id: ItemID.ironsing },
 		g: { id: ItemID.goldsing },
 		l: { id: ItemID.lapissing },
 		r: { id: ItemID.redstonesing },
 		q: { id: ItemID.quartzsing },
+		d: { id: ItemID.diamondsing },
+		e: { id: ItemID.emeraldsing },
 		u: { id: ItemID.ultimstew },
-		b: { id: ItemID.cosmMeatballs },
-		e: { id: ItemID.endestPearl },
+		m: { id: ItemID.cosmMeatballs },
+		p: { id: ItemID.endestPearl },
 		f: { id: ItemID.record_fragment }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.ingotInfinity,
 	count: 1
 }, ["aaaaaaaaa",
@@ -179,7 +185,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		c: { id: ItemID.catalystInfinity }
 	});
 
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmSword,
 	count: 1
 }, ["       aa",
@@ -196,7 +202,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		c: { id: ItemID.ingotNeutronium },
 		d: { id:ItemID.catalystInfinity }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmAxe,
 	count: 1
 }, [" a       ",
@@ -211,13 +217,13 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		a: { id: ItemID.ingotInfinity },
 		b: { id: ItemID.ingotNeutronium }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmShovel,
 	count: 1
 }, ["      aaa",
 	"     aaba",
 	"      aaa",
-	"     c  a",
+	"     c a ",
 	"    c    ",
 	"   c     ",
 	"  c      ",
@@ -227,7 +233,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		b: { id: BlockID.infBlock },
 		c: { id:ItemID.ingotNeutronium }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
     id: ItemID.infbow,
     count: 1
 }, ["   aa    ",
@@ -243,7 +249,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		b: { id: 35 },
 		c: { id: BlockID.crystal_matrixAV }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmPickaxe,
 	count: 1
 }, [" aaaaaaa ",
@@ -259,7 +265,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		b: { id: BlockID.crystal_matrixAV },
 		c: { id:ItemID.ingotNeutronium }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.cosmHoe,
 	count: 1
 }, ["     a   ",
@@ -271,10 +277,10 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 	"     a   ",
 	"     a   ",
 	"     a   "], {
-		a: { id: ItemID.ingotInfinity },
-		b: { id: ItemID.ingotNeutronium }
+		b: { id: ItemID.ingotInfinity },
+		a: { id: ItemID.ingotNeutronium }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.skull_sword,
 	count: 1
 }, ["       ab",
@@ -291,7 +297,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		w: { id: 17 }, s: { id:399 }
 	});
 
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.inf_helmet,
 	count: 1
 }, ["  aaaaa  ",
@@ -307,7 +313,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		b: { id: ItemID.ingotInfinity },
 		c: { id: ItemID.catalystInfinity }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.inf_chestplate,
 	count: 1
 }, [" aa   aa ",
@@ -323,7 +329,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		b: { id: ItemID.ingotInfinity },
 		c: { id: BlockID.crystal_matrixAV }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.inf_leggings,
 	count: 1
 }, ["aaaaaaaaa",
@@ -340,7 +346,7 @@ RecipeTE.addShapeRecipe("extWorckbench", {
 		c: { id: ItemID.catalystInfinity },
 		e: { id:BlockID.crystal_matrixAV }
 	});
-RecipeTE.addShapeRecipe("extWorckbench", {
+ExtremeTable.addShapeRecipe( {
 	id: ItemID.inf_boots,
 	count: 1
 }, [" aaa aaa ",

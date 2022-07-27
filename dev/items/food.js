@@ -1,10 +1,9 @@
 IDRegistry.genItemID("ultimstew");
-Item.createFoodItem("ultimstew", "Cosmos soup", {
+Item.createFoodItem("ultimstew", "Ultimate Stew", {
 	name: "ultimstew",
 	meta: 0,
 }, {
 	isTech: false,
-	stack: 64,
 	food: 10
 });
 
@@ -19,12 +18,11 @@ Callback.addCallback("FoodEaten", function(heal, satRatio) {
 });
 
 IDRegistry.genItemID("cosmMeatballs");
-Item.createFoodItem("cosmMeatballs", "Cosmos meatballs", {
+Item.createFoodItem("cosmMeatballs", "Cosmic Meatballs", {
 	name: "cosm_meatballs",
 	meta: 0,
 }, {
 	isTech: false,
-	stack: 64,
 	food: 10
 });
 

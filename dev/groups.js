@@ -49,7 +49,9 @@ Item.addCreativeGroup(AVARITIA_SINGULARITIES, AVARITIA_SINGULARITIES_NAME, [
 	ItemID.goldsing,
 	ItemID.lapissing,
 	ItemID.redstonesing,
-	ItemID.quartzsing
+	ItemID.quartzsing,
+	ItemID.diamondsing,
+	ItemID.emeraldsing
 ]);
 
 Item.addCreativeGroup(AVARITIA_FOOD, AVARITIA_FOOD_NAME, [
