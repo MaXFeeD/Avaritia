@@ -1,21 +1,4 @@
-# TypeScript v1 declaration files
-typings/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Sources build
-main.js
-.dex/
-bin/
-
-# Avaritia sources
-dev/.source/
-res/.source/
-
-# Environment ignores
-_config.yml
-**/*.bak
-
-# Dropbox sync
-.ttxfolder
+output
+tsconfig.json
+*.log
+*.icmod

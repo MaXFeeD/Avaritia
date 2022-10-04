@@ -1,0 +1,45 @@
+{
+	"info": {
+		"name": "Avaritia",
+		"version": "1.0.10 Beta",
+		"author": "StoneBlock Team",
+		"description": "A mod to see how hard people are willing to grind.",
+		"clientOnly": true
+	},
+	"api": "CoreEngine",
+	"resources": [
+		{
+			"path": "assets/res",
+			"type": "resource_directory"
+		},
+		{
+			"path": "assets/gui",
+			"type": "gui"
+		}
+	],
+	"sources": [
+		{
+			"source": "lib/*",
+			"type": "library",
+			"language": "javascript"
+		},
+		{
+			"type": "main",
+			"language": "javascript",
+			"source": "dev",
+			"target": "main.js"
+		},
+		{
+			"type": "launcher",
+			"language": "javascript",
+			"source": "launcher.js"
+		}
+	],
+	"compile": [],
+	"additional": [
+		{
+			"source": "assets/root/*",
+			"targetDir": "."
+		}
+	]
+}

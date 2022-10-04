@@ -24,7 +24,7 @@ items/crafts.js
 
 entity/sphere.js
 
-#integration/recipesviewer.js
+# integration/recipesviewer.js
 # integration/Botania.js
 # integration/BloodMagic.js
 # integration/Forestry.js
